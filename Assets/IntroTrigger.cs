@@ -6,19 +6,19 @@ using Unity.VisualScripting;
 public class IntroTrigger : MonoBehaviour
 {
     [Header("Camera Settings")]
-    public GameObject introCamera; // The secondary camera for the intro
+    public GameObject introCamera; 
     public GameObject playerCamera;
 
     [Header("Trigger Settings")]
     public Transform player;
-    public float triggerRange = 25f; // Distance at which the intro triggers
+    public float triggerRange = 25f; 
     private bool introPlayed = false;
 
     [Header("UI Settings")]
     public GameObject introUI;
 
     [Header("Camera Transition Settings")]
-    public float transitionSpeed = 2f; // Adjust for smoothness
+    public float transitionSpeed = 2f; 
     private Transform introCameraTransform;
     private Transform playerCameraTransform;
     public float positionThreshold = 0.5f;
@@ -41,7 +41,6 @@ public class IntroTrigger : MonoBehaviour
     {
         introPlayed = true;
 
-        // Enable intro camera & disable player camera
         introCamera.SetActive(true);
         playerCamera.SetActive(false);
 
@@ -52,7 +51,7 @@ public class IntroTrigger : MonoBehaviour
         while (Vector3.Distance(playerCameraTransform.position, introCameraTransform.position) > positionThreshold)
         {
             elapsedTime += Time.deltaTime * transitionSpeed;
-            float t = Mathf.Clamp01(elapsedTime); // Smoothly interpolate towards the target
+            float t = Mathf.Clamp01(elapsedTime); 
 
             playerCameraTransform.position = Vector3.Lerp(startPosition, introCameraTransform.position, t);
             playerCameraTransform.rotation = Quaternion.Slerp(startRotation, introCameraTransform.rotation, t);
@@ -60,14 +59,11 @@ public class IntroTrigger : MonoBehaviour
             yield return null;
         }
 
-        // Ensure final position & rotation are exactly at the target
         playerCameraTransform.position = introCameraTransform.position;
         playerCameraTransform.rotation = introCameraTransform.rotation;
 
-        // Only enable the UI after the camera has reached its target position
         introUI.SetActive(true);
 
-        // Wait for 3 seconds, then disable UI & switch back to gameplay
         yield return new WaitForSeconds(4f);
         EndIntro();
     }

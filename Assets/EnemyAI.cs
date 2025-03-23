@@ -19,19 +19,19 @@ public class EnemyAI : MonoBehaviour
     private Vector3 lastKnownPosition;
     private bool playerDetected = false;
 
-    private static List<EnemyAI> allEnemies = new List<EnemyAI>(); // Track all enemies
+    private static List<EnemyAI> allEnemies = new List<EnemyAI>(); 
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
-        player = GameObject.FindGameObjectWithTag("Player").transform; // Ensure the player has the "Player" tag
+        player = GameObject.FindGameObjectWithTag("Player").transform; 
         allEnemies.Add(this);
     }
 
     private void OnDestroy()
     {
-        allEnemies.Remove(this); // Clean up when enemy is destroyed
+        allEnemies.Remove(this); 
     }
 
     private void Update()
@@ -59,11 +59,9 @@ public class EnemyAI : MonoBehaviour
             Vector3 directionToPlayer = (potentialPlayer.position - transform.position).normalized;
             float distanceToPlayer = Vector3.Distance(transform.position, potentialPlayer.position);
 
-            // Check if player is within field of view
             float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
             if (angleToPlayer > fieldOfView * 0.5f) continue;
 
-            // Check for line of sight
             if (!Physics.Raycast(transform.position, directionToPlayer, distanceToPlayer, obstacleLayer))
             {
                 player = potentialPlayer;
@@ -80,7 +78,6 @@ public class EnemyAI : MonoBehaviour
         {
             agent.SetDestination(lastKnownPosition);
 
-            // If we reach the last known location and still don't see the player, stop chasing
             if (!CanSeePlayer() && Vector3.Distance(transform.position, lastKnownPosition) < 1f)
             {
                 playerDetected = false;

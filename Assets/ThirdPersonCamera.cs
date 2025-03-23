@@ -4,7 +4,6 @@ public class ThirdPersonCamera : MonoBehaviour
 {
     public Transform player;
     public Transform playerObj;
-    private Rigidbody rb;
 
     public float rotationSpeed = 10f;
 
@@ -12,8 +11,6 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        rb = player.GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -24,9 +21,7 @@ public class ThirdPersonCamera : MonoBehaviour
     private void RotatePlayer()
     {
         Vector3 cameraForward = transform.forward;
-        cameraForward.y = 0; // Flatten to avoid tilting
-
-        // Smoothly rotate the player to match camera forward
+        cameraForward.y = 0; 
         if (cameraForward != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(cameraForward);
