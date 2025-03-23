@@ -10,9 +10,10 @@ public class IntroTrigger : MonoBehaviour
     public GameObject playerCamera;
 
     [Header("Trigger Settings")]
-    public Transform player;
+    public GameObject player;
     public float triggerRange = 25f; 
     private bool introPlayed = false;
+    private PlayerMovement playerMovementScript;
 
     [Header("UI Settings")]
     public GameObject introUI;
@@ -25,13 +26,14 @@ public class IntroTrigger : MonoBehaviour
 
     private void Start()
     {
+        playerMovementScript = player.GetComponent<PlayerMovement>();
         introCameraTransform = introCamera.transform;
         playerCameraTransform = playerCamera.transform;
     }
 
     private void Update()
     {
-        if (!introPlayed && Vector3.Distance(transform.position, player.position) <= triggerRange)
+        if (!introPlayed && Vector3.Distance(transform.position, player.transform.position) <= triggerRange)
         {
             StartCoroutine(StartIntro());
         }
@@ -40,6 +42,7 @@ public class IntroTrigger : MonoBehaviour
     private IEnumerator StartIntro()
     {
         introPlayed = true;
+        playerMovementScript.enabled = false;
 
         introCamera.SetActive(true);
         playerCamera.SetActive(false);
@@ -73,6 +76,7 @@ public class IntroTrigger : MonoBehaviour
         introUI.SetActive(false);
         introCamera.SetActive(false);
         playerCamera.SetActive(true);
+        playerMovementScript.enabled = true;
     }
 
     private void OnDrawGizmosSelected()

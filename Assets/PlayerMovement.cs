@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jump Settings")]
     public int maxJumps = 3;
     private int jumpCount = 0;
-    public float jumpForce = 8f;
+    public float jumpForce = 14f;
     public float airMultiplier = 1f;
     public float jumpCooldown = 0.2f;
     public float playerHeight = 2f;
