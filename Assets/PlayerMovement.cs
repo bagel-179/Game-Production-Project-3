@@ -12,9 +12,9 @@ public class PlayerMovement : MonoBehaviour
     public float groundDrag = 5f;
 
     [Header("Dash Settings")]
-    public float dashForce = 20f;      // How strong the dash is
-    public float dashDuration = 0.2f;  // How long the dash lasts
-    public float dashCooldown = 1f;    // Time before player can dash again
+    public float dashForce = 30f;      
+    public float dashDuration = 0.2f; 
+    public float dashCooldown = 1f;    
     private bool isDashing = false;
     private bool canDash = true;
 
@@ -29,9 +29,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Glide Settings")]
     public bool enableGlide = true;
-    public float glideGravityScale = 0.2f; // Reduced gravity while gliding
-    public float normalGravityScale = 2f; // Normal gravity
-    public float glideFallSpeedLimit = 2f; // Max downward speed while gliding
+    public float glideGravityScale = 0.2f;
+    public float normalGravityScale = 2f;
+    public float glideFallSpeedLimit = 2f; 
 
     private Rigidbody rb;
     private Vector3 moveDirection;
@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        rb.linearVelocity = Vector3.zero; // Ensure no initial motion
+        rb.linearVelocity = Vector3.zero; 
     }
 
     private void Update()
@@ -66,7 +66,6 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        // Get movement direction relative to camera
         Vector3 forward = cameraTransform.forward;
         Vector3 right = cameraTransform.right;
 
@@ -106,13 +105,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (jumpCount >= maxJumps) return;
 
-        // Reset Y velocity to prevent stacking forces
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
-        // Apply the jump force
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
-        // Increment jump count
         jumpCount++;
     }
 
@@ -120,17 +116,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded)
         {
-            if (jumpCount > 0) jumpCount = 0; // Reset jumps when grounded
+            if (jumpCount > 0) jumpCount = 0; 
         }
 
         float gravityScale = (enableGlide && Input.GetKey(KeyCode.Space) && rb.linearVelocity.y < 0)
             ? glideGravityScale
             : normalGravityScale;
 
-        // Ensure proper downward force (negative gravity)
         rb.AddForce(Vector3.down * gravityScale * Mathf.Abs(Physics.gravity.y), ForceMode.Acceleration);
 
-        // Limit fall speed when gliding
         if (enableGlide && Input.GetKey(KeyCode.Space) && rb.linearVelocity.y < -glideFallSpeedLimit)
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, -glideFallSpeedLimit, rb.linearVelocity.z);
@@ -152,20 +146,16 @@ public class PlayerMovement : MonoBehaviour
         canDash = false;
         isDashing = true;
 
-        // Store current vertical velocity
         float savedYVelocity = rb.linearVelocity.y;
 
-        // Disable drag temporarily to avoid slowdown
         float originalDrag = rb.linearDamping;
         rb.linearDamping = 0f;
 
-        // Apply dash force while preserving vertical velocity
         Vector3 dashDirection = playerModel.forward;
         rb.linearVelocity = new Vector3(dashDirection.x * dashForce, savedYVelocity, dashDirection.z * dashForce);
 
         yield return new WaitForSeconds(dashDuration);
 
-        // Restore drag
         rb.linearDamping = originalDrag;
 
         isDashing = false;
