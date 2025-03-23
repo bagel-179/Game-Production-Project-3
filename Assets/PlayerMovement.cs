@@ -19,13 +19,19 @@ public class PlayerMovement : MonoBehaviour
     private bool canDash = true;
 
     [Header("Jump Settings")]
-    public int maxJumps = 3;
+    public int maxJumps = 2;
     private int jumpCount = 0;
     public float jumpForce = 14f;
     public float airMultiplier = 1f;
     public float jumpCooldown = 0.2f;
     public float playerHeight = 2f;
     [SerializeField] private LayerMask groundLayer;
+    private bool isGrounded;
+
+    [Header("Spin Settings")]
+    public float spinDuration = 0.3f;
+    public float spinSpeed = 2000f;
+    private bool isSpinning = false;
 
     [Header("Glide Settings")]
     public bool enableGlide = true;
@@ -35,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
     private Vector3 moveDirection;
-    private bool isGrounded;
+    
 
     private void Awake()
     {
@@ -76,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
 
         moveDirection = (forward * vertical + right * horizontal).normalized;
 
-        if (moveDirection != Vector3.zero)
+        if (!isSpinning && moveDirection != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
             playerModel.rotation = Quaternion.Slerp(playerModel.rotation, targetRotation, rotationSpeed * Time.deltaTime);
@@ -110,6 +116,11 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
         jumpCount++;
+
+        if (jumpCount == 1 || jumpCount == 2)
+        {
+            StartCoroutine(SpinEffect());
+        }
     }
 
     private void ApplyGravity()
@@ -141,6 +152,25 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = Physics.SphereCast(transform.position, 0.3f, Vector3.down, out _, playerHeight * 0.5f + 0.2f, groundLayer);
     }
 
+    private IEnumerator SpinEffect()
+    {
+        isSpinning = true; 
+        float spinDuration = 0.3f;
+        float spinSpeed = 1080f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < spinDuration)
+        {
+            float rotationAmount = spinSpeed * Time.deltaTime;
+            transform.Rotate(0f, rotationAmount, 0f, Space.Self);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.rotation = Quaternion.Euler(transform.eulerAngles.x, Mathf.Round(transform.eulerAngles.y), transform.eulerAngles.z);
+        isSpinning = false;
+    }
+
     private IEnumerator Dash()
     {
         canDash = false;
@@ -151,7 +181,9 @@ public class PlayerMovement : MonoBehaviour
         float originalDrag = rb.linearDamping;
         rb.linearDamping = 0f;
 
-        Vector3 dashDirection = playerModel.forward;
+        Vector3 dashDirection = isSpinning ? cameraTransform.forward : playerModel.forward;
+        dashDirection.y = 0f;
+        dashDirection.Normalize();
         rb.linearVelocity = new Vector3(dashDirection.x * dashForce, savedYVelocity, dashDirection.z * dashForce);
 
         yield return new WaitForSeconds(dashDuration);
