@@ -23,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
     private int jumpCount = 0;
     [SerializeField] private float jumpForce = 18f;
     private float airMultiplier = 1f;
-    private float jumpCooldown = 0.2f;
     private float playerHeight = 2f;
     [SerializeField] private LayerMask groundLayer;
     private bool isGrounded;
@@ -61,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
     {
         HandleInput();
         ApplyDrag();
-        CheckGroundStatus();                
+        CheckGroundStatus();
     }
 
     private void FixedUpdate()
@@ -121,18 +120,12 @@ public class PlayerMovement : MonoBehaviour
 
         jumpCount++;
 
-        if (jumpCount == 1 || jumpCount == 2)
-        {
-            StartCoroutine(SpinEffect());
-        }
+        if (jumpCount >= 1) StartCoroutine(SpinEffect());
     }
 
     private void ApplyGravity()
     {
-        if (isGrounded)
-        {
-            if (jumpCount > 0) jumpCount = 0; 
-        }
+        if (isGrounded && jumpCount > 0) jumpCount = 0;
 
         float gravityScale = (enableGlide && Input.GetKey(KeyCode.Space) && rb.linearVelocity.y < 0) ? glideGravityScale : normalGravityScale;
 
