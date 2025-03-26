@@ -7,37 +7,40 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform playerModel;
 
     [Header("Movement Settings")]
-    public float moveSpeed = 6f;
-    public float rotationSpeed = 10f;
-    public float groundDrag = 5f;
+    [SerializeField] private float moveSpeed = 6f;
+    [SerializeField] private float rotationSpeed = 10f;
+    [SerializeField] private float groundDrag = 5f;
 
     [Header("Dash Settings")]
-    public float dashForce = 30f;      
-    public float dashDuration = 0.2f; 
-    public float dashCooldown = 1f;    
+    [SerializeField] private float dashForce = 30f;
+    [SerializeField] private float dashDuration = 0.2f;
+    [SerializeField] private float dashCooldown = 1f;    
     private bool isDashing = false;
     private bool canDash = true;
 
     [Header("Jump Settings")]
-    public int maxJumps = 2;
+    [SerializeField] private int maxJumps = 2;
     private int jumpCount = 0;
-    public float jumpForce = 14f;
-    public float airMultiplier = 1f;
-    public float jumpCooldown = 0.2f;
-    public float playerHeight = 2f;
+    [SerializeField] private float jumpForce = 18f;
+    private float airMultiplier = 1f;
+    private float jumpCooldown = 0.2f;
+    private float playerHeight = 2f;
     [SerializeField] private LayerMask groundLayer;
     private bool isGrounded;
 
     [Header("Spin Settings")]
-    public float spinDuration = 0.3f;
-    public float spinSpeed = 2000f;
+    [SerializeField] private float spinDuration = 0.3f;
+    [SerializeField] private float spinSpeed = 3060f;
     private bool isSpinning = false;
 
     [Header("Glide Settings")]
-    public bool enableGlide = true;
-    public float glideGravityScale = 0.2f;
-    public float normalGravityScale = 2f;
-    public float glideFallSpeedLimit = 2f; 
+    [SerializeField] bool enableGlide = true;
+    [SerializeField] private float glideGravityScale = 0.2f;
+    private float normalGravityScale = 2f;
+    private float glideFallSpeedLimit = 2f;
+    [SerializeField] private float swaySpeed = 2f;
+    [SerializeField] private float swayAngle = 10f;
+    private bool isGliding;
 
     private Rigidbody rb;
     private Vector3 moveDirection;
@@ -58,12 +61,13 @@ public class PlayerMovement : MonoBehaviour
     {
         HandleInput();
         ApplyDrag();
-        CheckGroundStatus();
+        CheckGroundStatus();                
     }
 
     private void FixedUpdate()
     {
         if (!isDashing) MovePlayer();
+        if (isGliding) ApplyGlideSway();
         ApplyGravity();
     }
 
@@ -130,16 +134,17 @@ public class PlayerMovement : MonoBehaviour
             if (jumpCount > 0) jumpCount = 0; 
         }
 
-        float gravityScale = (enableGlide && Input.GetKey(KeyCode.Space) && rb.linearVelocity.y < 0)
-            ? glideGravityScale
-            : normalGravityScale;
+        float gravityScale = (enableGlide && Input.GetKey(KeyCode.Space) && rb.linearVelocity.y < 0) ? glideGravityScale : normalGravityScale;
 
         rb.AddForce(Vector3.down * gravityScale * Mathf.Abs(Physics.gravity.y), ForceMode.Acceleration);
 
         if (enableGlide && Input.GetKey(KeyCode.Space) && rb.linearVelocity.y < -glideFallSpeedLimit)
         {
+            isGliding = true;
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, -glideFallSpeedLimit, rb.linearVelocity.z);
         }
+        else
+            isGliding = false;
     }
 
     private void ApplyDrag()
@@ -152,22 +157,27 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = Physics.SphereCast(transform.position, 0.3f, Vector3.down, out _, playerHeight * 0.5f + 0.2f, groundLayer);
     }
 
+    private void ApplyGlideSway()
+    {
+        float swayValue = Mathf.Sin(Time.time * swaySpeed) * swayAngle;
+        playerModel.localRotation = Quaternion.Euler(playerModel.localRotation.eulerAngles.x, playerModel.localRotation.eulerAngles.y, swayValue);
+    }
+
     private IEnumerator SpinEffect()
     {
-        isSpinning = true; 
-        float spinDuration = 0.3f;
-        float spinSpeed = 1080f;
+        isSpinning = true;
         float elapsedTime = 0f;
 
         while (elapsedTime < spinDuration)
         {
             float rotationAmount = spinSpeed * Time.deltaTime;
-            transform.Rotate(0f, rotationAmount, 0f, Space.Self);
+            playerModel.Rotate(0f, rotationAmount, 0f, Space.Self); 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        transform.rotation = Quaternion.Euler(transform.eulerAngles.x, Mathf.Round(transform.eulerAngles.y), transform.eulerAngles.z);
+        playerModel.rotation = Quaternion.Euler(playerModel.eulerAngles.x, Mathf.Round(playerModel.eulerAngles.y), playerModel.eulerAngles.z);
+
         isSpinning = false;
     }
 
