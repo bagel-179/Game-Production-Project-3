@@ -15,7 +15,7 @@ public class MovingPlatform : MonoBehaviour
     private int direction = 1;
     private bool isWaiting = false;
 
-    void Update()
+    void FixedUpdate()
     {
         if (isFrozen || isWaiting || points.Length < 2 || platform == null) return;
 
@@ -75,34 +75,6 @@ public class MovingPlatform : MonoBehaviour
         {
             targetIndex = 1;
             direction = 1;
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-        {
-            Rigidbody playerRb = collision.collider.GetComponent<Rigidbody>();
-            if (playerRb != null && playerRb.GetComponent<ConfigurableJoint>() == null)
-            {
-                ConfigurableJoint joint = playerRb.gameObject.AddComponent<ConfigurableJoint>();
-                joint.connectedBody = GetComponent<Rigidbody>();
-                joint.xMotion = ConfigurableJointMotion.Locked;
-                joint.yMotion = ConfigurableJointMotion.Locked;
-                joint.zMotion = ConfigurableJointMotion.Locked;
-            }
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-        {
-            ConfigurableJoint joint = collision.collider.GetComponent<ConfigurableJoint>();
-            if (joint != null)
-            {
-                Destroy(joint);
-            }
         }
     }
 }
