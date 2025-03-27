@@ -18,6 +18,7 @@ public class EnemyAI : MonoBehaviour
     private NavMeshAgent agent;
     private Vector3 lastKnownPosition;
     private bool playerDetected = false;
+    private bool isActiveTimeline = true;
 
     private static List<EnemyAI> allEnemies = new List<EnemyAI>(); 
 
@@ -36,6 +37,8 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        if (!isActiveTimeline) return; 
+
         if (CanSeePlayer())
         {
             AlertNearbyEnemies();
@@ -51,6 +54,8 @@ public class EnemyAI : MonoBehaviour
 
     private bool CanSeePlayer()
     {
+        if (!isActiveTimeline) return false; 
+
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, playerLayer);
 
         foreach (Collider col in colliders)
@@ -74,7 +79,7 @@ public class EnemyAI : MonoBehaviour
 
     private void MoveToTarget()
     {
-        if (agent != null)
+        if (agent != null && isActiveTimeline)
         {
             agent.SetDestination(lastKnownPosition);
 
@@ -89,11 +94,26 @@ public class EnemyAI : MonoBehaviour
     {
         foreach (EnemyAI enemy in allEnemies)
         {
-            if (enemy != this && Vector3.Distance(transform.position, enemy.transform.position) <= alertRadius)
+            if (enemy != this && enemy.isActiveTimeline && Vector3.Distance(transform.position, enemy.transform.position) <= alertRadius)
             {
                 enemy.playerDetected = true;
                 enemy.lastKnownPosition = player.position;
             }
         }
+    }
+
+    public void SetActiveState(bool state)
+    {
+        isActiveTimeline = state;
+        if (!state)
+        {
+            LosePlayer();
+        }
+    }
+
+    private void LosePlayer()
+    {
+        playerDetected = false;
+        agent.ResetPath();
     }
 }

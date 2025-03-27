@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private Transform playerModel;
+    [SerializeField] private TimeShiftManager timeShiftManager;
 
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 6f;
@@ -61,6 +62,11 @@ public class PlayerMovement : MonoBehaviour
         HandleInput();
         ApplyDrag();
         CheckGroundStatus();
+
+        if (Input.GetMouseButtonDown(1)) 
+        {
+            timeShiftManager.TimeShift();
+        }
     }
 
     private void FixedUpdate()

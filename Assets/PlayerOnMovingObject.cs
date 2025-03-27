@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerOnMovingObject : MonoBehaviour
 {
-    public Rigidbody platformRigidbody;
+    private Rigidbody platformRigidbody;
     private Vector3 previousPlatformPosition;
     private Collider platformCollider; 
     private bool isOnPlatform = false;
@@ -11,40 +11,43 @@ public class PlayerOnMovingObject : MonoBehaviour
 
     private void Start()
     {
-        playerRigidbody = GetComponent<Rigidbody>();
-        platformCollider = platformRigidbody.GetComponent<Collider>(); 
-
-        previousPlatformPosition = platformRigidbody.position;
+        playerRigidbody = GetComponent<Rigidbody>();        
     }
 
     private void FixedUpdate()
     {
-        if (isOnPlatform)
+        if (isOnPlatform && platformRigidbody != null)
         {
-            Vector3 platformVelocity = platformRigidbody.position - previousPlatformPosition;
-
-            playerRigidbody.linearVelocity += platformVelocity;
-
             Vector3 platformMovement = platformRigidbody.position - previousPlatformPosition;
+
             playerRigidbody.position += platformMovement;
         }
 
-        previousPlatformPosition = platformRigidbody.position;
+        if (platformRigidbody != null)
+        {
+            previousPlatformPosition = platformRigidbody.position;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
-            isOnPlatform = true; 
+            Rigidbody detectedRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+
+            platformRigidbody = detectedRigidbody;
+            isOnPlatform = true;
+            previousPlatformPosition = platformRigidbody.position;
         }
+            
     }
 
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
-            isOnPlatform = false; 
+            isOnPlatform = false;
+            platformRigidbody = null;
         }
     }
 }
