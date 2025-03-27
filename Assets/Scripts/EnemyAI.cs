@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : MonoBehaviour, IFreezeable
 {
     [Header("Detection Settings")]
     public float detectionRange = 15f;
@@ -13,6 +13,7 @@ public class EnemyAI : MonoBehaviour
 
     [Header("Movement Settings")]
     public float moveSpeed = 5f;
+    public bool isFrozen = false;
 
     private Transform player;
     private NavMeshAgent agent;
@@ -115,5 +116,19 @@ public class EnemyAI : MonoBehaviour
     {
         playerDetected = false;
         agent.ResetPath();
+    }
+
+    public void SetFrozen(bool frozen)
+    {
+        isFrozen = frozen;
+
+        if (isFrozen)
+        {
+            Debug.Log($"{gameObject.name} is frozen.");
+        }
+        else
+        {
+            Debug.Log($"{gameObject.name} is unfrozen.");
+        }
     }
 }

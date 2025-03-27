@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class MovingPlatform : MonoBehaviour
+public class MovingPlatform : MonoBehaviour, IFreezeable
 {
     public Transform platform; 
     public Transform[] points;
@@ -75,6 +75,20 @@ public class MovingPlatform : MonoBehaviour
         {
             targetIndex = 1;
             direction = 1;
+        }
+    }
+
+    public void SetFrozen(bool frozen)
+    {
+        isFrozen = frozen;
+
+        if (isFrozen)
+        {
+            Debug.Log($"{gameObject.name} is frozen.");
+        }
+        else
+        {
+            Debug.Log($"{gameObject.name} is unfrozen.");
         }
     }
 }
