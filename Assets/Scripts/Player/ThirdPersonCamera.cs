@@ -9,6 +9,7 @@ public class ThirdPersonCamera : MonoBehaviour
     public Transform playerObj; 
     public CinemachineCamera playerCamera;
     public CinemachineCamera towerCamera;
+    public GameObject towerCam;
 
     [Header("Settings")]
     public float rotationSpeed = 10f;
@@ -23,6 +24,7 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
 
         playerCamera.Priority = highPriority;
         towerCamera.Priority = lowPriority;

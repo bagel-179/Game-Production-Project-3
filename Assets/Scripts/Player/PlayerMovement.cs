@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private Transform cameraTransform;
+    [SerializeField] private Transform cameraTransform; 
     [SerializeField] private Transform playerModel;
     [SerializeField] private TimeShiftManager timeShiftManager;
 
@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Dash Settings")]
     [SerializeField] private float dashForce = 30f;
     [SerializeField] private float dashDuration = 0.2f;
-    [SerializeField] private float dashCooldown = 1f;    
+    [SerializeField] private float dashCooldown = 1f;
     private bool isDashing = false;
     private bool canDash = true;
 
@@ -44,7 +44,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
     private Vector3 moveDirection;
-    
+
+    public Camera activeCamera;
 
     private void Awake()
     {
@@ -54,7 +55,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        rb.linearVelocity = Vector3.zero; 
+        rb.linearVelocity = Vector3.zero;
+        //activeCamera = cameraTransform.GetComponentInChildren<Camera>();
     }
 
     private void Update()
@@ -63,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
         ApplyDrag();
         CheckGroundStatus();
 
-        if (Input.GetKeyDown(KeyCode.R)) 
+        if (Input.GetKeyDown(KeyCode.R))
         {
             timeShiftManager.TimeShift();
         }
@@ -81,11 +83,11 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        Vector3 forward = cameraTransform.forward;
-        Vector3 right = cameraTransform.right;
+        Vector3 forward = activeCamera.transform.forward;
+        Vector3 right = activeCamera.transform.right;
 
-        forward.y = 0;
-        right.y = 0;
+        forward.y = 0;  
+        right.y = 0;  
         forward.Normalize();
         right.Normalize();
 
@@ -170,7 +172,7 @@ public class PlayerMovement : MonoBehaviour
         while (elapsedTime < spinDuration)
         {
             float rotationAmount = spinSpeed * Time.deltaTime;
-            playerModel.Rotate(0f, rotationAmount, 0f, Space.Self); 
+            playerModel.Rotate(0f, rotationAmount, 0f, Space.Self);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -190,7 +192,7 @@ public class PlayerMovement : MonoBehaviour
         float originalDrag = rb.linearDamping;
         rb.linearDamping = 0f;
 
-        Vector3 dashDirection = isSpinning ? cameraTransform.forward : playerModel.forward;
+        Vector3 dashDirection = isSpinning ? activeCamera.transform.forward : playerModel.forward;
         dashDirection.y = 0f;
         dashDirection.Normalize();
         rb.linearVelocity = new Vector3(dashDirection.x * dashForce, savedYVelocity, dashDirection.z * dashForce);

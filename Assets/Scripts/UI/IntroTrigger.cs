@@ -35,8 +35,6 @@ public class IntroTrigger : MonoBehaviour
         playerCameraTransform = playerCamera.transform;
         playerTowerCameraTransform = playerTowerCamera.transform;
 
-        playerCamera.SetActive(true);
-        playerTowerCamera.SetActive(true);
         introCamera.SetActive(false);
 
         lastActiveCamera = playerCamera; 
@@ -65,7 +63,8 @@ public class IntroTrigger : MonoBehaviour
         Vector3 startPosition = lastActiveCamera.transform.position;
         Quaternion startRotation = lastActiveCamera.transform.rotation;
 
-        while (Vector3.Distance(lastActiveCamera.transform.position, introCameraTransform.position) > positionThreshold)
+        while (Vector3.Distance(lastActiveCamera.transform.position, introCameraTransform.position) > positionThreshold ||
+               Quaternion.Angle(lastActiveCamera.transform.rotation, introCameraTransform.rotation) > positionThreshold)
         {
             elapsedTime += Time.deltaTime * transitionSpeed;
             float t = Mathf.Clamp01(elapsedTime);
