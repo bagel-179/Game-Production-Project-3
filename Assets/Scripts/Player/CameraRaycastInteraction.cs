@@ -15,6 +15,13 @@ public class CameraRaycastInteraction : MonoBehaviour
 
         if (Physics.SphereCast(ray, raycastWidth, out hit, raycastDistance, raycastLayerMask))
         {
+            VisualIndicator visualIndicator = hit.collider.GetComponent<VisualIndicator>();
+
+            if (visualIndicator != null)
+            {
+                visualIndicator.EnableIndicator(true);
+            }
+
             if (Input.GetKeyDown(KeyCode.E))
             {
                 if (hit.collider.CompareTag("Platform") || hit.collider.CompareTag("Enemy"))
@@ -35,9 +42,17 @@ public class CameraRaycastInteraction : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            var allVisualIndicators = FindObjectsOfType<VisualIndicator>();
+            foreach (var indicator in allVisualIndicators)
+            {
+                indicator.EnableIndicator(false);
+            }
+        }
     }
 
-    private IEnumerator UnfreezeObjectAfterTime(IFreezeable freezeableChild, IFreezeable freezeableParent, float delay)
+        private IEnumerator UnfreezeObjectAfterTime(IFreezeable freezeableChild, IFreezeable freezeableParent, float delay)
     {
         yield return new WaitForSeconds(delay);
 

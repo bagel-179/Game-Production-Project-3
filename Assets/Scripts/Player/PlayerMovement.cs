@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
         ApplyDrag();
         CheckGroundStatus();
 
-        if (Input.GetMouseButtonDown(1)) 
+        if (Input.GetKeyDown(KeyCode.R)) 
         {
             timeShiftManager.TimeShift();
         }

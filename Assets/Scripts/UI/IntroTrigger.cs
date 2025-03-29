@@ -8,6 +8,7 @@ public class IntroTrigger : MonoBehaviour
     [Header("Camera Settings")]
     public GameObject introCamera; 
     public GameObject playerCamera;
+    public GameObject playerTowerCamera;
 
     [Header("Trigger Settings")]
     public GameObject player;
@@ -19,16 +20,26 @@ public class IntroTrigger : MonoBehaviour
     public GameObject introUI;
 
     [Header("Camera Transition Settings")]
-    public float transitionSpeed = 2f; 
+    public float transitionSpeed = 2f;
     private Transform introCameraTransform;
     private Transform playerCameraTransform;
-    public float positionThreshold = 0.5f;
+    private Transform playerTowerCameraTransform;
+    public float positionThreshold = 1f;
+
+    private GameObject lastActiveCamera; 
 
     private void Start()
     {
         playerMovementScript = player.GetComponent<PlayerMovement>();
         introCameraTransform = introCamera.transform;
         playerCameraTransform = playerCamera.transform;
+        playerTowerCameraTransform = playerTowerCamera.transform;
+
+        playerCamera.SetActive(true);
+        playerTowerCamera.SetActive(true);
+        introCamera.SetActive(false);
+
+        lastActiveCamera = playerCamera; 
     }
 
     private void Update()
@@ -44,26 +55,29 @@ public class IntroTrigger : MonoBehaviour
         introPlayed = true;
         playerMovementScript.enabled = false;
 
+        lastActiveCamera = playerCamera.activeSelf ? playerCamera : playerTowerCamera;
+
         introCamera.SetActive(true);
         playerCamera.SetActive(false);
+        playerTowerCamera.SetActive(false);
 
         float elapsedTime = 0f;
-        Vector3 startPosition = playerCameraTransform.position;
-        Quaternion startRotation = playerCameraTransform.rotation;
+        Vector3 startPosition = lastActiveCamera.transform.position;
+        Quaternion startRotation = lastActiveCamera.transform.rotation;
 
-        while (Vector3.Distance(playerCameraTransform.position, introCameraTransform.position) > positionThreshold)
+        while (Vector3.Distance(lastActiveCamera.transform.position, introCameraTransform.position) > positionThreshold)
         {
             elapsedTime += Time.deltaTime * transitionSpeed;
-            float t = Mathf.Clamp01(elapsedTime); 
+            float t = Mathf.Clamp01(elapsedTime);
 
-            playerCameraTransform.position = Vector3.Lerp(startPosition, introCameraTransform.position, t);
-            playerCameraTransform.rotation = Quaternion.Slerp(startRotation, introCameraTransform.rotation, t);
+            lastActiveCamera.transform.position = Vector3.Lerp(startPosition, introCameraTransform.position, t);
+            lastActiveCamera.transform.rotation = Quaternion.Slerp(startRotation, introCameraTransform.rotation, t);
 
             yield return null;
         }
 
-        playerCameraTransform.position = introCameraTransform.position;
-        playerCameraTransform.rotation = introCameraTransform.rotation;
+        lastActiveCamera.transform.position = introCameraTransform.position;
+        lastActiveCamera.transform.rotation = introCameraTransform.rotation;
 
         introUI.SetActive(true);
 
@@ -75,7 +89,10 @@ public class IntroTrigger : MonoBehaviour
     {
         introUI.SetActive(false);
         introCamera.SetActive(false);
+
         playerCamera.SetActive(true);
+        playerTowerCamera.SetActive(true);
+
         playerMovementScript.enabled = true;
     }
 
