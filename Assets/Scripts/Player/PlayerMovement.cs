@@ -42,6 +42,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float swayAngle = 10f;
     private bool isGliding;
 
+    [Header("Particles")]
+    [SerializeField] private ParticleSystem jumpParticles;
+
     private Rigidbody rb;
     private Vector3 moveDirection;
 
@@ -56,7 +59,6 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rb.linearVelocity = Vector3.zero;
-        //activeCamera = cameraTransform.GetComponentInChildren<Camera>();
     }
 
     private void Update()
@@ -123,10 +125,10 @@ public class PlayerMovement : MonoBehaviour
         if (jumpCount >= maxJumps) return;
 
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
         jumpCount++;
+
+        jumpParticles.Play();
 
         if (jumpCount >= 1) StartCoroutine(SpinEffect());
     }
