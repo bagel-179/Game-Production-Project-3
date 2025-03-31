@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Transform cameraTransform; 
     [SerializeField] private Transform playerModel;
+    [SerializeField] private Transform dashOrientation;
     [SerializeField] private TimeShiftManager timeShiftManager;
 
     [Header("Movement Settings")]
@@ -40,6 +41,8 @@ public class PlayerMovement : MonoBehaviour
     private float glideFallSpeedLimit = 2f;
     [SerializeField] private float swaySpeed = 2f;
     [SerializeField] private float swayAngle = 10f;
+    private float currentSwayAngle = 0f;
+    private float swayTime = 0f;
     private bool isGliding;
 
     [Header("Particles")]
@@ -54,15 +57,12 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-    }
-
-    private void Start()
-    {
         rb.linearVelocity = Vector3.zero;
     }
 
     private void Update()
     {
+        jumpParticles.Play();
         HandleInput();
         ApplyDrag();
         CheckGroundStatus();
@@ -162,8 +162,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyGlideSway()
     {
-        float swayValue = Mathf.Sin(Time.time * swaySpeed) * swayAngle;
-        playerModel.localRotation = Quaternion.Euler(playerModel.localRotation.eulerAngles.x, playerModel.localRotation.eulerAngles.y, swayValue);
+        swayTime += Time.deltaTime * swaySpeed;
+        float targetSway = Mathf.Sin(swayTime) * swayAngle;
+
+        currentSwayAngle = Mathf.Lerp(currentSwayAngle, targetSway, Time.deltaTime * 5f);
+
+        playerModel.localRotation = Quaternion.Euler(playerModel.localRotation.eulerAngles.x, playerModel.localRotation.eulerAngles.y, currentSwayAngle);
     }
 
     private IEnumerator SpinEffect()
@@ -194,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
         float originalDrag = rb.linearDamping;
         rb.linearDamping = 0f;
 
-        Vector3 dashDirection = isSpinning ? activeCamera.transform.forward : playerModel.forward;
+        Vector3 dashDirection = dashOrientation.forward;
         dashDirection.y = 0f;
         dashDirection.Normalize();
         rb.linearVelocity = new Vector3(dashDirection.x * dashForce, savedYVelocity, dashDirection.z * dashForce);

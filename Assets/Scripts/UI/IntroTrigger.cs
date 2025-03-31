@@ -6,9 +6,10 @@ using Unity.VisualScripting;
 public class IntroTrigger : MonoBehaviour
 {
     [Header("Camera Settings")]
-    public GameObject introCamera; 
-    public GameObject playerCamera;
-    public GameObject playerTowerCamera;
+    public GameObject introCameraObj;
+    public CinemachineCamera introCamera; 
+    public CinemachineCamera playerCamera;
+    public CinemachineCamera playerTowerCamera;
 
     [Header("Trigger Settings")]
     public GameObject player;
@@ -22,22 +23,20 @@ public class IntroTrigger : MonoBehaviour
     [Header("Camera Transition Settings")]
     public float transitionSpeed = 2f;
     private Transform introCameraTransform;
-    private Transform playerCameraTransform;
-    private Transform playerTowerCameraTransform;
     public float positionThreshold = 1f;
+    public float rotationThreshold = 2f;
 
-    private GameObject lastActiveCamera; 
+    private CinemachineCamera lastActiveCamera;
 
     private void Start()
     {
         playerMovementScript = player.GetComponent<PlayerMovement>();
         introCameraTransform = introCamera.transform;
-        playerCameraTransform = playerCamera.transform;
-        playerTowerCameraTransform = playerTowerCamera.transform;
 
-        introCamera.SetActive(false);
+        introCameraObj.SetActive(false);
 
-        lastActiveCamera = playerCamera; 
+        // Find which Cinemachine camera is currently active
+        lastActiveCamera = playerCamera.Priority > playerTowerCamera.Priority ? playerCamera : playerTowerCamera;
     }
 
     private void Update()
@@ -53,44 +52,45 @@ public class IntroTrigger : MonoBehaviour
         introPlayed = true;
         playerMovementScript.enabled = false;
 
-        lastActiveCamera = playerCamera.activeSelf ? playerCamera : playerTowerCamera;
+        // Ensure we are detecting the correct active camera
+        lastActiveCamera = playerCamera.Priority > playerTowerCamera.Priority ? playerCamera : playerTowerCamera;
 
-        introCamera.SetActive(true);
-        playerCamera.SetActive(false);
-        playerTowerCamera.SetActive(false);
+        // Temporarily increase introCamera priority
+        introCameraObj.SetActive(true);
 
-        float elapsedTime = 0f;
-        Vector3 startPosition = lastActiveCamera.transform.position;
-        Quaternion startRotation = lastActiveCamera.transform.rotation;
+        introCamera.Priority = 100;
 
-        while (Vector3.Distance(lastActiveCamera.transform.position, introCameraTransform.position) > positionThreshold ||
-               Quaternion.Angle(lastActiveCamera.transform.rotation, introCameraTransform.rotation) > positionThreshold)
+        yield return new WaitForSeconds(0.5f); // Allow time for camera transition
+
+        // Wait until the camera reaches the target position & rotation
+        while (!IsCameraInPosition(introCameraTransform))
         {
-            elapsedTime += Time.deltaTime * transitionSpeed;
-            float t = Mathf.Clamp01(elapsedTime);
-
-            lastActiveCamera.transform.position = Vector3.Lerp(startPosition, introCameraTransform.position, t);
-            lastActiveCamera.transform.rotation = Quaternion.Slerp(startRotation, introCameraTransform.rotation, t);
-
             yield return null;
         }
-
-        lastActiveCamera.transform.position = introCameraTransform.position;
-        lastActiveCamera.transform.rotation = introCameraTransform.rotation;
-
+        yield return new WaitForSeconds(0.2f);
+        // Camera reached target, show UI
         introUI.SetActive(true);
 
         yield return new WaitForSeconds(4f);
         EndIntro();
     }
 
+    private bool IsCameraInPosition(Transform targetTransform)
+    {
+        Transform mainCam = Camera.main.transform;
+
+        float positionDiff = Vector3.Distance(mainCam.position, targetTransform.position);
+        float rotationDiff = Quaternion.Angle(mainCam.rotation, targetTransform.rotation);
+
+        return positionDiff < positionThreshold && rotationDiff < rotationThreshold;
+    }
+
     private void EndIntro()
     {
         introUI.SetActive(false);
-        introCamera.SetActive(false);
+        introCameraObj.SetActive(false);
 
-        playerCamera.SetActive(true);
-        playerTowerCamera.SetActive(true);
+        introCamera.Priority = 1;
 
         playerMovementScript.enabled = true;
     }
