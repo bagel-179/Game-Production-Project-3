@@ -84,6 +84,11 @@ public class EnemyAI : MonoBehaviour, IFreezeable
         {
             agent.SetDestination(lastKnownPosition);
 
+            if (Vector3.Distance(transform.position, lastKnownPosition) <= agent.stoppingDistance)
+            {
+                agent.ResetPath();
+            }
+
             if (!CanSeePlayer() && Vector3.Distance(transform.position, lastKnownPosition) < 1f)
             {
                 playerDetected = false;
@@ -124,10 +129,14 @@ public class EnemyAI : MonoBehaviour, IFreezeable
 
         if (isFrozen)
         {
+            agent.isStopped = true; 
+            agent.updateRotation = false; 
             Debug.Log($"{gameObject.name} is frozen.");
         }
         else
         {
+            agent.isStopped = false;
+            agent.updateRotation = true; 
             Debug.Log($"{gameObject.name} is unfrozen.");
         }
     }
