@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Particles")]
     [SerializeField] private ParticleSystem jumpParticles;
+    [SerializeField] private ParticleSystem glideParticles;
 
     private Rigidbody rb;
     private Vector3 moveDirection;
@@ -146,9 +147,14 @@ public class PlayerMovement : MonoBehaviour
         {
             isGliding = true;
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, -glideFallSpeedLimit, rb.linearVelocity.z);
+
+            glideParticles.Play();
         }
         else
+        {
             isGliding = false;
+            glideParticles.Stop();
+        }
     }
 
     private void ApplyDrag()
