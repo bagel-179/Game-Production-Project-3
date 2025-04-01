@@ -20,25 +20,26 @@ public class EnemyAI : MonoBehaviour, IFreezeable
     private Vector3 lastKnownPosition;
     private bool playerDetected = false;
     private bool isActiveTimeline = true;
+    private Vector3 frozenPosition;
 
-    private static List<EnemyAI> allEnemies = new List<EnemyAI>(); 
+    private static List<EnemyAI> allEnemies = new List<EnemyAI>();
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
-        player = GameObject.FindGameObjectWithTag("Player").transform; 
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         allEnemies.Add(this);
     }
 
     private void OnDestroy()
     {
-        allEnemies.Remove(this); 
+        allEnemies.Remove(this);
     }
 
     private void Update()
     {
-        if (!isActiveTimeline) return; 
+        if (!isActiveTimeline) return;
 
         if (CanSeePlayer())
         {
@@ -55,7 +56,7 @@ public class EnemyAI : MonoBehaviour, IFreezeable
 
     private bool CanSeePlayer()
     {
-        if (!isActiveTimeline) return false; 
+        if (!isActiveTimeline || isFrozen) return false;
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, playerLayer);
 
@@ -129,15 +130,36 @@ public class EnemyAI : MonoBehaviour, IFreezeable
 
         if (isFrozen)
         {
-            agent.isStopped = true; 
-            agent.updateRotation = false; 
             Debug.Log($"{gameObject.name} is frozen.");
+            frozenPosition = transform.position;
+
+            // Stop movement and reset any existing path
+            agent.isStopped = true;
+            agent.updatePosition = false;
+            agent.updateRotation = false;
+            agent.velocity = Vector3.zero;
+
+            // Prevent AI from remembering old destinations
+            lastKnownPosition = transform.position; // Set it to its current position
         }
         else
         {
-            agent.isStopped = false;
-            agent.updateRotation = true; 
             Debug.Log($"{gameObject.name} is unfrozen.");
+
+            // Force enemy to stay exactly where it was
+            transform.position = frozenPosition;
+
+            // Re-enable movement
+            agent.isStopped = false;
+            agent.updatePosition = true;
+            agent.updateRotation = true;
+
+            // Only set a new destination if the player is detected again
+            if (playerDetected && CanSeePlayer())
+            {
+                lastKnownPosition = player.position; // Update to a fresh player location
+                agent.SetDestination(lastKnownPosition);
+            }
         }
     }
 }
