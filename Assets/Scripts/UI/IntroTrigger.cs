@@ -8,8 +8,8 @@ public class IntroTrigger : MonoBehaviour
     [Header("Camera Settings")]
     public GameObject introCameraObj;
     public CinemachineCamera introCamera; 
-    public CinemachineCamera playerCamera;
-    public CinemachineCamera playerTowerCamera;
+    public CinemachineCamera freeLookCamera;
+    public CinemachineCamera towerCamera;
 
     [Header("Trigger Settings")]
     public GameObject player;
@@ -35,8 +35,7 @@ public class IntroTrigger : MonoBehaviour
 
         introCameraObj.SetActive(false);
 
-        // Find which Cinemachine camera is currently active
-        lastActiveCamera = playerCamera.Priority > playerTowerCamera.Priority ? playerCamera : playerTowerCamera;
+        lastActiveCamera = freeLookCamera.Priority > towerCamera.Priority ? freeLookCamera : towerCamera;
     }
 
     private void Update()
@@ -52,17 +51,14 @@ public class IntroTrigger : MonoBehaviour
         introPlayed = true;
         playerMovementScript.enabled = false;
 
-        // Ensure we are detecting the correct active camera
-        lastActiveCamera = playerCamera.Priority > playerTowerCamera.Priority ? playerCamera : playerTowerCamera;
+        lastActiveCamera = freeLookCamera.Priority > towerCamera.Priority ? freeLookCamera : towerCamera;
 
-        // Temporarily increase introCamera priority
         introCameraObj.SetActive(true);
 
         introCamera.Priority = 100;
 
-        yield return new WaitForSeconds(0.5f); // Allow time for camera transition
+        yield return new WaitForSeconds(0.5f); 
 
-        // Wait until the camera reaches the target position & rotation
         while (!IsCameraInPosition(introCameraTransform))
         {
             yield return null;

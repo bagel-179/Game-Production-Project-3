@@ -62,7 +62,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        jumpParticles.Play();
         HandleInput();
         ApplyDrag();
         CheckGroundStatus();
@@ -105,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumps)
         {
             Jump();
+            jumpParticles.Play();
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
