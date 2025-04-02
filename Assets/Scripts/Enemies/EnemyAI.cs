@@ -133,31 +133,26 @@ public class EnemyAI : MonoBehaviour, IFreezeable
             Debug.Log($"{gameObject.name} is frozen.");
             frozenPosition = transform.position;
 
-            // Stop movement and reset any existing path
             agent.isStopped = true;
             agent.updatePosition = false;
             agent.updateRotation = false;
             agent.velocity = Vector3.zero;
 
-            // Prevent AI from remembering old destinations
-            lastKnownPosition = transform.position; // Set it to its current position
+            lastKnownPosition = transform.position; 
         }
         else
         {
             Debug.Log($"{gameObject.name} is unfrozen.");
 
-            // Force enemy to stay exactly where it was
             transform.position = frozenPosition;
 
-            // Re-enable movement
             agent.isStopped = false;
             agent.updatePosition = true;
             agent.updateRotation = true;
 
-            // Only set a new destination if the player is detected again
             if (playerDetected && CanSeePlayer())
             {
-                lastKnownPosition = player.position; // Update to a fresh player location
+                lastKnownPosition = player.position; 
                 agent.SetDestination(lastKnownPosition);
             }
         }

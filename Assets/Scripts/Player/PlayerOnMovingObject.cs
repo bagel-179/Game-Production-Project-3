@@ -8,10 +8,11 @@ public class PlayerOnMovingObject : MonoBehaviour
     private bool isOnPlatform = false;
 
     private Rigidbody playerRigidbody;
+    private MovingPlatform currentPlatformScript;
 
     private void Start()
     {
-        playerRigidbody = GetComponent<Rigidbody>();        
+        playerRigidbody = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
@@ -19,7 +20,6 @@ public class PlayerOnMovingObject : MonoBehaviour
         if (isOnPlatform && platformRigidbody != null)
         {
             Vector3 platformMovement = platformRigidbody.position - previousPlatformPosition;
-
             playerRigidbody.position += platformMovement;
         }
 
@@ -33,13 +33,21 @@ public class PlayerOnMovingObject : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
-            Rigidbody detectedRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+            platformRigidbody = collision.gameObject.GetComponent<Rigidbody>();
 
-            platformRigidbody = detectedRigidbody;
+            currentPlatformScript = collision.transform.parent?.GetComponent<MovingPlatform>();
+
             isOnPlatform = true;
-            previousPlatformPosition = platformRigidbody.position;
+            if (platformRigidbody != null)
+            {
+                previousPlatformPosition = platformRigidbody.position;
+            }
+
+            if (currentPlatformScript != null)
+            {
+                currentPlatformScript.TriggerFall();
+            }
         }
-            
     }
 
     private void OnCollisionExit(Collision collision)
@@ -48,6 +56,15 @@ public class PlayerOnMovingObject : MonoBehaviour
         {
             isOnPlatform = false;
             platformRigidbody = null;
+            currentPlatformScript = null;
+
+            Debug.Log("Left platform");
+
+            // Stop the platform from falling when the player leaves the platform
+            if (currentPlatformScript != null)
+            {
+                currentPlatformScript.StopFalling();
+            }
         }
     }
 }

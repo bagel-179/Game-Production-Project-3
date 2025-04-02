@@ -88,8 +88,8 @@ GameObject:
   - component: {fileID: 5052754785885155283}
   - component: {fileID: 1351304742240801408}
   - component: {fileID: 6436463495101296124}
-  - component: {fileID: 9185171539368477156}
   - component: {fileID: 6575663709535633940}
+  - component: {fileID: 1897742284827103438}
   m_Layer: 6
   m_Name: Platform
   m_TagString: Platform
@@ -214,27 +214,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &9185171539368477156
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3510910802658646852}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0.00000047683716}
 --- !u!114 &6575663709535633940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,6 +226,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 646a4ad33ed32cd4b8bece436ccaea86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1897742284827103438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3510910802658646852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b31bde55459f674f9dadddda7b4c581, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIIndicator: {fileID: 2309057121876199216}
 --- !u!1 &4148726607732243394
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,7 +250,6 @@ GameObject:
   - component: {fileID: 9208964444670878710}
   - component: {fileID: 2961921449297996887}
   - component: {fileID: 7481329868130556479}
-  - component: {fileID: 7695243837327888549}
   m_Layer: 6
   m_Name: Sphere (3)
   m_TagString: Untagged
@@ -334,27 +325,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &7695243837327888549
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4148726607732243394}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5489791320218051441
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e074a7078c7a89f48b9a90fe6e3aece2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platform: {fileID: 8121340555826700708}
+  platform: {fileID: 3510910802658646852}
   points:
   - {fileID: 4141304295443244873}
   - {fileID: 9208964444670878710}
@@ -411,6 +381,9 @@ MonoBehaviour:
   isFrozen: 0
   stopPoints: 
   stopDuration: 2
+  canFall: 1
+  fallDelay: 2
+  fallSpeed: 2
 --- !u!1 &5498651486851367720
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,7 +395,6 @@ GameObject:
   - component: {fileID: 4141304295443244873}
   - component: {fileID: 1826469929961113337}
   - component: {fileID: 1672559494755543487}
-  - component: {fileID: 7529850287771422985}
   m_Layer: 6
   m_Name: Sphere (2)
   m_TagString: Untagged
@@ -498,27 +470,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &7529850287771422985
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5498651486851367720}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6789911774465032110
 GameObject:
   m_ObjectHideFlags: 0
