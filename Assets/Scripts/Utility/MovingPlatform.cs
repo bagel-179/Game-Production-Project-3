@@ -30,7 +30,7 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
 
     void Update()
     {
-        if (canShatter && !isFalling)
+        if (canShatter && PlayerOnPlatform && !isFrozen)
         {
             EnableShatterScript();
         }
@@ -56,7 +56,7 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
         {
             fallTimer -= Time.fixedDeltaTime; 
         }
-        else if (!PlayerOnPlatform) // Only fall if player isn't on platform
+        else if (PlayerOnPlatform)
         {
             platform.transform.position += Vector3.down * fallSpeed * Time.fixedDeltaTime; 
         }
@@ -113,6 +113,8 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
 
     public void SetFrozen(bool frozen) => isFrozen = frozen;
 
+    public void StopFalling() => isFalling = false;
+
     public void TriggerFall()
     {
         if (canFall && !isFalling)
@@ -121,8 +123,6 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
             isFalling = true;
         }
     }
-
-    public void StopFalling() => isFalling = false;
 
     private void EnableShatterScript()
     {
