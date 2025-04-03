@@ -1143,7 +1143,7 @@ MonoBehaviour:
   dashForce: 30
   dashDuration: 0.2
   dashCooldown: 1
-  maxJumps: 2
+  maxJumps: 1
   jumpForce: 18
   groundLayer:
     serializedVersion: 2

@@ -3,28 +3,34 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour, IFreezeable
 {
+    [Header("Movement Settings")]
     public GameObject platform; 
     public Transform[] points;
     public float speed = 2f;
     public bool isALoop = false;
-    public bool isFrozen = false;
     public int[] stopPoints;
     public float stopDuration = 2f;
+    
+    [Header("Fall Settings")]
     public bool canFall = false;
     public float fallDelay = 2f;
     public float fallSpeed = 2f;
-
+    
+    [Header("Special Features")]
     public bool canShatter = false;
+    public bool isFrozen = false;
 
     private int targetIndex = 0;
     private int direction = 1;
     private bool isWaiting = false;
     private bool isFalling = false;
     private float fallTimer = 0;
+    
+    public bool PlayerOnPlatform { get; private set; }
 
     void Update()
     {
-        if (canShatter)
+        if (canShatter && !isFalling)
         {
             EnableShatterScript();
         }
@@ -32,31 +38,37 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
 
     void FixedUpdate()
     {
-        if (!isFalling)
+        if (isFalling)
         {
-            if (isFrozen || isWaiting || points.Length < 2 || platform == null)
-                return;
+            HandleFalling();
+            return;
+        }
 
-            MovePlatform();
-        }
-        else
+        if (isFrozen || isWaiting || points.Length < 2 || platform == null)
+            return;
+
+        MovePlatform();
+    }
+
+    void HandleFalling()
+    {
+        if (fallTimer > 0)
         {
-            if (fallTimer > 0)
-            {
-                fallTimer -= Time.fixedDeltaTime; 
-            }
-            else
-            {
-                platform.transform.position += Vector3.down * fallSpeed * Time.fixedDeltaTime; 
-            }
+            fallTimer -= Time.fixedDeltaTime; 
         }
-        
+        else if (!PlayerOnPlatform) // Only fall if player isn't on platform
+        {
+            platform.transform.position += Vector3.down * fallSpeed * Time.fixedDeltaTime; 
+        }
     }
 
     void MovePlatform()
     {
         Transform targetPoint = points[targetIndex];
-        platform.transform.position = Vector3.MoveTowards(platform.transform.position, targetPoint.position, speed * Time.deltaTime);
+        platform.transform.position = Vector3.MoveTowards(
+            platform.transform.position, 
+            targetPoint.position, 
+            speed * Time.deltaTime);
 
         if (Vector3.Distance(platform.transform.position, targetPoint.position) < 0.01f)
         {
@@ -71,14 +83,7 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
         }
     }
 
-    bool ShouldStopAtPoint(int index)
-    {
-        foreach (int stopIndex in stopPoints)
-        {
-            if (stopIndex == index) return true;
-        }
-        return false;
-    }
+    bool ShouldStopAtPoint(int index) => System.Array.Exists(stopPoints, point => point == index);
 
     IEnumerator WaitAtPoint()
     {
@@ -94,13 +99,8 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
 
         if (targetIndex >= points.Length)
         {
-            if (isALoop)
-                targetIndex = 0;
-            else
-            {
-                targetIndex = points.Length - 2;
-                direction = -1;
-            }
+            targetIndex = isALoop ? 0 : points.Length - 2;
+            direction = isALoop ? direction : -1;
         }
         else if (targetIndex < 0)
         {
@@ -109,10 +109,9 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
         }
     }
 
-    public void SetFrozen(bool frozen)
-    {
-        isFrozen = frozen;
-    }
+    public void SetPlayerOnPlatform(bool onPlatform) => PlayerOnPlatform = onPlatform;
+
+    public void SetFrozen(bool frozen) => isFrozen = frozen;
 
     public void TriggerFall()
     {
@@ -123,22 +122,14 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
         }
     }
 
-    public void StopFalling()
-    {
-        isFalling = false; 
-    }
+    public void StopFalling() => isFalling = false;
 
     private void EnableShatterScript()
     {
         Shatter shatterScript = GetComponentInChildren<Shatter>();
         if (shatterScript != null)
         {
-            Debug.Log("Shatter script found! Calling EnableShattering.");
-            shatterScript.EnableShattering();  // Call the EnableShattering function on the Shatter script
-        }
-        else
-        {
-            Debug.LogWarning("Shatter script not found in children!");
+            shatterScript.EnableShattering();
         }
     }
 }

@@ -4,11 +4,8 @@ public class PlayerOnMovingObject : MonoBehaviour
 {
     private Rigidbody platformRigidbody;
     private Vector3 previousPlatformPosition;
-    private Collider platformCollider; 
-    private bool isOnPlatform = false;
-
+    private MovingPlatform currentPlatform;
     private Rigidbody playerRigidbody;
-    private MovingPlatform currentPlatformScript;
 
     private void Start()
     {
@@ -17,54 +14,43 @@ public class PlayerOnMovingObject : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isOnPlatform && platformRigidbody != null)
-        {
-            Vector3 platformMovement = platformRigidbody.position - previousPlatformPosition;
-            playerRigidbody.position += platformMovement;
-        }
+        if (platformRigidbody == null) return;
+
+        Vector3 platformMovement = platformRigidbody.position - previousPlatformPosition;
+        playerRigidbody.position += platformMovement;
+        previousPlatformPosition = platformRigidbody.position;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!collision.gameObject.CompareTag("Platform")) return;
+
+        platformRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+        currentPlatform = collision.transform.parent?.GetComponent<MovingPlatform>();
 
         if (platformRigidbody != null)
         {
             previousPlatformPosition = platformRigidbody.position;
         }
-    }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Platform"))
+        if (currentPlatform != null)
         {
-            platformRigidbody = collision.gameObject.GetComponent<Rigidbody>();
-
-            currentPlatformScript = collision.transform.parent?.GetComponent<MovingPlatform>();
-
-            isOnPlatform = true;
-            if (platformRigidbody != null)
-            {
-                previousPlatformPosition = platformRigidbody.position;
-            }
-
-            if (currentPlatformScript != null)
-            {
-                currentPlatformScript.TriggerFall();
-            }
+            currentPlatform.SetPlayerOnPlatform(true);
+            currentPlatform.TriggerFall();
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Platform"))
+        if (!collision.gameObject.CompareTag("Platform")) return;
+
+        if (currentPlatform != null)
         {
-            isOnPlatform = false;
-            platformRigidbody = null;
-            currentPlatformScript = null;
-
-            Debug.Log("Left platform");
-
-            // Stop the platform from falling when the player leaves the platform
-            if (currentPlatformScript != null)
-            {
-                currentPlatformScript.StopFalling();
-            }
+            currentPlatform.SetPlayerOnPlatform(false);
+            currentPlatform.StopFalling();
         }
+
+        platformRigidbody = null;
+        currentPlatform = null;
     }
 }
