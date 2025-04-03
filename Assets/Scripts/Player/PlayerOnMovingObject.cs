@@ -23,20 +23,14 @@ public class PlayerOnMovingObject : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!collision.gameObject.CompareTag("Platform")) return;
-
-        platformRigidbody = collision.gameObject.GetComponent<Rigidbody>();
-        currentPlatform = collision.transform.parent?.GetComponent<MovingPlatform>();
-
-        if (platformRigidbody != null)
+        if (collision.gameObject.CompareTag("Platform"))
         {
-            previousPlatformPosition = platformRigidbody.position;
-        }
-
-        if (currentPlatform != null)
-        {
-            currentPlatform.SetPlayerOnPlatform(true);
-            currentPlatform.TriggerFall();
+            currentPlatform = collision.transform.parent.GetComponent<MovingPlatform>();
+            if (currentPlatform != null)
+            {
+                currentPlatform.SetPlayerOnPlatform(true);
+                currentPlatform.TriggerFall(); 
+            }
         }
     }
 

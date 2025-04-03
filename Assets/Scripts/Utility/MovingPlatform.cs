@@ -14,7 +14,7 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
     [Header("Fall Settings")]
     public bool canFall = false;
     public float fallDelay = 2f;
-    public float fallSpeed = 2f;
+    public float verticalSpeed = 5f;
     
     [Header("Special Features")]
     public bool canShatter = false;
@@ -25,8 +25,15 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
     private bool isWaiting = false;
     private bool isFalling = false;
     private float fallTimer = 0;
-    
+    private Vector3 fallStartPosition;
+    private Rigidbody platformRb;
+
     public bool PlayerOnPlatform { get; private set; }
+
+    void Start()
+    {
+        platformRb = platform.GetComponent<Rigidbody>();
+    }
 
     void Update()
     {
@@ -38,32 +45,28 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
 
     void FixedUpdate()
     {
+        if (platform == null) return;
+
         if (isFalling)
         {
             HandleFalling();
             return;
         }
 
-        if (isFrozen || isWaiting || points.Length < 2 || platform == null)
+
+        if (isFrozen || isWaiting || points.Length < 2)
             return;
 
         MovePlatform();
     }
 
-    void HandleFalling()
-    {
-        if (fallTimer > 0)
-        {
-            fallTimer -= Time.fixedDeltaTime; 
-        }
-        else if (PlayerOnPlatform)
-        {
-            platform.transform.position += Vector3.down * fallSpeed * Time.fixedDeltaTime; 
-        }
-    }
-
     void MovePlatform()
     {
+        if (platformRb != null)
+        {
+            platformRb.linearVelocity = Vector3.zero; 
+        }
+
         Transform targetPoint = points[targetIndex];
         platform.transform.position = Vector3.MoveTowards(
             platform.transform.position, 
@@ -113,14 +116,54 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
 
     public void SetFrozen(bool frozen) => isFrozen = frozen;
 
-    public void StopFalling() => isFalling = false;
+    void HandleFalling()
+    {
+        if (fallTimer > 0)
+        {
+            fallTimer -= Time.fixedDeltaTime;
+            return;
+        }
+
+        if (platformRb != null && PlayerOnPlatform)
+        {
+            platformRb.linearVelocity = Vector3.down * verticalSpeed;
+        }
+    }
+
+    //void HandleReturning()
+    //{
+    //    platform.transform.position = Vector3.MoveTowards(
+    //        platform.transform.position,
+    //        originalPosition,
+    //        verticalSpeed * Time.fixedDeltaTime);
+
+    //    if (Vector3.Distance(platform.transform.position, originalPosition) < 0.01f)
+    //    {
+    //        isReturning = false;
+    //        originalPosition = platform.transform.position;
+    //    }
+    //}
 
     public void TriggerFall()
     {
-        if (canFall && !isFalling)
+        if (canFall && !isFalling && PlayerOnPlatform && platform != null)
         {
-            fallTimer = fallDelay; 
+            fallStartPosition = platform.transform.position;
+            fallTimer = fallDelay;
             isFalling = true;
+            isWaiting = false;
+            StopAllCoroutines();
+
+            Debug.Log("Falling initiated! Position: " + fallStartPosition);
+        }
+    }
+
+    public void StopFalling()
+    {
+        isFalling = false;
+        if (platformRb != null)
+        {
+            platformRb.linearVelocity = Vector3.zero;
         }
     }
 
