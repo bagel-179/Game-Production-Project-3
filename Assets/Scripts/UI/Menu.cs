@@ -22,6 +22,7 @@ public class Menu : MonoBehaviour
 
     private bool isPaused = false;
     private bool isAnimating = false;
+    private bool gameStarted = false;
 
     private void Start()
     {
@@ -36,7 +37,7 @@ public class Menu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !isAnimating)
+        if (gameStarted && Input.GetKeyDown(KeyCode.Escape) && !isAnimating)
         {
             TogglePause();
         }
@@ -44,6 +45,8 @@ public class Menu : MonoBehaviour
 
     public void TogglePause()
     {
+        if (!gameStarted) return;
+
         isPaused = !isPaused;
         isAnimating = true;
 
@@ -82,6 +85,8 @@ public class Menu : MonoBehaviour
 
     public void PlayGame()
     {
+        gameStarted = true;
+
         playerMovementScript.enabled = true;
         thirdPersonCameraScript.enabled = true;
 
@@ -93,6 +98,9 @@ public class Menu : MonoBehaviour
 
         menuRb.useGravity = true;
         Destroy(menuBackground, 5f);
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void Restart()

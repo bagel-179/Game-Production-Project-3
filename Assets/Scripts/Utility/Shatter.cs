@@ -7,20 +7,24 @@ public class Shatter : MonoBehaviour
 {
     [Header("Shatter Settings")]
     [Tooltip("Number of recursive splits")]
-    public int CutCascades = 1;
+    [SerializeField] private int CutCascades = 4;
 
     [Tooltip("Force applied to fragments")]
-    public float ExplodeForce = 0;
+    [SerializeField] private float ExplodeForce = 30;
 
     [Header("Fragment Settings")]
     [Tooltip("Time before fragments are destroyed (0 = never)")]
-    public float FragmentLifetime = 5f;
+    [SerializeField] private float FragmentLifetime = 4f;
 
     [Tooltip("Fade out duration before destruction")]
-    public float FadeDuration = 1f;
+    [SerializeField] private float FadeDuration = 1f;
+
+    [Header("Destruction Effects")]
+    [Tooltip("Duration of shrink animation before destruction")]
+    [SerializeField] private float shrinkDuration = 4f;
 
     [Tooltip("Minimum fragment size (stops recursive splitting)")]
-    public float MinFragmentSize = 0.1f;
+    [SerializeField] private float MinFragmentSize = 0.1f;
 
     private bool edgeSet = false;
     private Vector3 edgeVertex = Vector3.zero;
@@ -98,18 +102,14 @@ public class Shatter : MonoBehaviour
                 if (fragmentScript != null)
                 {
                     fragmentScript.StartCoroutine(fragmentScript.DestroyFragmentAfterTime(
-                        parts[i].GameObject,
-                        FragmentLifetime,
-                        FadeDuration));
+                        parts[i].GameObject, FragmentLifetime, FadeDuration, shrinkDuration));
                 }
                 else
                 {
                     // If no Shatter component, add a temporary MonoBehaviour to run the coroutine
                     var coroutineRunner = parts[i].GameObject.AddComponent<FragmentCoroutineRunner>();
                     coroutineRunner.StartCoroutine(DestroyFragmentAfterTime(
-                        parts[i].GameObject,
-                        FragmentLifetime,
-                        FadeDuration));
+                        parts[i].GameObject, FragmentLifetime, FadeDuration, shrinkDuration));
                 }
             }
         }
@@ -117,9 +117,22 @@ public class Shatter : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private IEnumerator DestroyFragmentAfterTime(GameObject fragment, float lifetime, float fadeDuration)
+    private IEnumerator DestroyFragmentAfterTime(GameObject fragment, float lifetime, float fadeDuration, float shrinkDuration = 0.5f)
     {
         yield return new WaitForSeconds(lifetime);
+
+        float shrinkTimer = 0f;
+        Vector3 originalScale = fragment.transform.localScale;
+
+        while (shrinkTimer < shrinkDuration)
+        {
+            if (fragment == null) yield break;
+
+            shrinkTimer += Time.deltaTime;
+            float progress = shrinkTimer / shrinkDuration;
+            fragment.transform.localScale = originalScale * Mathf.Lerp(1f, 0.01f, progress);
+            yield return null;
+        }
 
         if (fadeDuration > 0)
         {
