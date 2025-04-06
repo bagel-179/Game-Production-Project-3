@@ -26,11 +26,7 @@ public class PlayerOnMovingObject : MonoBehaviour
         if (collision.gameObject.CompareTag("Platform"))
         {
             currentPlatform = collision.transform.parent.GetComponent<MovingPlatform>();
-            if (currentPlatform != null)
-            {
-                currentPlatform.SetPlayerOnPlatform(true);
-                currentPlatform.TriggerFall(); 
-            }
+            currentPlatform.SetPlayerOnPlatform(true);
         }
     }
 
@@ -38,13 +34,6 @@ public class PlayerOnMovingObject : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Platform")) return;
 
-        if (currentPlatform != null)
-        {
-            currentPlatform.SetPlayerOnPlatform(false);
-            currentPlatform.StopFalling();
-        }
-
-        platformRigidbody = null;
-        currentPlatform = null;
+        currentPlatform.SetPlayerOnPlatform(false);
     }
 }
