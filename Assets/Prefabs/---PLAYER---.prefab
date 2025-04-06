@@ -271,6 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 736c9435efff87348b87aa89ecfd26af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCollider: {fileID: 3704859078637601244}
   pastLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -280,6 +281,9 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
+  effectDuration: 2
+  lensDistortionAmount: -0.5
+  collisionCheckRadius: 0.5
 --- !u!1 &3369707598768734279
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,22 +1,74 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
 
 public class TimeShiftManager : MonoBehaviour
 {
+    public Collider playerCollider;
     public LayerMask pastLayer;
     public LayerMask presentLayer;
     public LayerMask playerLayer;
+    public float effectDuration = 2f;
+    [Range(-1, 1)] public float lensDistortionAmount = -0.5f;
+    public float collisionCheckRadius = 0.5f;
 
     private Camera playerCamera;
     private bool isPastActive = false;
+    private bool isOnCooldown = false;
+    private float originalFOV;
+    private ChromaticAberration chromaticAberration;
+    private LensDistortion lensDistortion;
+    private Volume globalVolume;    
 
     void Start()
     {
         playerCamera = Camera.main;
+        originalFOV = playerCamera.fieldOfView;
         SetActiveLayer(false);
+
+        globalVolume = FindObjectOfType<Volume>();
+        if (globalVolume != null && globalVolume.profile != null)
+        {
+            globalVolume.profile.TryGet(out chromaticAberration);
+            globalVolume.profile.TryGet(out lensDistortion);
+        }
     }
 
     public void TimeShift()
     {
+        if (isOnCooldown || WouldCollideInOtherTimeline()) return;
+
+        StartCoroutine(TimeShiftEffects());
+    }
+
+    private bool WouldCollideInOtherTimeline()
+    {
+        // Get the layer mask of the timeline we're switching to
+        LayerMask targetLayerMask = isPastActive ? presentLayer : pastLayer;
+        int targetLayer = isPastActive ? LayerMask.NameToLayer("Present") : LayerMask.NameToLayer("Past");
+
+        // Check for colliders in the target timeline at our position
+        Collider[] colliders = Physics.OverlapSphere(
+            transform.position,
+            collisionCheckRadius,
+            targetLayerMask
+        );
+
+        // If any colliders exist in the other timeline at our position, we can't shift
+        if (colliders.Length > 0)
+        {
+            // Optional: Visual feedback that you can't shift here
+            Debug.Log("Can't timeshift - would collide with objects in the other timeline");
+            return true;
+        }
+
+        return false;
+    }
+
+    private System.Collections.IEnumerator TimeShiftEffects()
+    {
+        isOnCooldown = true;
+
         isPastActive = !isPastActive;
         SetActiveLayer(isPastActive);
 
@@ -31,9 +83,50 @@ public class TimeShiftManager : MonoBehaviour
             }
             else if (enemy.gameObject.layer == activeLayer)
             {
-                enemy.SetActiveState(true); 
+                enemy.SetActiveState(true);
             }
         }
+
+        if (chromaticAberration != null)
+        {
+            chromaticAberration.intensity.value = 1f;
+        }
+
+        if (lensDistortion != null)
+        {
+            lensDistortion.intensity.value = lensDistortionAmount;
+        }
+
+        float elapsed = 0f;
+        while (elapsed < effectDuration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float progress = elapsed / effectDuration;
+
+            if (chromaticAberration != null)
+            {
+                chromaticAberration.intensity.value = Mathf.Lerp(1f, 0f, progress);
+            }
+
+            if (lensDistortion != null)
+            {
+                lensDistortion.intensity.value = Mathf.Lerp(lensDistortionAmount, 0f, progress);
+            }
+
+            yield return null;
+        }
+
+        if (chromaticAberration != null)
+        {
+            chromaticAberration.intensity.value = 0f;
+        }
+        if (lensDistortion != null)
+        {
+            lensDistortion.intensity.value = 0f;
+        }
+
+        yield return new WaitForSecondsRealtime(1f);
+        isOnCooldown = false;
     }
 
     private void SetActiveLayer(bool pastActive)
@@ -42,7 +135,7 @@ public class TimeShiftManager : MonoBehaviour
 
         if (pastActive)
         {
-            playerCamera.cullingMask = (allLayers & ~presentLayer) | pastLayer; 
+            playerCamera.cullingMask = (allLayers & ~presentLayer) | pastLayer;
             Physics.IgnoreLayerCollision(LayerMaskToLayer(presentLayer), LayerMaskToLayer(playerLayer), true);
             Physics.IgnoreLayerCollision(LayerMaskToLayer(pastLayer), LayerMaskToLayer(playerLayer), false);
         }
@@ -65,4 +158,5 @@ public class TimeShiftManager : MonoBehaviour
         }
         return layer;
     }
+
 }
