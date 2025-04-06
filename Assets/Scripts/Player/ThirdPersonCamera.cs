@@ -6,7 +6,6 @@ public class ThirdPersonCamera : MonoBehaviour
 {
     [Header("Camera Targets")]
     public Transform player;
-    public Transform playerObj; 
     public CinemachineCamera playerCamera;
     public CinemachineCamera towerCamera;
     public GameObject towerCam;

@@ -20,25 +20,26 @@ public class EnemyAI : MonoBehaviour, IFreezeable
     private Vector3 lastKnownPosition;
     private bool playerDetected = false;
     private bool isActiveTimeline = true;
+    private Vector3 frozenPosition;
 
-    private static List<EnemyAI> allEnemies = new List<EnemyAI>(); 
+    private static List<EnemyAI> allEnemies = new List<EnemyAI>();
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
-        player = GameObject.FindGameObjectWithTag("Player").transform; 
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         allEnemies.Add(this);
     }
 
     private void OnDestroy()
     {
-        allEnemies.Remove(this); 
+        allEnemies.Remove(this);
     }
 
     private void Update()
     {
-        if (!isActiveTimeline) return; 
+        if (!isActiveTimeline) return;
 
         if (CanSeePlayer())
         {
@@ -55,7 +56,7 @@ public class EnemyAI : MonoBehaviour, IFreezeable
 
     private bool CanSeePlayer()
     {
-        if (!isActiveTimeline) return false; 
+        if (!isActiveTimeline || isFrozen) return false;
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, playerLayer);
 
@@ -83,6 +84,11 @@ public class EnemyAI : MonoBehaviour, IFreezeable
         if (agent != null && isActiveTimeline)
         {
             agent.SetDestination(lastKnownPosition);
+
+            if (Vector3.Distance(transform.position, lastKnownPosition) <= agent.stoppingDistance)
+            {
+                agent.ResetPath();
+            }
 
             if (!CanSeePlayer() && Vector3.Distance(transform.position, lastKnownPosition) < 1f)
             {
@@ -125,10 +131,30 @@ public class EnemyAI : MonoBehaviour, IFreezeable
         if (isFrozen)
         {
             Debug.Log($"{gameObject.name} is frozen.");
+            frozenPosition = transform.position;
+
+            agent.isStopped = true;
+            agent.updatePosition = false;
+            agent.updateRotation = false;
+            agent.velocity = Vector3.zero;
+
+            lastKnownPosition = transform.position; 
         }
         else
         {
             Debug.Log($"{gameObject.name} is unfrozen.");
+
+            transform.position = frozenPosition;
+
+            agent.isStopped = false;
+            agent.updatePosition = true;
+            agent.updateRotation = true;
+
+            if (playerDetected && CanSeePlayer())
+            {
+                lastKnownPosition = player.position; 
+                agent.SetDestination(lastKnownPosition);
+            }
         }
     }
 }

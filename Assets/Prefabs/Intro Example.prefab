@@ -795,14 +795,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9684b38ac21fd3459f083b67ce733b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introCamera: {fileID: 8277223707461212652}
-  playerCamera: {fileID: 0}
-  playerTowerCamera: {fileID: 0}
+  introCameraObj: {fileID: 0}
+  introCamera: {fileID: 8992969149022446087}
+  freeLookCamera: {fileID: 0}
+  towerCamera: {fileID: 0}
   player: {fileID: 0}
   triggerRange: 25
   introUI: {fileID: 2280249635421053739}
   transitionSpeed: 2
   positionThreshold: 1
+  rotationThreshold: 2
 --- !u!1 &8277223707461212652
 GameObject:
   m_ObjectHideFlags: 0

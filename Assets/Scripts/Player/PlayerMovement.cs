@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Transform cameraTransform; 
     [SerializeField] private Transform playerModel;
+    [SerializeField] private Transform dashOrientation;
     [SerializeField] private TimeShiftManager timeShiftManager;
 
     [Header("Movement Settings")]
@@ -40,7 +41,13 @@ public class PlayerMovement : MonoBehaviour
     private float glideFallSpeedLimit = 2f;
     [SerializeField] private float swaySpeed = 2f;
     [SerializeField] private float swayAngle = 10f;
+    private float currentSwayAngle = 0f;
+    private float swayTime = 0f;
     private bool isGliding;
+
+    [Header("Particles")]
+    [SerializeField] private ParticleSystem jumpParticles;
+    [SerializeField] private ParticleSystem glideParticles;
 
     private Rigidbody rb;
     private Vector3 moveDirection;
@@ -51,12 +58,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-    }
-
-    private void Start()
-    {
         rb.linearVelocity = Vector3.zero;
-        //activeCamera = cameraTransform.GetComponentInChildren<Camera>();
     }
 
     private void Update()
@@ -97,11 +99,13 @@ public class PlayerMovement : MonoBehaviour
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
             playerModel.rotation = Quaternion.Slerp(playerModel.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            dashOrientation.rotation = Quaternion.Slerp(dashOrientation.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumps)
         {
             Jump();
+            jumpParticles.Play();
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
@@ -123,10 +127,10 @@ public class PlayerMovement : MonoBehaviour
         if (jumpCount >= maxJumps) return;
 
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
         jumpCount++;
+
+        jumpParticles.Play();
 
         if (jumpCount >= 1) StartCoroutine(SpinEffect());
     }
@@ -143,9 +147,14 @@ public class PlayerMovement : MonoBehaviour
         {
             isGliding = true;
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, -glideFallSpeedLimit, rb.linearVelocity.z);
+
+            glideParticles.Play();
         }
         else
+        {
             isGliding = false;
+            glideParticles.Stop();
+        }
     }
 
     private void ApplyDrag()
@@ -160,8 +169,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyGlideSway()
     {
-        float swayValue = Mathf.Sin(Time.time * swaySpeed) * swayAngle;
-        playerModel.localRotation = Quaternion.Euler(playerModel.localRotation.eulerAngles.x, playerModel.localRotation.eulerAngles.y, swayValue);
+        swayTime += Time.deltaTime * swaySpeed;
+        float targetSway = Mathf.Sin(swayTime) * swayAngle;
+
+        currentSwayAngle = Mathf.Lerp(currentSwayAngle, targetSway, Time.deltaTime * 5f);
+
+        playerModel.localRotation = Quaternion.Euler(playerModel.localRotation.eulerAngles.x, playerModel.localRotation.eulerAngles.y, currentSwayAngle);
     }
 
     private IEnumerator SpinEffect()
@@ -192,7 +205,7 @@ public class PlayerMovement : MonoBehaviour
         float originalDrag = rb.linearDamping;
         rb.linearDamping = 0f;
 
-        Vector3 dashDirection = isSpinning ? activeCamera.transform.forward : playerModel.forward;
+        Vector3 dashDirection = dashOrientation.forward;
         dashDirection.y = 0f;
         dashDirection.Normalize();
         rb.linearVelocity = new Vector3(dashDirection.x * dashForce, savedYVelocity, dashDirection.z * dashForce);
