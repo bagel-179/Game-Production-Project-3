@@ -233,13 +233,11 @@ public class PlayerMovement : MonoBehaviour
         if (currentSlowRoutine != null)
             StopCoroutine(currentSlowRoutine);
 
-        // Apply slowdown immediately
         originalSpeed = moveSpeed;
         currentSpeed = moveSpeed * slowAmount;
         isSlowed = true;
         Debug.Log("Slow!");
 
-        // Start timer to remove slowdown
         currentSlowRoutine = StartCoroutine(RemoveSlowAfterDelay(slowDuration));
     }
 

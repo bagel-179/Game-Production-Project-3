@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 945219790406703314}
   - component: {fileID: 8155372826330857902}
   - component: {fileID: 1870093875775420764}
+  - component: {fileID: 8733611333770158284}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
@@ -189,6 +190,23 @@ MonoBehaviour:
     m_Bits: 192
   moveSpeed: 5
   isFrozen: 0
+--- !u!114 &8733611333770158284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903698086898571435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6d81c8cf4abd24f8d0fe09bad2d7df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 10
+  attackPoint: {fileID: 8725805840327512423}
+  laser: {fileID: 2863471376362914732}
+  slowAmount: 0.5
+  slowDuration: 1.5
 --- !u!1 &2863471376362914732
 GameObject:
   m_ObjectHideFlags: 0

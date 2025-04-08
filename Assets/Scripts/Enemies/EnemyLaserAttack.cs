@@ -9,7 +9,7 @@ public class EnemyLaserAttack : MonoBehaviour
 
     [Header("Slow Effect")]
     public float slowAmount = 0.5f;
-    public float slowDuration = 1.5f;
+    public float slowDuration = 0.5f;
 
     private EnemyAI enemyAI;
     private bool isAttacking = false;
