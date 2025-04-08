@@ -1,26 +1,23 @@
 using UnityEngine;
 
-public class SkyboxSwitcher : MonoBehaviour
+public class SkyboxSwapper : MonoBehaviour
 {
-    public Material presentSkybox;
     public Material pastSkybox;
+    public Material presentSkybox;
+    public float swapCooldown = 2f; // Time in seconds between swaps
 
     private bool isPresent = true;
+    private float lastSwapTime = -Mathf.Infinity;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && Time.time >= lastSwapTime + swapCooldown)
         {
             isPresent = !isPresent;
-
-            // Change the skybox
             RenderSettings.skybox = isPresent ? presentSkybox : pastSkybox;
+            DynamicGI.UpdateEnvironment(); // Optional: updates lighting
 
-            // Optional: force update the lighting
-            DynamicGI.UpdateEnvironment();
-
-            // Swap layer visibility or call your layer switch logic here too
-            Debug.Log("Switched to: " + (isPresent ? "Present" : "Past"));
+            lastSwapTime = Time.time;
         }
     }
 }
