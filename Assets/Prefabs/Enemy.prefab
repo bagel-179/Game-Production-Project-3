@@ -204,7 +204,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 10
   attackPoint: {fileID: 8725805840327512423}
-  laser: {fileID: 2863471376362914732}
   slowAmount: 0.5
   slowDuration: 1.5
 --- !u!1 &2863471376362914732
@@ -263,7 +262,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 283d7583e5cd8444a8df66bb6bcb1b48, type: 2}
+  - {fileID: 2100000, guid: e237a9a5acdef3a41818454421b22ba6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -338,12 +337,12 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
   m_MaskInteraction: 0
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
 --- !u!1 &3949818352178496891
