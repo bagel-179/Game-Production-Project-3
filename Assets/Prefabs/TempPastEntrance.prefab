@@ -288,6 +288,8 @@ Transform:
   - {fileID: 834931905391191862}
   - {fileID: 6129410818443078245}
   - {fileID: 879478485070011390}
+  - {fileID: 2376454212854451739}
+  - {fileID: 6790387322486655902}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4931628860197198211
@@ -1049,6 +1051,68 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6160437538613224164, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
   m_PrefabInstance: {fileID: 546611274325788492}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &629140257551445303
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8960051316858750786}
+    m_Modifications:
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -91.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9438548
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.33036062
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -38.581
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6758982051314154515, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Name
+      value: Textured Demolished Market Stand 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+--- !u!4 &6790387322486655902 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+  m_PrefabInstance: {fileID: 629140257551445303}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &970737978401291438
 PrefabInstance:
@@ -3619,6 +3683,68 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7035829094485223466, guid: 96dc9ba494037b345919021ee6084a4d, type: 3}
   m_PrefabInstance: {fileID: 8323209211965293094}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8468062312361520383
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8960051316858750786}
+    m_Modifications:
+    - target: {fileID: 6160437538613224164, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160437538613224164, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.0399995
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160437538613224164, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -91.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160437538613224164, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.39303064
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160437538613224164, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160437538613224164, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9195253
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160437538613224164, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160437538613224164, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160437538613224164, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -133.714
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160437538613224164, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6788496810499749982, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
+      propertyPath: m_Name
+      value: Textured Demolished Market Stand 3 (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
+--- !u!4 &2376454212854451739 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6160437538613224164, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
+  m_PrefabInstance: {fileID: 8468062312361520383}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8684864649332830222
 PrefabInstance:
