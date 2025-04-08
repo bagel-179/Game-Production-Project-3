@@ -157,4 +157,27 @@ public class EnemyAI : MonoBehaviour, IFreezeable
             }
         }
     }
+
+
+
+
+
+    public Vector3 GetPlayerPosition()
+    {
+        return player != null ? player.position : Vector3.zero;
+    }
+    public bool IsPlayerDetected()
+    {
+        return playerDetected;
+    }
+
+    public Transform GetPlayerTransform()
+    {
+        return player;
+    }
+
+    public float GetDetectionRange()
+    {
+        return detectionRange;
+    }
 }

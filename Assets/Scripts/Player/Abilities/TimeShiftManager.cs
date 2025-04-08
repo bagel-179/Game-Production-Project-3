@@ -43,21 +43,17 @@ public class TimeShiftManager : MonoBehaviour
 
     private bool WouldCollideInOtherTimeline()
     {
-        // Get the layer mask of the timeline we're switching to
         LayerMask targetLayerMask = isPastActive ? presentLayer : pastLayer;
         int targetLayer = isPastActive ? LayerMask.NameToLayer("Present") : LayerMask.NameToLayer("Past");
 
-        // Check for colliders in the target timeline at our position
         Collider[] colliders = Physics.OverlapSphere(
             transform.position,
             collisionCheckRadius,
             targetLayerMask
         );
 
-        // If any colliders exist in the other timeline at our position, we can't shift
         if (colliders.Length > 0)
         {
-            // Optional: Visual feedback that you can't shift here
             Debug.Log("Can't timeshift - would collide with objects in the other timeline");
             return true;
         }
@@ -125,7 +121,7 @@ public class TimeShiftManager : MonoBehaviour
             lensDistortion.intensity.value = 0f;
         }
 
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.5f);
         isOnCooldown = false;
     }
 
