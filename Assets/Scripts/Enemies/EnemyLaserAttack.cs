@@ -4,7 +4,7 @@ public class EnemyLaserAttack : MonoBehaviour
 {
     [Header("Attack Settings")]
     public float attackRange = 10f;
-    public Transform attackPoint; 
+    public Transform attackPoint;
 
     [Header("Slow Effect")]
     public float slowAmount = 0.5f;

@@ -44,9 +44,9 @@ public class FlyingEnemyAttack : MonoBehaviour
                     StartCoroutine(SpinEffect(controller.playerModel));
                 }
 
-               // if (slowAmount > 0f && slowDuration > 0f)
+                 if (slowAmount > 0f && slowDuration > 0f)
                 {
-                    //controller.ApplySlow(slowAmount, slowDuration);
+                    controller.ApplySlow(slowAmount, slowDuration);
                 }
             }
         }

@@ -138,7 +138,7 @@ public class EnemyAI : MonoBehaviour, IFreezeable
             agent.updateRotation = false;
             agent.velocity = Vector3.zero;
 
-            lastKnownPosition = transform.position; 
+            lastKnownPosition = transform.position;
         }
         else
         {
@@ -152,9 +152,32 @@ public class EnemyAI : MonoBehaviour, IFreezeable
 
             if (playerDetected && CanSeePlayer())
             {
-                lastKnownPosition = player.position; 
+                lastKnownPosition = player.position;
                 agent.SetDestination(lastKnownPosition);
             }
         }
+    }
+
+
+
+
+
+    public Vector3 GetPlayerPosition()
+    {
+        return player != null ? player.position : Vector3.zero;
+    }
+    public bool IsPlayerDetected()
+    {
+        return playerDetected;
+    }
+
+    public Transform GetPlayerTransform()
+    {
+        return player;
+    }
+
+    public float GetDetectionRange()
+    {
+        return detectionRange;
     }
 }
