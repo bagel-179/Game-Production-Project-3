@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
 
@@ -27,7 +28,6 @@ public class TimeShiftManager : MonoBehaviour
     void Start()
     {
         playerCamera = Camera.main;
-        originalFOV = playerCamera.fieldOfView;
         SetActiveTimeline(false);
 
         globalVolume = FindObjectOfType<Volume>();
@@ -80,7 +80,7 @@ public class TimeShiftManager : MonoBehaviour
         return otherBounds.Contains(playerBounds.center);
     }
 
-    private System.Collections.IEnumerator TimeShiftEffects()
+    private IEnumerator TimeShiftEffects()
     {
         isOnCooldown = true;
 
