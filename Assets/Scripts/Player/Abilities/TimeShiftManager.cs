@@ -12,6 +12,10 @@ public class TimeShiftManager : MonoBehaviour
     [Range(-1, 1)] public float lensDistortionAmount = -0.5f;
     public float collisionCheckRadius = 0.5f;
 
+    [Header("Audio Ambience")]
+    public GameObject pastAudio;
+    public GameObject presentAudio;
+
     private Camera playerCamera;
     private bool isPastActive = false;
     private bool isOnCooldown = false;
@@ -24,7 +28,7 @@ public class TimeShiftManager : MonoBehaviour
     {
         playerCamera = Camera.main;
         originalFOV = playerCamera.fieldOfView;
-        SetActiveLayer(false);
+        SetActiveTimeline(false);
 
         globalVolume = FindObjectOfType<Volume>();
         if (globalVolume != null && globalVolume.profile != null)
@@ -66,7 +70,7 @@ public class TimeShiftManager : MonoBehaviour
         isOnCooldown = true;
 
         isPastActive = !isPastActive;
-        SetActiveLayer(isPastActive);
+        SetActiveTimeline(isPastActive);
 
         int inactiveLayer = isPastActive ? LayerMask.NameToLayer("Present") : LayerMask.NameToLayer("Past");
         int activeLayer = isPastActive ? LayerMask.NameToLayer("Past") : LayerMask.NameToLayer("Present");
@@ -125,7 +129,7 @@ public class TimeShiftManager : MonoBehaviour
         isOnCooldown = false;
     }
 
-    private void SetActiveLayer(bool pastActive)
+    private void SetActiveTimeline(bool pastActive)
     {
         int allLayers = ~0;
 
@@ -134,12 +138,18 @@ public class TimeShiftManager : MonoBehaviour
             playerCamera.cullingMask = (allLayers & ~presentLayer) | pastLayer;
             Physics.IgnoreLayerCollision(LayerMaskToLayer(presentLayer), LayerMaskToLayer(playerLayer), true);
             Physics.IgnoreLayerCollision(LayerMaskToLayer(pastLayer), LayerMaskToLayer(playerLayer), false);
+
+            presentAudio.SetActive(false);
+            pastAudio.SetActive(true);
         }
         else
         {
             playerCamera.cullingMask = (allLayers & ~pastLayer) | presentLayer;
             Physics.IgnoreLayerCollision(LayerMaskToLayer(pastLayer), LayerMaskToLayer(playerLayer), true);
             Physics.IgnoreLayerCollision(LayerMaskToLayer(presentLayer), LayerMaskToLayer(playerLayer), false);
+
+            presentAudio.SetActive(true);
+            pastAudio.SetActive(false);
         }
     }
 
