@@ -45,8 +45,82 @@ Transform:
   - {fileID: 484175998411143532}
   - {fileID: 7451365992460043335}
   - {fileID: 755925818516449149}
+  - {fileID: 8470929792432114897}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4572848799915951621
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8470929792432114897}
+  - component: {fileID: 7270996157857044748}
+  - component: {fileID: 8290992874975578787}
+  m_Layer: 8
+  m_Name: DialogueCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &8470929792432114897
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4572848799915951621}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0015656296, y: 0.69573987, z: -0.0017407342, w: 0.71829003}
+  m_LocalPosition: {x: -22.61, y: -3.29, z: 33.78}
+  m_LocalScale: {x: 11.56856, y: 13.200489, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1999610481424749622}
+  m_LocalEulerAnglesHint: {x: 0.268, y: 88.173, z: -0.018}
+--- !u!65 &7270996157857044748
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4572848799915951621}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8290992874975578787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4572848799915951621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f47dfa805a8111f49bffba41dd0a8c7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialoguePanel: {fileID: 0}
+  dialogueText: {fileID: 0}
+  portraitImage: {fileID: 0}
+  dialogueLine: Galen's Journal should be right up ahead in the ruined temple.
+  portraitSprite: {fileID: 0}
+  dialogueDisplayTime: 3
+  typeSpeed: 0.03
 --- !u!1001 &146690643359344449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -333,7 +407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4347348681792758975, guid: 21a2d4d4b0cf85f4995b1f06a25192d7, type: 3}
       propertyPath: m_TagString
-      value: Platform
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5689488445663055940, guid: 21a2d4d4b0cf85f4995b1f06a25192d7, type: 3}
       propertyPath: m_Size.x
@@ -914,7 +988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4347348681792758975, guid: 21a2d4d4b0cf85f4995b1f06a25192d7, type: 3}
       propertyPath: m_TagString
-      value: Platform
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5689488445663055940, guid: 21a2d4d4b0cf85f4995b1f06a25192d7, type: 3}
       propertyPath: m_Size.x
@@ -1035,7 +1109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4347348681792758975, guid: 21a2d4d4b0cf85f4995b1f06a25192d7, type: 3}
       propertyPath: m_TagString
-      value: Platform
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5689488445663055940, guid: 21a2d4d4b0cf85f4995b1f06a25192d7, type: 3}
       propertyPath: m_Size.x
@@ -1282,6 +1356,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Demolished Platform
       objectReference: {fileID: 0}
+    - target: {fileID: 7071027067154466968, guid: c89322e8aae76c844ac50088376d25a2, type: 3}
+      propertyPath: m_TagString
+      value: Platform
+      objectReference: {fileID: 0}
     - target: {fileID: 7596030007233368610, guid: c89322e8aae76c844ac50088376d25a2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.139832
@@ -1496,7 +1574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4347348681792758975, guid: 21a2d4d4b0cf85f4995b1f06a25192d7, type: 3}
       propertyPath: m_TagString
-      value: Platform
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5689488445663055940, guid: 21a2d4d4b0cf85f4995b1f06a25192d7, type: 3}
       propertyPath: m_Size.x
@@ -1817,7 +1895,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4347348681792758975, guid: 21a2d4d4b0cf85f4995b1f06a25192d7, type: 3}
       propertyPath: m_TagString
-      value: Platform
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5689488445663055940, guid: 21a2d4d4b0cf85f4995b1f06a25192d7, type: 3}
       propertyPath: m_Size.x
@@ -2268,7 +2346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4347348681792758975, guid: 21a2d4d4b0cf85f4995b1f06a25192d7, type: 3}
       propertyPath: m_TagString
-      value: Platform
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5689488445663055940, guid: 21a2d4d4b0cf85f4995b1f06a25192d7, type: 3}
       propertyPath: m_Size.x
