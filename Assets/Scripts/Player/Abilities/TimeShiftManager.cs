@@ -12,6 +12,10 @@ public class TimeShiftManager : MonoBehaviour
     [Range(-1, 1)] public float lensDistortionAmount = -0.5f;
     public float collisionCheckRadius = 0.5f;
 
+    [Header("Audio Ambience")]
+    public GameObject pastAudio;
+    public GameObject presentAudio;
+
     private Camera playerCamera;
     private bool isPastActive = false;
     private bool isOnCooldown = false;
@@ -24,7 +28,7 @@ public class TimeShiftManager : MonoBehaviour
     {
         playerCamera = Camera.main;
         originalFOV = playerCamera.fieldOfView;
-        SetActiveLayer(false);
+        SetActiveTimeline(false);
 
         globalVolume = FindObjectOfType<Volume>();
         if (globalVolume != null && globalVolume.profile != null)
@@ -43,26 +47,37 @@ public class TimeShiftManager : MonoBehaviour
 
     private bool WouldCollideInOtherTimeline()
     {
-        // Get the layer mask of the timeline we're switching to
         LayerMask targetLayerMask = isPastActive ? presentLayer : pastLayer;
         int targetLayer = isPastActive ? LayerMask.NameToLayer("Present") : LayerMask.NameToLayer("Past");
 
-        // Check for colliders in the target timeline at our position
-        Collider[] colliders = Physics.OverlapSphere(
-            transform.position,
-            collisionCheckRadius,
-            targetLayerMask
+        Physics.IgnoreLayerCollision(LayerMaskToLayer(targetLayerMask), LayerMaskToLayer(playerLayer), false);
+
+        bool wouldCollide = Physics.CheckSphere(playerCollider.transform.position, playerCollider.bounds.extents.magnitude * 0.9f, targetLayerMask
         );
 
-        // If any colliders exist in the other timeline at our position, we can't shift
-        if (colliders.Length > 0)
+        Physics.IgnoreLayerCollision(LayerMaskToLayer(targetLayerMask), LayerMaskToLayer(playerLayer), true);
+
+        if (wouldCollide)
         {
-            // Optional: Visual feedback that you can't shift here
-            Debug.Log("Can't timeshift - would collide with objects in the other timeline");
+            Debug.Log("Can't timeshift");
             return true;
         }
 
         return false;
+    }
+
+    private bool IsPlayerInsideCollider(Collider otherCollider)
+    {
+        if (playerCollider == null || otherCollider == null)
+            return false;
+
+        Bounds playerBounds = playerCollider.bounds;
+        Bounds otherBounds = otherCollider.bounds;
+
+        if (!otherBounds.Intersects(playerBounds))
+            return false;
+
+        return otherBounds.Contains(playerBounds.center);
     }
 
     private System.Collections.IEnumerator TimeShiftEffects()
@@ -70,7 +85,7 @@ public class TimeShiftManager : MonoBehaviour
         isOnCooldown = true;
 
         isPastActive = !isPastActive;
-        SetActiveLayer(isPastActive);
+        SetActiveTimeline(isPastActive);
 
         int inactiveLayer = isPastActive ? LayerMask.NameToLayer("Present") : LayerMask.NameToLayer("Past");
         int activeLayer = isPastActive ? LayerMask.NameToLayer("Past") : LayerMask.NameToLayer("Present");
@@ -125,11 +140,11 @@ public class TimeShiftManager : MonoBehaviour
             lensDistortion.intensity.value = 0f;
         }
 
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.5f);
         isOnCooldown = false;
     }
 
-    private void SetActiveLayer(bool pastActive)
+    private void SetActiveTimeline(bool pastActive)
     {
         int allLayers = ~0;
 
@@ -138,12 +153,18 @@ public class TimeShiftManager : MonoBehaviour
             playerCamera.cullingMask = (allLayers & ~presentLayer) | pastLayer;
             Physics.IgnoreLayerCollision(LayerMaskToLayer(presentLayer), LayerMaskToLayer(playerLayer), true);
             Physics.IgnoreLayerCollision(LayerMaskToLayer(pastLayer), LayerMaskToLayer(playerLayer), false);
+
+            presentAudio.SetActive(false);
+            pastAudio.SetActive(true);
         }
         else
         {
             playerCamera.cullingMask = (allLayers & ~pastLayer) | presentLayer;
             Physics.IgnoreLayerCollision(LayerMaskToLayer(pastLayer), LayerMaskToLayer(playerLayer), true);
             Physics.IgnoreLayerCollision(LayerMaskToLayer(presentLayer), LayerMaskToLayer(playerLayer), false);
+
+            presentAudio.SetActive(true);
+            pastAudio.SetActive(false);
         }
     }
 

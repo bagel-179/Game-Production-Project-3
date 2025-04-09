@@ -1138,9 +1138,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 3533464661148812467}
-  playerModel: {fileID: 4467526785359513021}
   dashOrientation: {fileID: 6011374811060814301}
   timeShiftManager: {fileID: 1890963542965803041}
+  playerModel: {fileID: 4467526785359513021}
   moveSpeed: 6
   rotationSpeed: 10
   groundDrag: 5
