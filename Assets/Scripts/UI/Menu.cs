@@ -15,10 +15,6 @@ public class Menu : MonoBehaviour
     public GameObject quitButton;
     public GameObject pauseMenu;
 
-    [Header("TEMP Win/Lose References")]
-    public GameObject winText;
-    public GameObject loseText;
-
     private PlayerMovement playerMovementScript;
     private ThirdPersonCamera thirdPersonCameraScript;
     private Rigidbody menuRb;
@@ -28,7 +24,7 @@ public class Menu : MonoBehaviour
     private bool isAnimating = false;
     private bool gameStarted = false;
 
-    private void Awake()
+    private void Start()
     {
         playerMovementScript = player.GetComponent<PlayerMovement>();
         thirdPersonCameraScript = player.GetComponent<ThirdPersonCamera>();
@@ -36,8 +32,6 @@ public class Menu : MonoBehaviour
         menuRb = menuBackground.GetComponentInChildren<Rigidbody>();
         pauseMenuAnimator = GetComponentInChildren<Animator>();
 
-        winText.SetActive(false);
-        loseText.SetActive(false);
         pauseMenu.SetActive(false);
     }
 

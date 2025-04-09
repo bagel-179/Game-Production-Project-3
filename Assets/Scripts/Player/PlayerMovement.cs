@@ -3,19 +3,15 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private Transform cameraTransform;
+    [SerializeField] private Transform cameraTransform; 
+    [SerializeField] private Transform playerModel;
     [SerializeField] private Transform dashOrientation;
     [SerializeField] private TimeShiftManager timeShiftManager;
-    [HideInInspector, SerializeField] public Transform playerModel;
 
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float rotationSpeed = 10f;
     [SerializeField] private float groundDrag = 5f;
-    private float currentSpeed;
-    private float originalSpeed;
-    private bool isSlowed = false;
-    private Coroutine currentSlowRoutine;
 
     [Header("Dash Settings")]
     [SerializeField] private float dashForce = 30f;
@@ -63,8 +59,6 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         rb.linearVelocity = Vector3.zero;
-
-        currentSpeed = moveSpeed;
     }
 
     private void Update()
@@ -81,8 +75,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isDashing)
-            MovePlayer();
+        if (!isDashing) MovePlayer();
         if (isGliding) ApplyGlideSway();
         ApplyGravity();
     }
@@ -123,9 +116,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        float speedToUse = isSlowed ? currentSpeed : moveSpeed;
         float multiplier = isGrounded ? 1f : airMultiplier;
-        Vector3 targetVelocity = moveDirection * speedToUse * multiplier;
+        Vector3 targetVelocity = moveDirection * moveSpeed * multiplier;
 
         rb.linearVelocity = new Vector3(targetVelocity.x, rb.linearVelocity.y, targetVelocity.z);
     }
@@ -174,7 +166,6 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = Physics.SphereCast(transform.position, 0.3f, Vector3.down, out _, playerHeight * 0.5f + 0.2f, groundLayer);
     }
-
 
     private void ApplyGlideSway()
     {
@@ -226,26 +217,5 @@ public class PlayerMovement : MonoBehaviour
         isDashing = false;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
-    }
-
-    public void ApplySlow(float slowAmount, float slowDuration)
-    {
-        if (currentSlowRoutine != null)
-            StopCoroutine(currentSlowRoutine);
-
-        originalSpeed = moveSpeed;
-        currentSpeed = moveSpeed * slowAmount;
-        isSlowed = true;
-        Debug.Log("Slow!");
-
-        currentSlowRoutine = StartCoroutine(RemoveSlowAfterDelay(slowDuration));
-    }
-
-    private IEnumerator RemoveSlowAfterDelay(float slowDuration)
-    {
-        yield return new WaitForSeconds(slowDuration);
-        currentSpeed = originalSpeed;
-        isSlowed = false;
-        Debug.Log("Not Slow!");
     }
 }
