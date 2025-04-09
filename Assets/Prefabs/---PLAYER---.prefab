@@ -284,6 +284,8 @@ MonoBehaviour:
   effectDuration: 2
   lensDistortionAmount: -0.5
   collisionCheckRadius: 0.5
+  pastAudio: {fileID: 0}
+  presentAudio: {fileID: 0}
 --- !u!1 &3369707598768734279
 GameObject:
   m_ObjectHideFlags: 0
@@ -1516,6 +1518,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7765551550452636663, guid: 922ac34f46a950d4a8f17ea80de91178, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015327357643849221, guid: 922ac34f46a950d4a8f17ea80de91178, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
