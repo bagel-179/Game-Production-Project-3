@@ -686,6 +686,12 @@ Transform:
   - {fileID: 2571613308468344075}
   - {fileID: 7999804865387407881}
   - {fileID: 560119540614282738}
+  - {fileID: 6788442745389080701}
+  - {fileID: 153842997162105684}
+  - {fileID: 2890219223922416492}
+  - {fileID: 5884747970238244619}
+  - {fileID: 4142410160620541223}
+  - {fileID: 7523226710762165279}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &62117213447240809
@@ -835,6 +841,68 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7035829094485223466, guid: 96dc9ba494037b345919021ee6084a4d, type: 3}
   m_PrefabInstance: {fileID: 288627215007696942}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1396433242602752974
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2317945636983282401}
+    m_Modifications:
+    - target: {fileID: 5052920842035163401, guid: 31429a78a74861142892f34d25101aca, type: 3}
+      propertyPath: m_Name
+      value: Textured Demolished Market Stand 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5572153506168318899, guid: 31429a78a74861142892f34d25101aca, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 5572153506168318899, guid: 31429a78a74861142892f34d25101aca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 5572153506168318899, guid: 31429a78a74861142892f34d25101aca, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 142.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 5572153506168318899, guid: 31429a78a74861142892f34d25101aca, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7090675
+      objectReference: {fileID: 0}
+    - target: {fileID: 5572153506168318899, guid: 31429a78a74861142892f34d25101aca, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5572153506168318899, guid: 31429a78a74861142892f34d25101aca, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7051407
+      objectReference: {fileID: 0}
+    - target: {fileID: 5572153506168318899, guid: 31429a78a74861142892f34d25101aca, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5572153506168318899, guid: 31429a78a74861142892f34d25101aca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5572153506168318899, guid: 31429a78a74861142892f34d25101aca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -89.682
+      objectReference: {fileID: 0}
+    - target: {fileID: 5572153506168318899, guid: 31429a78a74861142892f34d25101aca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 31429a78a74861142892f34d25101aca, type: 3}
+--- !u!4 &6788442745389080701 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5572153506168318899, guid: 31429a78a74861142892f34d25101aca, type: 3}
+  m_PrefabInstance: {fileID: 1396433242602752974}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1467576546151666998
 PrefabInstance:
@@ -1201,6 +1269,80 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7035829094485223466, guid: 96dc9ba494037b345919021ee6084a4d, type: 3}
   m_PrefabInstance: {fileID: 2528889228550800453}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2807469548091046235
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2317945636983282401}
+    m_Modifications:
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 219.01588
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 219.01588
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 219.01588
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 90.68589
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -11.833687
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 156.9519
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941651975750108394, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Name
+      value: Textured Rubble Pile
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+--- !u!4 &5884747970238244619 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+  m_PrefabInstance: {fileID: 2807469548091046235}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3062139939856812547
 PrefabInstance:
@@ -1990,6 +2132,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7035829094485223466, guid: 96dc9ba494037b345919021ee6084a4d, type: 3}
   m_PrefabInstance: {fileID: 4321286901219384151}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4530819294041731766
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2317945636983282401}
+    m_Modifications:
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 57.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -12.28986
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 176.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9830833
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.18315919
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 21.108
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6758982051314154515, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Name
+      value: Textured Demolished Market Stand 1 (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+--- !u!4 &7523226710762165279 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+  m_PrefabInstance: {fileID: 4530819294041731766}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4653436006913774134
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2716,6 +2920,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7035829094485223466, guid: 96dc9ba494037b345919021ee6084a4d, type: 3}
   m_PrefabInstance: {fileID: 5618824241915177072}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5629567307533552503
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2317945636983282401}
+    m_Modifications:
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 93.24791
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -12.335665
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 161.63792
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941651975750108394, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Name
+      value: Textured Rubble Pile (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+--- !u!4 &4142410160620541223 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+  m_PrefabInstance: {fileID: 5629567307533552503}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5719137840809444445
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3011,6 +3277,69 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7035829094485223466, guid: 96dc9ba494037b345919021ee6084a4d, type: 3}
   m_PrefabInstance: {fileID: 5970814603275526258}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6099533702287932925
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2317945636983282401}
+    m_Modifications:
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 63.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8.465986
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 141.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9493089
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.31434482
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -36.643
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6758982051314154515, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Name
+      value: Textured Demolished Market Stand 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 1738092931098545184, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+--- !u!4 &153842997162105684 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+  m_PrefabInstance: {fileID: 6099533702287932925}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6113845180990375370
 PrefabInstance:
@@ -3755,4 +4084,66 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8131248098456046035, guid: 8816538f4990ffd48ae6476a41eea4cf, type: 3}
   m_PrefabInstance: {fileID: 8670675325900102050}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &9123015091703578053
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2317945636983282401}
+    m_Modifications:
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 93.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -12.335665
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 158.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9908843
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.1347156
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 15.484
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6758982051314154515, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Name
+      value: Textured Demolished Market Stand 1 (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+--- !u!4 &2890219223922416492 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+  m_PrefabInstance: {fileID: 9123015091703578053}
   m_PrefabAsset: {fileID: 0}
