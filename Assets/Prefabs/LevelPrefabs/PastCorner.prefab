@@ -246,8 +246,8 @@ Transform:
   m_GameObject: {fileID: 5611276905001675513}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -21.4, y: -1.67, z: 156.9}
-  m_LocalScale: {x: 7.0947604, y: 5.1386, z: 7.3852563}
+  m_LocalPosition: {x: -21.49, y: -1.67, z: 156.9}
+  m_LocalScale: {x: 7.0947604, y: 5.1386, z: 5.7015653}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2317945636983282401}
@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 8842343061023506830}
   - component: {fileID: 7216920911686380131}
   - component: {fileID: 6474099754937273321}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: DialogueCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -396,8 +396,8 @@ MonoBehaviour:
   dialoguePanel: {fileID: 0}
   dialogueText: {fileID: 0}
   portraitImage: {fileID: 0}
-  dialogueLine: I don't remember the market coming to an end here. Maybe I should
-    try and change timelines. (Press R)
+  dialogueLine: These ash piles are blocking the way. I bet this street was a lot
+    cleaner back when Pompeii was thriving. (Press R)
   portraitSprite: {fileID: 0}
   dialogueDisplayTime: 3
   typeSpeed: 0.03
@@ -429,8 +429,8 @@ Transform:
   m_GameObject: {fileID: 8812423445882366247}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -8.68, y: -1.66, z: 155.55476}
-  m_LocalScale: {x: 1, y: 1, z: 3.9878995}
+  m_LocalPosition: {x: -10.86, y: -1.66, z: 155.55476}
+  m_LocalScale: {x: 1, y: 1, z: 3.3253102}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2317945636983282401}

@@ -1094,6 +1094,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Demolished Flag Pole (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1265719605019446197, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590241382533554036, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1730830840898791148, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2885891932130274334, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4841660549314630444, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -21.755878
@@ -1134,6 +1150,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5286256958145093949, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1152,6 +1172,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8960051316858750786}
     m_Modifications:
+    - target: {fileID: 1786285769530150559, guid: d61128ed140fbb14cb5d46000ef9df47, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7636093983416907838, guid: d61128ed140fbb14cb5d46000ef9df47, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.76859
@@ -1208,6 +1232,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Textured Base Crate (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7951962443805064079, guid: d61128ed140fbb14cb5d46000ef9df47, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1226,6 +1254,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8960051316858750786}
     m_Modifications:
+    - target: {fileID: 1786285769530150559, guid: d61128ed140fbb14cb5d46000ef9df47, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7636093983416907838, guid: d61128ed140fbb14cb5d46000ef9df47, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.96914
@@ -1281,6 +1313,10 @@ PrefabInstance:
     - target: {fileID: 7951962443805064079, guid: d61128ed140fbb14cb5d46000ef9df47, type: 3}
       propertyPath: m_Name
       value: Textured Base Crate
+      objectReference: {fileID: 0}
+    - target: {fileID: 7951962443805064079, guid: d61128ed140fbb14cb5d46000ef9df47, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1441,6 +1477,58 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8960051316858750786}
     m_Modifications:
+    - target: {fileID: 183651898965237355, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 396237218507955454, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 772887016097192960, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1738092931098545184, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769964416279928911, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381860060620214770, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3768752870118987945, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3857834649458470797, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911501544842161797, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5117479182755072786, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5146261803469269810, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5374416771397287768, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5894669792623418740, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.16
@@ -1484,6 +1572,22 @@ PrefabInstance:
     - target: {fileID: 6758982051314154515, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
       propertyPath: m_Name
       value: Textured Demolished Market Stand 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6758982051314154515, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8272607512469000364, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8898097049307565863, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9102110788972612858, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1577,6 +1681,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8960051316858750786}
     m_Modifications:
+    - target: {fileID: 140540109793584564, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 755643006429891407, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314065527613725772, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3731666794300264849, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5474674249755500914, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6358789217734298312, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7253574401177827165, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7370743203684796742, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039578595122426777, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
       propertyPath: m_LocalScale.x
       value: 254.30273
@@ -1629,9 +1769,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8776389366941719579, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8941651975750108394, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
       propertyPath: m_Name
       value: Textured Rubble Pile (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941651975750108394, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125136666132606769, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1992,9 +2144,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8960051316858750786}
     m_Modifications:
+    - target: {fileID: 1263150418894083192, guid: 7b309f6f1c6dfa949b6248c272f507ac, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1426093131457252973, guid: 7b309f6f1c6dfa949b6248c272f507ac, type: 3}
       propertyPath: m_Name
       value: Pompeii Shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 1426093131457252973, guid: 7b309f6f1c6dfa949b6248c272f507ac, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054105592849327053, guid: 7b309f6f1c6dfa949b6248c272f507ac, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4623589247554650106, guid: 7b309f6f1c6dfa949b6248c272f507ac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2340,6 +2504,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Demolished Flag Pole
       objectReference: {fileID: 0}
+    - target: {fileID: 1265719605019446197, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590241382533554036, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1730830840898791148, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2885891932130274334, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4841660549314630444, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -27.363497
@@ -2379,6 +2559,10 @@ PrefabInstance:
     - target: {fileID: 4841660549314630444, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286256958145093949, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2474,11 +2658,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7035829094485223466, guid: 96dc9ba494037b345919021ee6084a4d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.32
+      value: 13.3
       objectReference: {fileID: 0}
     - target: {fileID: 7035829094485223466, guid: 96dc9ba494037b345919021ee6084a4d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.7999997
+      value: -1.99
       objectReference: {fileID: 0}
     - target: {fileID: 7035829094485223466, guid: 96dc9ba494037b345919021ee6084a4d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2608,6 +2792,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8960051316858750786}
     m_Modifications:
+    - target: {fileID: 1786285769530150559, guid: d61128ed140fbb14cb5d46000ef9df47, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7636093983416907838, guid: d61128ed140fbb14cb5d46000ef9df47, type: 3}
       propertyPath: m_LocalPosition.x
       value: -19.58
@@ -2651,6 +2839,10 @@ PrefabInstance:
     - target: {fileID: 7951962443805064079, guid: d61128ed140fbb14cb5d46000ef9df47, type: 3}
       propertyPath: m_Name
       value: Textured Base Crate (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7951962443805064079, guid: d61128ed140fbb14cb5d46000ef9df47, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3356,6 +3548,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8960051316858750786}
     m_Modifications:
+    - target: {fileID: 140540109793584564, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 755643006429891407, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314065527613725772, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3731666794300264849, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5474674249755500914, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6358789217734298312, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7253574401177827165, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7370743203684796742, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039578595122426777, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -21.872835
@@ -3396,9 +3624,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8776389366941719579, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8941651975750108394, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
       propertyPath: m_Name
       value: Textured Rubble Pile (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941651975750108394, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125136666132606769, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3918,6 +4158,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8960051316858750786}
     m_Modifications:
+    - target: {fileID: 1786285769530150559, guid: d61128ed140fbb14cb5d46000ef9df47, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7636093983416907838, guid: d61128ed140fbb14cb5d46000ef9df47, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.88429
@@ -3974,6 +4218,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Textured Base Crate (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7951962443805064079, guid: d61128ed140fbb14cb5d46000ef9df47, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3995,6 +4243,22 @@ PrefabInstance:
     - target: {fileID: 1265719605019446197, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
       propertyPath: m_Name
       value: Demolished Flag Pole (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1265719605019446197, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590241382533554036, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1730830840898791148, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2885891932130274334, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4841660549314630444, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4035,6 +4299,10 @@ PrefabInstance:
     - target: {fileID: 4841660549314630444, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286256958145093949, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4206,6 +4474,58 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8960051316858750786}
     m_Modifications:
+    - target: {fileID: 183651898965237355, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 396237218507955454, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 772887016097192960, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1738092931098545184, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769964416279928911, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381860060620214770, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3768752870118987945, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3857834649458470797, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911501544842161797, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5117479182755072786, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5146261803469269810, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5374416771397287768, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5894669792623418740, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6235069796352943785, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.39
@@ -4249,6 +4569,22 @@ PrefabInstance:
     - target: {fileID: 6758982051314154515, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
       propertyPath: m_Name
       value: Textured Demolished Market Stand 1 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6758982051314154515, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8272607512469000364, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8898097049307565863, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9102110788972612858, guid: c0f213c2358bf0a4284d26b83b248058, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4416,6 +4752,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8960051316858750786}
     m_Modifications:
+    - target: {fileID: 140540109793584564, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 755643006429891407, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314065527613725772, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3731666794300264849, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5474674249755500914, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6358789217734298312, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7253574401177827165, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7370743203684796742, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039578595122426777, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
       propertyPath: m_LocalScale.x
       value: 199.93825
@@ -4468,9 +4840,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8776389366941719579, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8941651975750108394, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
       propertyPath: m_Name
       value: Textured Rubble Pile (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941651975750108394, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125136666132606769, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4552,6 +4936,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8960051316858750786}
     m_Modifications:
+    - target: {fileID: 140540109793584564, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 755643006429891407, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314065527613725772, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3731666794300264849, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5474674249755500914, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6358789217734298312, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7253574401177827165, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7370743203684796742, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039578595122426777, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12.883673
@@ -4592,9 +5012,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8776389366941719579, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8941651975750108394, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
       propertyPath: m_Name
       value: Textured Rubble Pile (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941651975750108394, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125136666132606769, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4884,6 +5316,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Demolished Flag Pole (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1265719605019446197, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590241382533554036, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1730830840898791148, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2885891932130274334, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4841660549314630444, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4165
@@ -4935,6 +5383,10 @@ PrefabInstance:
     - target: {fileID: 4841660549314630444, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -88.523
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286256958145093949, guid: bedd4ff68f8be79429e83fcfbf1c3ca4, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5042,11 +5494,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7035829094485223466, guid: 96dc9ba494037b345919021ee6084a4d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.320004
+      value: 13.300005
       objectReference: {fileID: 0}
     - target: {fileID: 7035829094485223466, guid: 96dc9ba494037b345919021ee6084a4d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.7999997
+      value: -1.99
       objectReference: {fileID: 0}
     - target: {fileID: 7035829094485223466, guid: 96dc9ba494037b345919021ee6084a4d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5102,6 +5554,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8960051316858750786}
     m_Modifications:
+    - target: {fileID: 2010819795596380269, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2891665403061521516, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5945055464746709226, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6160437538613224164, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.62
@@ -5145,6 +5609,18 @@ PrefabInstance:
     - target: {fileID: 6788496810499749982, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
       propertyPath: m_Name
       value: Textured Demolished Market Stand 3 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6788496810499749982, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8158019003216221409, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8451643507513030885, guid: 4b29379ad803148428608afb6fc8ed90, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5274,6 +5750,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8960051316858750786}
     m_Modifications:
+    - target: {fileID: 140540109793584564, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 755643006429891407, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314065527613725772, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3731666794300264849, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5474674249755500914, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6358789217734298312, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7253574401177827165, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7370743203684796742, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039578595122426777, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8601015145066470992, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -27.922
@@ -5314,9 +5826,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8776389366941719579, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8941651975750108394, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
       propertyPath: m_Name
       value: Textured Rubble Pile
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941651975750108394, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125136666132606769, guid: 47e54a13cd33cfd4ba2271446d7b28d4, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
