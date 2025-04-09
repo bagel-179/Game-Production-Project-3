@@ -50,19 +50,34 @@ public class TimeShiftManager : MonoBehaviour
         LayerMask targetLayerMask = isPastActive ? presentLayer : pastLayer;
         int targetLayer = isPastActive ? LayerMask.NameToLayer("Present") : LayerMask.NameToLayer("Past");
 
-        Collider[] colliders = Physics.OverlapSphere(
-            transform.position,
-            collisionCheckRadius,
-            targetLayerMask
+        Physics.IgnoreLayerCollision(LayerMaskToLayer(targetLayerMask), LayerMaskToLayer(playerLayer), false);
+
+        bool wouldCollide = Physics.CheckSphere(playerCollider.transform.position, playerCollider.bounds.extents.magnitude * 0.9f, targetLayerMask
         );
 
-        if (colliders.Length > 0)
+        Physics.IgnoreLayerCollision(LayerMaskToLayer(targetLayerMask), LayerMaskToLayer(playerLayer), true);
+
+        if (wouldCollide)
         {
-            Debug.Log("Can't timeshift - would collide with objects in the other timeline");
+            Debug.Log("Can't timeshift");
             return true;
         }
 
         return false;
+    }
+
+    private bool IsPlayerInsideCollider(Collider otherCollider)
+    {
+        if (playerCollider == null || otherCollider == null)
+            return false;
+
+        Bounds playerBounds = playerCollider.bounds;
+        Bounds otherBounds = otherCollider.bounds;
+
+        if (!otherBounds.Intersects(playerBounds))
+            return false;
+
+        return otherBounds.Contains(playerBounds.center);
     }
 
     private System.Collections.IEnumerator TimeShiftEffects()
