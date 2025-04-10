@@ -5,37 +5,45 @@ using UnityEngine.Rendering;
 
 public class TimeShiftManager : MonoBehaviour
 {
+    [Header("Player References")]
+    public GameObject player;
     public Collider playerCollider;
+    public Camera playerCamera;
+
+    [Header("Timeline Layers")]
     public LayerMask pastLayer;
     public LayerMask presentLayer;
     public LayerMask playerLayer;
-    public float effectDuration = 2f;
-    [Range(-1, 1)] public float lensDistortionAmount = -0.5f;
     public float collisionCheckRadius = 0.5f;
+
+    [Header("Shift Effects")]
+    public float effectDuration = 2f;
+    [Range(-1, 1)] public float lensDistortionAmount = -0.5f;    
+    [Range(0, 10)] public float bloomIntensity = 5f;
+    [Range(0, 1)] public float bloomThreshold = 0f;
 
     [Header("Audio Ambience")]
     public GameObject pastAudio;
     public GameObject presentAudio;
 
-    private Camera playerCamera;
     private bool isPastActive = false;
     private bool isOnCooldown = false;
-    private float originalFOV;
     private ChromaticAberration chromaticAberration;
     private LensDistortion lensDistortion;
-    private Volume globalVolume;    
+    private Bloom bloom;
+    private Volume globalVolume;
 
     void Start()
     {
-        playerCamera = Camera.main;
         SetActiveTimeline(false);
 
+        playerCamera = Camera.main;
+
         globalVolume = FindObjectOfType<Volume>();
-        if (globalVolume != null && globalVolume.profile != null)
-        {
-            globalVolume.profile.TryGet(out chromaticAberration);
-            globalVolume.profile.TryGet(out lensDistortion);
-        }
+
+        globalVolume.profile.TryGet(out chromaticAberration);
+        globalVolume.profile.TryGet(out lensDistortion);
+        globalVolume.profile.TryGet(out bloom);
     }
 
     public void TimeShift()
@@ -47,37 +55,28 @@ public class TimeShiftManager : MonoBehaviour
 
     private bool WouldCollideInOtherTimeline()
     {
+        if (playerCollider == null) return false;
+
         LayerMask targetLayerMask = isPastActive ? presentLayer : pastLayer;
         int targetLayer = isPastActive ? LayerMask.NameToLayer("Present") : LayerMask.NameToLayer("Past");
 
         Physics.IgnoreLayerCollision(LayerMaskToLayer(targetLayerMask), LayerMaskToLayer(playerLayer), false);
 
-        bool wouldCollide = Physics.CheckSphere(playerCollider.transform.position, playerCollider.bounds.extents.magnitude * 0.9f, targetLayerMask
+        bool wouldCollide = Physics.CheckSphere(
+            playerCollider.transform.position,
+            collisionCheckRadius,
+            targetLayerMask
         );
 
         Physics.IgnoreLayerCollision(LayerMaskToLayer(targetLayerMask), LayerMaskToLayer(playerLayer), true);
 
         if (wouldCollide)
         {
-            Debug.Log("Can't timeshift");
+            Debug.Log("Can't timeshift - collision detected");
             return true;
         }
 
         return false;
-    }
-
-    private bool IsPlayerInsideCollider(Collider otherCollider)
-    {
-        if (playerCollider == null || otherCollider == null)
-            return false;
-
-        Bounds playerBounds = playerCollider.bounds;
-        Bounds otherBounds = otherCollider.bounds;
-
-        if (!otherBounds.Intersects(playerBounds))
-            return false;
-
-        return otherBounds.Contains(playerBounds.center);
     }
 
     private IEnumerator TimeShiftEffects()
@@ -87,6 +86,7 @@ public class TimeShiftManager : MonoBehaviour
         isPastActive = !isPastActive;
         SetActiveTimeline(isPastActive);
 
+        // Handle enemies
         int inactiveLayer = isPastActive ? LayerMask.NameToLayer("Present") : LayerMask.NameToLayer("Past");
         int activeLayer = isPastActive ? LayerMask.NameToLayer("Past") : LayerMask.NameToLayer("Present");
 
@@ -102,15 +102,13 @@ public class TimeShiftManager : MonoBehaviour
             }
         }
 
-        if (chromaticAberration != null)
-        {
-            chromaticAberration.intensity.value = 1f;
-        }
+        float originalChromaIntensity = chromaticAberration != null ? chromaticAberration.intensity.value : 0f;
+        float originalLensDistortion = lensDistortion != null ? lensDistortion.intensity.value : 0f;
+        float originalBloomIntensity = bloom != null ? bloom.intensity.value : 2f;
+        float originalBloomThreshold = bloom != null ? bloom.threshold.value : 0.8f;
 
-        if (lensDistortion != null)
-        {
-            lensDistortion.intensity.value = lensDistortionAmount;
-        }
+        bloom.intensity.value = bloomIntensity;
+        bloom.threshold.value = bloomThreshold;
 
         float elapsed = 0f;
         while (elapsed < effectDuration)
@@ -118,27 +116,18 @@ public class TimeShiftManager : MonoBehaviour
             elapsed += Time.unscaledDeltaTime;
             float progress = elapsed / effectDuration;
 
-            if (chromaticAberration != null)
-            {
-                chromaticAberration.intensity.value = Mathf.Lerp(1f, 0f, progress);
-            }
-
-            if (lensDistortion != null)
-            {
-                lensDistortion.intensity.value = Mathf.Lerp(lensDistortionAmount, 0f, progress);
-            }
+            chromaticAberration.intensity.value = Mathf.Lerp(1f, 0f, progress);
+            lensDistortion.intensity.value = Mathf.Lerp(lensDistortionAmount, 0f, progress);
+            bloom.intensity.value = Mathf.Lerp(bloomIntensity, originalBloomIntensity, progress);
+            bloom.threshold.value = Mathf.Lerp(bloomThreshold, originalBloomThreshold, progress);
 
             yield return null;
         }
 
-        if (chromaticAberration != null)
-        {
-            chromaticAberration.intensity.value = 0f;
-        }
-        if (lensDistortion != null)
-        {
-            lensDistortion.intensity.value = 0f;
-        }
+        chromaticAberration.intensity.value = originalChromaIntensity;
+        lensDistortion.intensity.value = originalLensDistortion;
+        bloom.intensity.value = originalBloomIntensity;
+        bloom.threshold.value = originalBloomThreshold;
 
         yield return new WaitForSecondsRealtime(0.5f);
         isOnCooldown = false;
@@ -146,6 +135,8 @@ public class TimeShiftManager : MonoBehaviour
 
     private void SetActiveTimeline(bool pastActive)
     {
+        if (playerCamera == null) return;
+
         int allLayers = ~0;
 
         if (pastActive)
@@ -154,8 +145,8 @@ public class TimeShiftManager : MonoBehaviour
             Physics.IgnoreLayerCollision(LayerMaskToLayer(presentLayer), LayerMaskToLayer(playerLayer), true);
             Physics.IgnoreLayerCollision(LayerMaskToLayer(pastLayer), LayerMaskToLayer(playerLayer), false);
 
-            presentAudio.SetActive(false);
-            pastAudio.SetActive(true);
+            if (presentAudio != null) presentAudio.SetActive(false);
+            if (pastAudio != null) pastAudio.SetActive(true);
         }
         else
         {
@@ -163,8 +154,8 @@ public class TimeShiftManager : MonoBehaviour
             Physics.IgnoreLayerCollision(LayerMaskToLayer(pastLayer), LayerMaskToLayer(playerLayer), true);
             Physics.IgnoreLayerCollision(LayerMaskToLayer(presentLayer), LayerMaskToLayer(playerLayer), false);
 
-            presentAudio.SetActive(true);
-            pastAudio.SetActive(false);
+            if (presentAudio != null) presentAudio.SetActive(true);
+            if (pastAudio != null) pastAudio.SetActive(false);
         }
     }
 
@@ -179,5 +170,4 @@ public class TimeShiftManager : MonoBehaviour
         }
         return layer;
     }
-
 }
