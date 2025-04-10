@@ -148,7 +148,9 @@ PrefabInstance:
       value: Burnt Tree
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1639341939432478534, guid: 8816538f4990ffd48ae6476a41eea4cf, type: 3}
+    - {fileID: 7557807181801356892, guid: 8816538f4990ffd48ae6476a41eea4cf, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8816538f4990ffd48ae6476a41eea4cf, type: 3}

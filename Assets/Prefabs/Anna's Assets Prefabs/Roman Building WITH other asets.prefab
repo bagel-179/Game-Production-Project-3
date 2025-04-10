@@ -938,12 +938,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Textured Roman Building
       objectReference: {fileID: 0}
+    - target: {fileID: 6203807799240410979, guid: 02bcdd8461a27e6439f35ee93000c233, type: 3}
+      propertyPath: m_Size.y
+      value: 4.9382334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203807799240410979, guid: 02bcdd8461a27e6439f35ee93000c233, type: 3}
+      propertyPath: m_Center.y
+      value: -1.9691178
+      objectReference: {fileID: 0}
     - target: {fileID: 8651718403518180346, guid: 02bcdd8461a27e6439f35ee93000c233, type: 3}
       propertyPath: m_LocalScale.y
       value: 1.0238
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6844863094478209853, guid: 02bcdd8461a27e6439f35ee93000c233, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02bcdd8461a27e6439f35ee93000c233, type: 3}

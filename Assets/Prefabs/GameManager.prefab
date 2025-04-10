@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1878455747575386318}
   - component: {fileID: 4411015599660487661}
   - component: {fileID: 3067888215214305903}
-  - component: {fileID: 5430388336630253782}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -79,15 +78,3 @@ MonoBehaviour:
   lensDistortionAmount: -0.5
   bloomIntensity: 5
   bloomThreshold: 0
---- !u!114 &5430388336630253782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2246536804612608275}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15ce2cd34ee94d244ad93a2293821a58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
