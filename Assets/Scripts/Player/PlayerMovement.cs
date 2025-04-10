@@ -45,9 +45,12 @@ public class PlayerMovement : MonoBehaviour
     private float glideFallSpeedLimit = 2f;
     [SerializeField] private float swaySpeed = 2f;
     [SerializeField] private float swayAngle = 10f;
+    [SerializeField] private float maxGlideDuration = 3f;
     private float currentSwayAngle = 0f;
     private float swayTime = 0f;
     private bool isGliding;
+    private float glideTimer = 0f; 
+    private bool canGlide = true;
 
     [Header("Particles")]
     [SerializeField] private ParticleSystem jumpParticles;
@@ -76,6 +79,12 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             timeShiftManager.TimeShift();
+        }
+
+        if (isGrounded)
+        {
+            canGlide = true;
+            glideTimer = 0f;
         }
     }
 
@@ -147,18 +156,26 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded && jumpCount > 0) jumpCount = 0;
 
-        float gravityScale = (enableGlide && Input.GetKey(KeyCode.Space) && rb.linearVelocity.y < 0) ? glideGravityScale : normalGravityScale;
+        bool tryingToGlide = enableGlide && Input.GetKey(KeyCode.Space) && rb.linearVelocity.y < 0;
+        float gravityScale = (tryingToGlide && canGlide) ? glideGravityScale : normalGravityScale;
 
         rb.AddForce(Vector3.down * gravityScale * Mathf.Abs(Physics.gravity.y), ForceMode.Acceleration);
 
-        if (enableGlide && Input.GetKey(KeyCode.Space) && rb.linearVelocity.y < -glideFallSpeedLimit)
+        if (tryingToGlide && canGlide && rb.linearVelocity.y < -glideFallSpeedLimit)
         {
             isGliding = true;
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, -glideFallSpeedLimit, rb.linearVelocity.z);
-
             glideParticles.Play();
+
+            glideTimer += Time.deltaTime;
+            if (glideTimer >= maxGlideDuration)
+            {
+                canGlide = false;
+                isGliding = false;
+                glideParticles.Stop();
+            }
         }
-        else
+        else if (isGliding)
         {
             isGliding = false;
             glideParticles.Stop();

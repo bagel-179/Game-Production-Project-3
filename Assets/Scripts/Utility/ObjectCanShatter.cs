@@ -11,10 +11,19 @@ public class ObjectCanShatter : MonoBehaviour
             if (canShatter)
             {
                 Shatter shatterScript = GetComponent<Shatter>();
-                if (shatterScript != null)
-                {
-                    shatterScript.EnableShattering();
-                }
+                shatterScript.EnableShattering();
+            }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (canShatter)
+            {
+                Shatter shatterScript = GetComponent<Shatter>();
+                shatterScript.EnableShattering();
             }
         }
     }

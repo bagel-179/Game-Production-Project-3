@@ -16,15 +16,17 @@ public class TimeShiftManager : MonoBehaviour
     public LayerMask playerLayer;
     public float collisionCheckRadius = 0.5f;
 
+    [Header("Timeline FX")]
+    public GameObject PrestineFX;
+    public GameObject EruptionFX;
+    public Material PrestineSkybox;
+    public Material EruptionSkybox;
+        
     [Header("Shift Effects")]
     public float effectDuration = 2f;
     [Range(-1, 1)] public float lensDistortionAmount = -0.5f;    
     [Range(0, 10)] public float bloomIntensity = 5f;
     [Range(0, 1)] public float bloomThreshold = 0f;
-
-    [Header("Audio Ambience")]
-    public GameObject pastAudio;
-    public GameObject presentAudio;
 
     private bool isPastActive = false;
     private bool isOnCooldown = false;
@@ -86,7 +88,6 @@ public class TimeShiftManager : MonoBehaviour
         isPastActive = !isPastActive;
         SetActiveTimeline(isPastActive);
 
-        // Handle enemies
         int inactiveLayer = isPastActive ? LayerMask.NameToLayer("Present") : LayerMask.NameToLayer("Past");
         int activeLayer = isPastActive ? LayerMask.NameToLayer("Past") : LayerMask.NameToLayer("Present");
 
@@ -101,6 +102,12 @@ public class TimeShiftManager : MonoBehaviour
                 enemy.SetActiveState(true);
             }
         }
+
+        RenderSettings.skybox = isPastActive ? EruptionSkybox : PrestineSkybox;
+        DynamicGI.UpdateEnvironment();
+
+
+        //HANDLES EFFECTS!!!
 
         float originalChromaIntensity = chromaticAberration != null ? chromaticAberration.intensity.value : 0f;
         float originalLensDistortion = lensDistortion != null ? lensDistortion.intensity.value : 0f;
@@ -145,8 +152,8 @@ public class TimeShiftManager : MonoBehaviour
             Physics.IgnoreLayerCollision(LayerMaskToLayer(presentLayer), LayerMaskToLayer(playerLayer), true);
             Physics.IgnoreLayerCollision(LayerMaskToLayer(pastLayer), LayerMaskToLayer(playerLayer), false);
 
-            if (presentAudio != null) presentAudio.SetActive(false);
-            if (pastAudio != null) pastAudio.SetActive(true);
+            PrestineFX.SetActive(false);
+            EruptionFX.SetActive(true);
         }
         else
         {
@@ -154,8 +161,8 @@ public class TimeShiftManager : MonoBehaviour
             Physics.IgnoreLayerCollision(LayerMaskToLayer(pastLayer), LayerMaskToLayer(playerLayer), true);
             Physics.IgnoreLayerCollision(LayerMaskToLayer(presentLayer), LayerMaskToLayer(playerLayer), false);
 
-            if (presentAudio != null) presentAudio.SetActive(true);
-            if (pastAudio != null) pastAudio.SetActive(false);
+            PrestineFX.SetActive(true);
+            EruptionFX.SetActive(false);
         }
     }
 

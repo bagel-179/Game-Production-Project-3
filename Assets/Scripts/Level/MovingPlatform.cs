@@ -4,18 +4,13 @@ using UnityEngine;
 public class MovingPlatform : MonoBehaviour, IFreezeable
 {
     [Header("Movement Settings")]
-    public GameObject platform; 
+    public GameObject platform;
     public Transform[] points;
     public float speed = 2f;
     public bool isALoop = false;
     public int[] stopPoints;
     public float stopDuration = 2f;
-    
-    [Header("Fall Settings")]
-    public bool canFall = false;
-    public float fallDelay = 2f;
-    public float verticalSpeed = 5f;
-    
+
     [Header("Special Features")]
     public bool canShatter = false;
     public bool isFrozen = false;
@@ -24,12 +19,20 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
     private int direction = 1;
     private bool isWaiting = false;
     private Rigidbody platformRb;
+    private Vector3 initialPosition;
 
     public bool PlayerOnPlatform { get; private set; }
 
     void Start()
     {
         platformRb = platform.GetComponent<Rigidbody>();
+        initialPosition = platform.transform.position;
+
+        if (platformRb != null)
+        {
+            platformRb.isKinematic = true;
+            platformRb.interpolation = RigidbodyInterpolation.Interpolate; // For smoother movement
+        }
     }
 
     void Update()
@@ -52,17 +55,23 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
 
     void MovePlatform()
     {
-        if (platformRb != null)
-        {
-            platformRb.linearVelocity = Vector3.zero; 
-        }
-
         Transform targetPoint = points[targetIndex];
-        platform.transform.position = Vector3.MoveTowards(
-            platform.transform.position, 
-            targetPoint.position, 
+        Vector3 newPosition = Vector3.MoveTowards(
+            platform.transform.position,
+            targetPoint.position,
             speed * Time.deltaTime);
 
+        // If using Rigidbody, move it properly
+        if (platformRb != null)
+        {
+            platformRb.MovePosition(newPosition);
+        }
+        else
+        {
+            platform.transform.position = newPosition;
+        }
+
+        // Check if we've reached the target point
         if (Vector3.Distance(platform.transform.position, targetPoint.position) < 0.01f)
         {
             if (ShouldStopAtPoint(targetIndex))
@@ -92,8 +101,15 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
 
         if (targetIndex >= points.Length)
         {
-            targetIndex = isALoop ? 0 : points.Length - 2;
-            direction = isALoop ? direction : -1;
+            if (isALoop)
+            {
+                targetIndex = 0;
+            }
+            else
+            {
+                targetIndex = points.Length - 2;
+                direction = -1;
+            }
         }
         else if (targetIndex < 0)
         {
@@ -102,10 +118,25 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
         }
     }
 
+    public void ResetPlatform()
+    {
+        StopAllCoroutines();
+        isWaiting = false;
+
+        if (platformRb != null)
+        {
+            platformRb.linearVelocity = Vector3.zero;
+            platformRb.angularVelocity = Vector3.zero;
+        }
+
+        platform.transform.position = initialPosition;
+        targetIndex = 0;
+        direction = 1;
+    }
+
     public void SetPlayerOnPlatform(bool onPlatform) => PlayerOnPlatform = onPlatform;
 
     public void SetFrozen(bool frozen) => isFrozen = frozen;
-
 
     private void EnableShatterScript()
     {

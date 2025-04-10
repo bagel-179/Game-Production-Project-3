@@ -656,7 +656,7 @@ GameObject:
   - component: {fileID: 6264541396828794907}
   - component: {fileID: 1175942714506362511}
   m_Layer: 8
-  m_Name: Plane
+  m_Name: LavaPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
