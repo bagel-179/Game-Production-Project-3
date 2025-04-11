@@ -83,15 +83,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: aea592341721b6b4c9a5b7233d320a5d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1274303712967877878}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: aea592341721b6b4c9a5b7233d320a5d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8493076051662541568}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: aea592341721b6b4c9a5b7233d320a5d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4365612108298427801}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: aea592341721b6b4c9a5b7233d320a5d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7004128737873183475}
   m_SourcePrefab: {fileID: 100100000, guid: aea592341721b6b4c9a5b7233d320a5d, type: 3}
 --- !u!1 &4174708985777021025 stripped
 GameObject:
@@ -119,61 +110,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.51806265, y: 0.5178087, z: 0.86673415}
   m_Center: {x: 0, y: -3.7671684e-16, z: -0.08900908}
---- !u!54 &8493076051662541568
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4174708985777021025}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &4365612108298427801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4174708985777021025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd4850b1de7a7c84e863cb0bad2b06fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canShatter: 1
---- !u!114 &7004128737873183475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4174708985777021025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00395c52721e6f84b971170660d2768c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CutCascades: 4
-  ExplodeForce: 30
-  FragmentLifetime: 4
-  FadeDuration: 1
-  shrinkDuration: 4
-  MinFragmentSize: 0.1
