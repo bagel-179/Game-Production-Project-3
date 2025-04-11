@@ -10,6 +10,7 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
     public bool isALoop = false;
     public int[] stopPoints;
     public float stopDuration = 2f;
+    public bool isMovingVertical = false; 
 
     [Header("Special Features")]
     public bool canShatter = false;
@@ -19,20 +20,14 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
     private int direction = 1;
     private bool isWaiting = false;
     private Rigidbody platformRb;
-    private Vector3 initialPosition;
+    private Vector3 originalPosition;
 
     public bool PlayerOnPlatform { get; private set; }
 
     void Start()
     {
         platformRb = platform.GetComponent<Rigidbody>();
-        initialPosition = platform.transform.position;
-
-        if (platformRb != null)
-        {
-            platformRb.isKinematic = true;
-            platformRb.interpolation = RigidbodyInterpolation.Interpolate; // For smoother movement
-        }
+        originalPosition = platform.transform.position;
     }
 
     void Update()
@@ -55,24 +50,26 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
 
     void MovePlatform()
     {
-        Transform targetPoint = points[targetIndex];
-        Vector3 newPosition = Vector3.MoveTowards(
-            platform.transform.position,
-            targetPoint.position,
-            speed * Time.deltaTime);
-
-        // If using Rigidbody, move it properly
         if (platformRb != null)
         {
-            platformRb.MovePosition(newPosition);
-        }
-        else
-        {
-            platform.transform.position = newPosition;
+            platformRb.linearVelocity = Vector3.zero;
         }
 
-        // Check if we've reached the target point
-        if (Vector3.Distance(platform.transform.position, targetPoint.position) < 0.01f)
+        Transform targetPoint = points[targetIndex];
+        Vector3 targetPosition = targetPoint.position;
+
+        // If vertical movement is enabled, maintain original X and Z positions
+        if (isMovingVertical)
+        {
+            targetPosition = new Vector3(originalPosition.x, targetPoint.position.y, originalPosition.z);
+        }
+
+        platform.transform.position = Vector3.MoveTowards(
+            platform.transform.position,
+            targetPosition,
+            speed * Time.deltaTime);
+
+        if (Vector3.Distance(platform.transform.position, targetPosition) < 0.01f)
         {
             if (ShouldStopAtPoint(targetIndex))
             {
@@ -101,37 +98,14 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
 
         if (targetIndex >= points.Length)
         {
-            if (isALoop)
-            {
-                targetIndex = 0;
-            }
-            else
-            {
-                targetIndex = points.Length - 2;
-                direction = -1;
-            }
+            targetIndex = isALoop ? 0 : points.Length - 2;
+            direction = isALoop ? direction : -1;
         }
         else if (targetIndex < 0)
         {
             targetIndex = 1;
             direction = 1;
         }
-    }
-
-    public void ResetPlatform()
-    {
-        StopAllCoroutines();
-        isWaiting = false;
-
-        if (platformRb != null)
-        {
-            platformRb.linearVelocity = Vector3.zero;
-            platformRb.angularVelocity = Vector3.zero;
-        }
-
-        platform.transform.position = initialPosition;
-        targetIndex = 0;
-        direction = 1;
     }
 
     public void SetPlayerOnPlatform(bool onPlatform) => PlayerOnPlatform = onPlatform;
