@@ -452,6 +452,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 143784489141975743, guid: 8ba5dcf111a2ab64cb3304c01d9096b4, type: 3}
+      propertyPath: m_Name
+      value: Roof
+      objectReference: {fileID: 0}
+    - target: {fileID: 143784489141975743, guid: 8ba5dcf111a2ab64cb3304c01d9096b4, type: 3}
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
