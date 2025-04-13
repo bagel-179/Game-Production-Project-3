@@ -20,13 +20,11 @@ public class FlutePlaying : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-            audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource = gameObject.AddComponent<AudioSource>();
 
         audioSource.loop = true;
-        audioSource.playOnAwake = false;
 
-            arrowKeyUI.SetActive(false);
+        arrowKeyUI.SetActive(false);
     }
 
     private void Update()
@@ -59,8 +57,9 @@ public class FlutePlaying : MonoBehaviour
 
         audioSource.Stop();
         audioSource.clip = clip;
-        audioSource.volume = 1f;
+        audioSource.volume = 0f;
         audioSource.Play();
+        StartCoroutine(FadeIn());
 
         currentKey = key;
     }
@@ -73,7 +72,7 @@ public class FlutePlaying : MonoBehaviour
     private void StartFadeOut()
     {
         if (fadeCoroutine != null)
-            StopCoroutine(fadeCoroutine);
+        StopCoroutine(fadeCoroutine);
 
         fadeCoroutine = StartCoroutine(FadeOutAndStop());
     }
@@ -94,12 +93,27 @@ public class FlutePlaying : MonoBehaviour
         fadeCoroutine = null;
     }
 
+    private IEnumerator FadeIn(float fadeTime = 0.1f)
+    {
+        float targetVolume = 1f;
+        float t = 0f;
+
+        while (t < fadeTime)
+        {
+            audioSource.volume = Mathf.Lerp(0f, targetVolume, t / fadeTime);
+            t += Time.deltaTime;
+            yield return null;
+        }
+
+        audioSource.volume = targetVolume;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             isPlayerInside = true;
-                arrowKeyUI.SetActive(true);
+            arrowKeyUI.SetActive(true);
         }
     }
 
@@ -108,7 +122,7 @@ public class FlutePlaying : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInside = false;
-                arrowKeyUI.SetActive(false);
+            arrowKeyUI.SetActive(false);
 
             StartFadeOut();
         }
