@@ -58,7 +58,6 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
         Transform targetPoint = points[targetIndex];
         Vector3 targetPosition = targetPoint.position;
 
-        // If vertical movement is enabled, maintain original X and Z positions
         if (isMovingVertical)
         {
             targetPosition = new Vector3(originalPosition.x, targetPoint.position.y, originalPosition.z);
