@@ -2,6 +2,7 @@ using Unity.Cinemachine;
 using System.Collections;
 using UnityEngine;
 using Unity.VisualScripting;
+using UnityEngine.Audio;
 
 public class IntroTrigger : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class IntroTrigger : MonoBehaviour
     [Header("UI Settings")]
     public GameObject introUI;
 
+    [Header("Sounds")]
+    public AudioClip introSound;
+
     [Header("Camera Transition Settings")]
     public float transitionSpeed = 2f;
     private Transform introCameraTransform;
@@ -27,11 +31,13 @@ public class IntroTrigger : MonoBehaviour
     public float rotationThreshold = 2f;
 
     private CinemachineCamera lastActiveCamera;
+    private AudioSource audioSource;
 
     private void Start()
     {
         playerMovementScript = player.GetComponent<PlayerMovement>();
         introCameraTransform = introCamera.transform;
+        audioSource = GetComponent<AudioSource>();
 
         introCameraObj.SetActive(false);
 
@@ -64,8 +70,9 @@ public class IntroTrigger : MonoBehaviour
             yield return null;
         }
         yield return new WaitForSeconds(0.2f);
-        // Camera reached target, show UI
+        
         introUI.SetActive(true);
+        audioSource.Play();
 
         yield return new WaitForSeconds(4f);
         EndIntro();
