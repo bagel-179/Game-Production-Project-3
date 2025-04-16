@@ -56,14 +56,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private ParticleSystem jumpParticles;
     [SerializeField] private ParticleSystem glideParticles;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip shiftSound;
+
     private Rigidbody rb;
     private Vector3 moveDirection;
+    private AudioSource audioSource;
 
     public Camera activeCamera;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
         rb.freezeRotation = true;
         rb.linearVelocity = Vector3.zero;
 
@@ -79,6 +84,8 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             timeShiftManager.TimeShift();
+            audioSource.clip = shiftSound;
+            audioSource.Play();
         }
 
         if (isGrounded)

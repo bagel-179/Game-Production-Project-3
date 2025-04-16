@@ -57,8 +57,6 @@ public class TimeShiftManager : MonoBehaviour
 
     private bool WouldCollideInOtherTimeline()
     {
-        if (playerCollider == null) return false;
-
         LayerMask targetLayerMask = isPastActive ? presentLayer : pastLayer;
         int targetLayer = isPastActive ? LayerMask.NameToLayer("Present") : LayerMask.NameToLayer("Past");
 
@@ -74,7 +72,7 @@ public class TimeShiftManager : MonoBehaviour
 
         if (wouldCollide)
         {
-            Debug.Log("Can't timeshift - collision detected");
+            Debug.Log("Can't timeshift because of collider");
             return true;
         }
 
@@ -87,21 +85,7 @@ public class TimeShiftManager : MonoBehaviour
 
         isPastActive = !isPastActive;
         SetActiveTimeline(isPastActive);
-
-        int inactiveLayer = isPastActive ? LayerMask.NameToLayer("Present") : LayerMask.NameToLayer("Past");
-        int activeLayer = isPastActive ? LayerMask.NameToLayer("Past") : LayerMask.NameToLayer("Present");
-
-        foreach (EnemyAI enemy in FindObjectsOfType<EnemyAI>())
-        {
-            if (enemy.gameObject.layer == inactiveLayer)
-            {
-                enemy.SetActiveState(false);
-            }
-            else if (enemy.gameObject.layer == activeLayer)
-            {
-                enemy.SetActiveState(true);
-            }
-        }
+        
 
         RenderSettings.skybox = isPastActive ? EruptionSkybox : PrestineSkybox;
         DynamicGI.UpdateEnvironment();
