@@ -31,12 +31,18 @@ public class PlayerMovement : MonoBehaviour
     private float airMultiplier = 1f;
     private float playerHeight = 2f;
     [SerializeField] private LayerMask groundLayer;
-    private bool isGrounded;
+    [HideInInspector] public bool isGrounded;
 
     [Header("Spin Settings")]
     [SerializeField] private float spinDuration = 0.3f;
     [SerializeField] private float spinSpeed = 3060f;
     private bool isSpinning = false;
+
+    [Header("Ground Slam")]
+    [SerializeField] private GroundSlam groundSlam;
+    private float jumpStartHeight;
+    private bool canSlam = false;
+    private bool movementLocked = false;
 
     [Header("Glide Settings")]
     [SerializeField] bool enableGlide = true;
@@ -130,10 +136,22 @@ public class PlayerMovement : MonoBehaviour
             dashOrientation.rotation = Quaternion.Slerp(dashOrientation.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumps)
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumps && !movementLocked)
         {
             Jump();
             jumpParticles.Play();
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftControl) && canSlam)
+        {
+            groundSlam.ActivateGroundSlam();
+            canSlam = false;
+        }
+
+        if (canSlam && rb.linearVelocity.y < 0 && (jumpStartHeight - transform.position.y) > groundSlam.minJumpSlam)
+        {
+            groundSlam.ActivateGroundSlam();
+            canSlam = false;
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
@@ -144,6 +162,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
+        if (movementLocked) return;
+
         float speedToUse = isSlowed ? currentSpeed : moveSpeed;
         float multiplier = isGrounded ? 1f : airMultiplier;
         Vector3 targetVelocity = moveDirection * speedToUse * multiplier;
@@ -160,6 +180,9 @@ public class PlayerMovement : MonoBehaviour
         jumpCount++;
 
         jumpParticles.Play();
+
+        jumpStartHeight = transform.position.y;
+        canSlam = true;
 
         if (jumpCount >= 1) StartCoroutine(SpinEffect());
     }
@@ -199,11 +222,15 @@ public class PlayerMovement : MonoBehaviour
         rb.linearDamping = isGrounded ? groundDrag : 0f;
     }
 
-    private void CheckGroundStatus()
+    public void CheckGroundStatus()
     {
         isGrounded = Physics.SphereCast(transform.position, 0.3f, Vector3.down, out _, playerHeight * 0.5f + 0.2f, groundLayer);
     }
 
+    public void SetMovementLock(bool locked)
+    {
+        movementLocked = locked;
+    }
 
     private void ApplyGlideSway()
     {
