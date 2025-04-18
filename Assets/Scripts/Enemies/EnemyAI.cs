@@ -81,11 +81,26 @@ public class EnemyAI : MonoBehaviour, IFreezeable
 
     private void MoveToTarget()
     {
-        if (agent != null && isActiveTimeline)
+        if (agent == null || !isActiveTimeline) return;
+
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        if (distanceToPlayer < agent.stoppingDistance)
+        {
+            Vector3 directionAway = (transform.position - player.position).normalized;
+            Vector3 backOffPosition = transform.position + directionAway * 2f; 
+
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(backOffPosition, out hit, 2f, NavMesh.AllAreas))
+            {
+                agent.SetDestination(hit.position);
+            }
+        }
+        else
         {
             agent.SetDestination(lastKnownPosition);
 
-            if (Vector3.Distance(transform.position, lastKnownPosition) <= agent.stoppingDistance)
+            if (distanceToPlayer <= agent.stoppingDistance)
             {
                 agent.ResetPath();
             }

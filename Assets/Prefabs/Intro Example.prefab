@@ -838,6 +838,7 @@ MonoBehaviour:
   player: {fileID: 0}
   triggerRange: 25
   introUI: {fileID: 2280249635421053739}
+  introSound: {fileID: 0}
   transitionSpeed: 2
   positionThreshold: 1
   rotationThreshold: 2

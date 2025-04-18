@@ -13,6 +13,13 @@ public class CameraRaycastInteraction : MonoBehaviour
     public float sphereRadius = 5f;
     public LayerMask sphereCastLayerMask;
 
+    [SerializeField] private AudioClip freezeSound;
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     private void Update()
     {
         RaycastHit hit;
@@ -30,6 +37,8 @@ public class CameraRaycastInteraction : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 TryFreezeObject(hit.collider);
+                audioSource.clip = freezeSound;
+                audioSource.Play();
             }
         }
         else
@@ -48,6 +57,9 @@ public class CameraRaycastInteraction : MonoBehaviour
     {
         if (col.CompareTag("Platform") || col.CompareTag("Enemy"))
         {
+            audioSource.clip = freezeSound;
+            audioSource.Play();
+
             IFreezeable freezeableChild = col.GetComponent<IFreezeable>();
             IFreezeable freezeableParent = col.transform.parent?.GetComponent<IFreezeable>();
 
@@ -79,6 +91,9 @@ public class CameraRaycastInteraction : MonoBehaviour
         {
             if (col.CompareTag("Platform") || col.CompareTag("Enemy"))
             {
+                audioSource.clip = freezeSound;
+                audioSource.Play();
+
                 IFreezeable freezeableChild = col.GetComponent<IFreezeable>();
                 IFreezeable freezeableParent = col.transform.parent?.GetComponent<IFreezeable>();
 

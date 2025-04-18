@@ -20,7 +20,6 @@ public class FlutePlaying : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        audioSource = gameObject.AddComponent<AudioSource>();
 
         audioSource.loop = true;
 

@@ -4,14 +4,30 @@ using System.Collections;
 public class FallReset : MonoBehaviour
 {
     public Transform spawnPoint;
+    public AudioClip fallSound;
+    //public ParticleSystem fallEffect;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Transform root = other.transform.root;
-            root.position = spawnPoint.position;
-            root.rotation = spawnPoint.rotation;
+            StartCoroutine(HandleFallReset(other.transform.root));
         }
+    }
+
+    private IEnumerator HandleFallReset(Transform playerRoot)
+    {
+        Transform playerModel = playerRoot.Find("Capsule");
+        playerModel.gameObject.SetActive(false);
+
+        //Instantiate(fallEffect, playerRoot.position, Quaternion.identity);
+        AudioSource.PlayClipAtPoint(fallSound, playerRoot.position);
+
+        yield return new WaitForSeconds(2f);
+
+        playerRoot.position = spawnPoint.position;
+        playerRoot.rotation = spawnPoint.rotation;
+
+        playerModel.gameObject.SetActive(true);
     }
 }
