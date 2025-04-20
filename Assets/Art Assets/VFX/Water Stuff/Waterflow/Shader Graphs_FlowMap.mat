@@ -51,15 +51,15 @@ Material:
     m_Ints: []
     m_Floats:
     - _FlowMap_Tilling: 10
-    - _Metallic: 0.52
+    - _Metallic: 0.429
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Smoothness: 0.9
-    - _Speed: 0.19
-    - _Strength: 0.52
+    - _Smoothness: 0.713
+    - _Speed: 0.07
+    - _Strength: 0.4
     - _Tilling: 6
     m_Colors:
-    - _Tint: {r: 0.40430754, g: 0.7735849, b: 0.6963874, a: 0}
+    - _Tint: {r: 0.028034903, g: 0.8490566, b: 0.8169101, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &706386166538821002
