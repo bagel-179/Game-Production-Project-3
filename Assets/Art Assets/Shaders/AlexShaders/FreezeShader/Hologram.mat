@@ -7,35 +7,26 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_FlowMap
-  m_Shader: {fileID: -6465566751694194690, guid: e3baee0ad64eb614b86df0593f3ed865, type: 3}
+  m_Name: Hologram
+  m_Shader: {fileID: -6465566751694194690, guid: be19b9a553a5f054dbec3d7c71afa5e7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Transparent
   disabledShaderPasses:
   - MOTIONVECTORS
+  - DepthOnly
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _FlowMap:
-        m_Texture: {fileID: 2800000, guid: 4a6a3d4d3541c8b4ea9a3f89311317e0, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Normals:
-        m_Texture: {fileID: 2800000, guid: 695a3b87db74f9f488f354e68f3a58dd, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture:
-        m_Texture: {fileID: 2800000, guid: a3c9bbe357a189646958ccc630bbc4c5, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -50,19 +41,25 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FlowMap_Tilling: 10
-    - _Metallic: 0.429
+    - _AlphaClip: 0
+    - _AlphaToMask: 0
+    - _Blend: 0
+    - _CastShadows: 1
+    - _Cull: 2
+    - _DstBlend: 10
+    - _FresnelProperty: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Smoothness: 0.713
-    - _Speed: 0.07
-    - _Strength: 0.4
-    - _Tilling: 6
+    - _SrcBlend: 5
+    - _Surface: 1
+    - _ZTest: 4
+    - _ZWrite: 0
+    - _ZWriteControl: 0
     m_Colors:
-    - _Tint: {r: 0.028034903, g: 0.8490566, b: 0.8169101, a: 0}
+    - _FresnelColor: {r: 0.6633873, g: 0.022662953, b: 4.8045344, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &706386166538821002
+--- !u!114 &4521472626673994155
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

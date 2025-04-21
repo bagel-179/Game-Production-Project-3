@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water
+  m_Name: Void
   m_Shader: {fileID: -6465566751694194690, guid: 349fa31decc704e499c5509c2a259f66, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -67,13 +67,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Brightness: 0.12
-    - _Density: 1.74
+    - _Brightness: -1.31
+    - _Density: 2
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Speed: 0.08
-    - _Strength: 2.03
+    - _Speed: 0.1
+    - _Strength: 17.24
     m_Colors:
-    - _Color: {r: 0.036084704, g: 0.8370154, b: 2.2973971, a: 0}
+    - _Color: {r: 0.13653043, g: 0.029545564, b: 0.3684505, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
