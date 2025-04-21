@@ -6,7 +6,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     [Header("Timer Settings")]
-    public int startingTimeInSeconds = 300;
+    public int startingTimeInSeconds = 240;
 
     [Header("UI References")]
     public TextMeshProUGUI timerText;

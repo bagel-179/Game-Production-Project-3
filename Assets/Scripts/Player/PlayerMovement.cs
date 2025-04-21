@@ -145,12 +145,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftControl) && canSlam)
         {
             groundSlam.ActivateGroundSlam();
-            canSlam = false;
-        }
-
-        if (canSlam && rb.linearVelocity.y < 0 && (jumpStartHeight - transform.position.y) > groundSlam.minJumpSlam)
-        {
-            groundSlam.ActivateGroundSlam();
+            canGlide = false;
             canSlam = false;
         }
 
@@ -205,15 +200,12 @@ public class PlayerMovement : MonoBehaviour
             glideTimer += Time.deltaTime;
             if (glideTimer >= maxGlideDuration)
             {
-                canGlide = false;
-                isGliding = false;
-                glideParticles.Stop();
+                CancelGlide();
             }
         }
         else if (isGliding)
         {
-            isGliding = false;
-            glideParticles.Stop();
+            CancelGlide();
         }
     }
 
@@ -303,5 +295,13 @@ public class PlayerMovement : MonoBehaviour
         currentSpeed = originalSpeed;
         isSlowed = false;
         Debug.Log("Not Slow!");
+    }
+
+    public void CancelGlide()
+    {
+        isGliding = false;
+        canGlide = false;
+        glideParticles.Stop();
+        //rb.gravity = normalGravityScale; 
     }
 }

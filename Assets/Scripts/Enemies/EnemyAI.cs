@@ -15,6 +15,10 @@ public class EnemyAI : MonoBehaviour, IFreezeable
     public float moveSpeed = 5f;
     public bool isFrozen = false;
 
+    public ParticleSystem deathParticle;
+    public GameManager gmTimer;
+    [SerializeField] private float addTimeAmount = 15f;
+
     private Transform player;
     private NavMeshAgent agent;
     private Vector3 lastKnownPosition;
@@ -30,6 +34,8 @@ public class EnemyAI : MonoBehaviour, IFreezeable
         agent.speed = moveSpeed;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         allEnemies.Add(this);
+
+        gmTimer = FindObjectOfType<GameManager>();
     }
 
     private void OnDestroy()
@@ -174,7 +180,16 @@ public class EnemyAI : MonoBehaviour, IFreezeable
     }
 
 
+    public void Die()
+    {
+        deathParticle.transform.parent = null;
+        deathParticle.Play();
+        Destroy(deathParticle.gameObject, deathParticle.main.duration);
 
+        gmTimer.AddTime(addTimeAmount);
+
+        Destroy(gameObject);
+    }
 
 
     public Vector3 GetPlayerPosition()

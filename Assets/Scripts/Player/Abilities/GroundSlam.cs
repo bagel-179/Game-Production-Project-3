@@ -1,12 +1,15 @@
 using UnityEngine;
 using System.Collections;
+using Unity.Cinemachine;
+using UnityEngine.Audio;
 
 public class GroundSlam : MonoBehaviour
 {
     [SerializeField] private Transform playerModel;
     [SerializeField] private GameObject slamCollider;
-    //[SerializeField] private ParticleSystem slamParticles;
-    //[SerializeField] private AudioSource slamSound;
+    [SerializeField] private CinemachineImpulseSource impulseSource;
+    [SerializeField] private ParticleSystem slamParticles;
+    [SerializeField] private AudioClip slamSound;
     private PlayerMovement playerMovement;
     private Rigidbody rb;
 
@@ -19,11 +22,13 @@ public class GroundSlam : MonoBehaviour
 
     private Vector3 origModelRotation;
     private bool isSlamming = false;
+    private AudioSource audioSource;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         playerMovement = GetComponent<PlayerMovement>();
+        audioSource = GetComponent<AudioSource>();
         origModelRotation = playerModel.localEulerAngles;
 
         slamCollider.SetActive(false);
@@ -33,6 +38,7 @@ public class GroundSlam : MonoBehaviour
     {
         if (isSlamming || playerMovement == null) return;
 
+        playerMovement.CancelGlide();
         StartCoroutine(GroundSlamRoutine());
     }
 
@@ -62,15 +68,22 @@ public class GroundSlam : MonoBehaviour
             yield return null;
         }
 
-        SlamImpact();
-        isSlamming = false;
-        playerMovement.SetMovementLock(false); 
+        if(playerMovement.isGrounded)
+        {
+            SlamImpact();
+            isSlamming = false;
+            playerMovement.SetMovementLock(false);
+        }
     }
 
     private void SlamImpact()
     {
-        //slamParticles.Play();
-        //slamSound.Play();
+        slamParticles.Play();
+        audioSource.clip = slamSound;
+        audioSource.Play();
+        StartCoroutine(FadeOutSound());
+        impulseSource.GenerateImpulse();
+
 
         rb.AddForce(Vector3.up * postSlamBounce, ForceMode.Impulse);
 
@@ -88,7 +101,28 @@ public class GroundSlam : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            Destroy(other.gameObject);
+            EnemyAI enemyScript = other.GetComponentInParent<EnemyAI>();
+            enemyScript.Die();
         }
     }
+
+    private IEnumerator FadeOutSound()
+    {
+        if (slamSound == null) yield break;
+
+        float startVolume = audioSource.volume;
+        float timer = 0f;
+
+        while (timer < 0.5f)
+        {
+            timer += Time.deltaTime;
+            audioSource.volume = Mathf.Lerp(startVolume, 0f, timer / 0.5f);
+            yield return null;
+        }
+
+        audioSource.Stop();
+        audioSource.volume = startVolume;
+    }
+
+
 }
