@@ -2619,8 +2619,8 @@ MonoBehaviour:
   dialoguePanel: {fileID: 0}
   dialogueText: {fileID: 0}
   portraitImage: {fileID: 0}
-  dialogueLine: The courtyard is way too busy right now. I doubt there's many people
-    around after the eruption. (Press R)
+  dialogueLine: 'Hmm, it seems like the guards won''t let me through the temple...
+    If only I came at a different time... [ R ]'
   portraitSprite: {fileID: 0}
   dialogueDisplayTime: 3
   typeSpeed: 0.03

@@ -1069,8 +1069,8 @@ MonoBehaviour:
   dialoguePanel: {fileID: 0}
   dialogueText: {fileID: 0}
   portraitImage: {fileID: 0}
-  dialogueLine: These ash piles are blocking the way. I bet this street was a lot
-    cleaner back when Pompeii was thriving. (Press R)
+  dialogueLine: 'These ash piles are blocking the way. I bet this street was a lot
+    cleaner back when Pompeii was thriving. [ R ]'
   portraitSprite: {fileID: 0}
   dialogueDisplayTime: 3
   typeSpeed: 0.03

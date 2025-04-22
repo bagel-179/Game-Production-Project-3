@@ -1079,8 +1079,8 @@ MonoBehaviour:
   dialoguePanel: {fileID: 0}
   dialogueText: {fileID: 0}
   portraitImage: {fileID: 0}
-  dialogueLine: I dont remember the markets ending here. I wonder if there's a path
-    ahead after the eruption. I should try changing the timeline (Press R)
+  dialogueLine: 'I dont remember the markets ending here. I wonder if there''s a
+    path ahead after the eruption. I should try changing timelines [ R ]'
   portraitSprite: {fileID: 0}
   dialogueDisplayTime: 3
   typeSpeed: 0.03
