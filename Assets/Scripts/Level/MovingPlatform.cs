@@ -3,14 +3,20 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour, IFreezeable
 {
-    [Header("Movement Settings")]
+    [Header("Movement")]
     public GameObject platform;
     public Transform[] points;
     public float speed = 2f;
+    
     public bool isALoop = false;
     public int[] stopPoints;
     public float stopDuration = 2f;
-    public bool isMovingVertical = false; 
+    public bool isMovingVertical = false;
+    
+    [Header("Rotation")]
+    public float rotationSpeed = 30f;
+    public bool rotatePlatform = false;
+    public Vector3 rotationAxis = Vector3.up;
 
     [Header("Special Features")]
     public bool canShatter = false;
@@ -21,28 +27,26 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
     private bool isWaiting = false;
     private Rigidbody platformRb;
     private Vector3 originalPosition;
+    private Quaternion originalRotation;
 
     public bool PlayerOnPlatform { get; private set; }
 
     void Start()
     {
         platformRb = platform.GetComponent<Rigidbody>();
+        platformRb.isKinematic = true;
         originalPosition = platform.transform.position;
+        originalRotation = platform.transform.rotation;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (canShatter && PlayerOnPlatform && !isFrozen)
         {
             EnableShatterScript();
         }
-    }
 
-    void FixedUpdate()
-    {
-        if (platform == null) return;
-
-        if (isFrozen || isWaiting || points.Length < 2)
+        if (platform == null || isFrozen || isWaiting || points.Length < 2)
             return;
 
         MovePlatform();
@@ -50,23 +54,15 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
 
     void MovePlatform()
     {
-        if (platformRb != null)
-        {
-            platformRb.linearVelocity = Vector3.zero;
-        }
-
         Transform targetPoint = points[targetIndex];
-        Vector3 targetPosition = targetPoint.position;
+        Vector3 targetPosition = isMovingVertical ? new Vector3(originalPosition.x, targetPoint.position.y, originalPosition.z) : targetPoint.position;
 
-        if (isMovingVertical)
+        platform.transform.position = Vector3.MoveTowards(platform.transform.position, targetPosition, speed * Time.deltaTime);
+
+        if (rotatePlatform)
         {
-            targetPosition = new Vector3(originalPosition.x, targetPoint.position.y, originalPosition.z);
+            platform.transform.Rotate(rotationAxis, rotationSpeed * Time.deltaTime, Space.World);
         }
-
-        platform.transform.position = Vector3.MoveTowards(
-            platform.transform.position,
-            targetPosition,
-            speed * Time.deltaTime);
 
         if (Vector3.Distance(platform.transform.position, targetPosition) < 0.01f)
         {
@@ -110,6 +106,8 @@ public class MovingPlatform : MonoBehaviour, IFreezeable
     public void SetPlayerOnPlatform(bool onPlatform) => PlayerOnPlatform = onPlatform;
 
     public void SetFrozen(bool frozen) => isFrozen = frozen;
+
+    public Rigidbody GetPlatformRigidbody() => platformRb;
 
     private void EnableShatterScript()
     {
