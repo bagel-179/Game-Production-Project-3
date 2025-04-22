@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 3506402612773841049}
   - component: {fileID: 6336446142868765601}
   m_Layer: 0
-  m_Name: Demolished Moving Platform
+  m_Name: MovingPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
