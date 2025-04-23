@@ -25,8 +25,8 @@ public class PlayerMovement : MonoBehaviour
     private bool canDash = true;
 
     [Header("Jump Settings")]
-    [SerializeField] private int maxJumps = 2;
-    private int jumpCount = 0;
+    [SerializeField] public int maxJumps = 2;
+    [HideInInspector] public int jumpCount = 0;
     [SerializeField] private float jumpForce = 18f;
     private float airMultiplier = 1f;
     private float playerHeight = 2f;
@@ -70,6 +70,9 @@ public class PlayerMovement : MonoBehaviour
     private AudioSource audioSource;
 
     public Camera activeCamera;
+
+    public static event System.Action OnJump;
+    public bool IsGrinding { get; set; }
 
     private void Awake()
     {
@@ -136,10 +139,16 @@ public class PlayerMovement : MonoBehaviour
             dashOrientation.rotation = Quaternion.Slerp(dashOrientation.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumps && !movementLocked)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            Jump();
-            jumpParticles.Play();
+            if (IsGrinding) return; // Let SplineGrinder handle it
+
+            if (jumpCount < maxJumps && !movementLocked)
+            {
+                Debug.Log("JUMPING");
+                Jump();
+                jumpParticles.Play();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.LeftControl) && canSlam)
@@ -166,7 +175,12 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = new Vector3(targetVelocity.x, rb.linearVelocity.y, targetVelocity.z);
     }
 
-    private void Jump()
+    public bool IsJumping()
+    {
+        return Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumps && !movementLocked;
+    }
+
+    public void Jump()
     {
         if (jumpCount >= maxJumps) return;
 
@@ -174,8 +188,9 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         jumpCount++;
 
-        jumpParticles.Play();
+        OnJump?.Invoke();
 
+        jumpParticles.Play();
         jumpStartHeight = transform.position.y;
         canSlam = true;
 
@@ -302,6 +317,5 @@ public class PlayerMovement : MonoBehaviour
         isGliding = false;
         canGlide = false;
         glideParticles.Stop();
-        //rb.gravity = normalGravityScale; 
     }
 }
