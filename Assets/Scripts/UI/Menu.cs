@@ -22,7 +22,7 @@ public class Menu : MonoBehaviour
 
     private bool isPaused = false;
     private bool isAnimating = false;
-    private bool gameStarted = false;
+    [SerializeField] public bool gameStarted = false;
 
     private void Start()
     {
@@ -33,6 +33,24 @@ public class Menu : MonoBehaviour
         pauseMenuAnimator = GetComponentInChildren<Animator>();
 
         pauseMenu.SetActive(false);
+
+        if (gameStarted)
+        {
+            playerMovementScript.enabled = true;
+            thirdPersonCameraScript.enabled = true;
+
+            freeLook.SetActive(true);
+            towerView.SetActive(true);
+
+            playButton.SetActive(false);
+            quitButton.SetActive(false);
+
+            menuRb.useGravity = true;
+            Destroy(menuBackground, 5f);
+
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 
     void Update()
@@ -40,7 +58,7 @@ public class Menu : MonoBehaviour
         if (gameStarted && Input.GetKeyDown(KeyCode.Escape) && !isAnimating)
         {
             TogglePause();
-        }
+        }        
     }
 
     public void TogglePause()
