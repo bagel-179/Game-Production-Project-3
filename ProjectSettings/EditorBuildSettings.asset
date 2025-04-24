@@ -14,6 +14,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelBlockouts/PompeiiBlockout.unity
     guid: 37abd244e2d380546a6bd5743c8180ac
+  - enabled: 1
+    path: Assets/Scenes/LevelBlockouts/QinDynastyBlockout.unity
+    guid: 3e79ccec978542e48827551c163d7dcf
+  - enabled: 1
+    path: Assets/Scenes/LevelBlockouts/HospitalBlockout.unity
+    guid: 89c7dc64032ee9c42b41578c5a1c27c0
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
