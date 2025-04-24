@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7090045059404609600}
   - component: {fileID: 6523024434020856326}
   - component: {fileID: 5625913729916662272}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hospital Ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
