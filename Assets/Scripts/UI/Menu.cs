@@ -24,6 +24,12 @@ public class Menu : MonoBehaviour
     private bool isAnimating = false;
     [SerializeField] public bool gameStarted = false;
 
+    private void Awake()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     private void Start()
     {
         playerMovementScript = player.GetComponent<PlayerMovement>();
