@@ -355,8 +355,62 @@ Transform:
   - {fileID: 3633552706791136265}
   - {fileID: 178020338233798283}
   - {fileID: 6596167622873541453}
+  - {fileID: 6556800511263121753}
   m_Father: {fileID: 7932916321231103723}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4058726532668534519
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6556800511263121753}
+  - component: {fileID: 8931426714628725337}
+  m_Layer: 3
+  m_Name: SlamCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6556800511263121753
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4058726532668534519}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1.0384, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3027440306641788663}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &8931426714628725337
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4058726532668534519}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 2.5
+  m_Center: {x: 0, y: 1.2622342, z: 0}
 --- !u!1 &6109848055357874634
 GameObject:
   m_ObjectHideFlags: 0
@@ -1060,6 +1114,7 @@ GameObject:
   - component: {fileID: 1861314301438727587}
   - component: {fileID: 4141584712281969641}
   - component: {fileID: 905084904772674360}
+  - component: {fileID: 1011621519538829708}
   - component: {fileID: 1427328328156887950}
   m_Layer: 3
   m_Name: ---PLAYER---
@@ -1150,7 +1205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 3533464661148812467}
   dashOrientation: {fileID: 6011374811060814301}
-  timeShiftManager: {fileID: 1890963542965803041}
+  timeShiftManager: {fileID: 0}
   playerModel: {fileID: 4467526785359513021}
   moveSpeed: 6
   rotationSpeed: 10
@@ -1159,6 +1214,7 @@ MonoBehaviour:
   dashDuration: 0.2
   dashCooldown: 1
   maxJumps: 1
+  jumpCount: 0
   jumpForce: 18
   groundLayer:
     serializedVersion: 2
@@ -1166,7 +1222,7 @@ MonoBehaviour:
   isGrounded: 0
   spinDuration: 0.3
   spinSpeed: 3060
-  groundSlam: {fileID: 0}
+  groundSlam: {fileID: 1011621519538829708}
   enableGlide: 1
   glideGravityScale: 0.2
   swaySpeed: 2
@@ -1174,7 +1230,7 @@ MonoBehaviour:
   maxGlideDuration: 3
   jumpParticles: {fileID: 2257914018958813870}
   glideParticles: {fileID: 8553193003984133610}
-  shiftSound: {fileID: 0}
+  shiftSound: {fileID: 8300000, guid: 9d62f17aad6cd1540800d3dd5b90e359, type: 3}
   activeCamera: {fileID: 1904427356534748904}
 --- !u!114 &1861314301438727587
 MonoBehaviour:
@@ -1188,6 +1244,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4801493931735eb4cb0d99efb26e9bf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  raycastDistance: 0.3
+  platformLayer:
+    serializedVersion: 2
+    m_Bits: 768
+  raycastOffset: {x: 0, y: -0.85, z: 0}
 --- !u!114 &4141584712281969641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1209,7 +1270,7 @@ MonoBehaviour:
   sphereCastLayerMask:
     serializedVersion: 2
     m_Bits: 768
-  freezeSound: {fileID: 0}
+  freezeSound: {fileID: 8300000, guid: 3b1c5707666d21c448fac580b546cb27, type: 3}
 --- !u!114 &905084904772674360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1223,6 +1284,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: {fileID: 0}
+--- !u!114 &1011621519538829708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8112903973688768263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32a6ee60c0c46bc4db1eca6940938799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerModel: {fileID: 4467526785359513021}
+  slamCollider: {fileID: 4058726532668534519}
+  impulseSource: {fileID: 0}
+  slamParticles: {fileID: 3405060744434391084}
+  slamSound: {fileID: 8300000, guid: 86db8b588fcc56441a69122ac754f8f9, type: 3}
+  spinDuration: 0.5
+  slamSpeed: 30
+  postSlamBounce: 2
+  minJumpSlam: 3
+  slamColliderDuration: 0.2
 --- !u!82 &1427328328156887950
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1333,6 +1416,7 @@ GameObject:
   - component: {fileID: 5407084863747813304}
   - component: {fileID: 3704859078637601244}
   - component: {fileID: 2476508876331958418}
+  - component: {fileID: 2255317294298136440}
   m_Layer: 3
   m_Name: Capsule
   m_TagString: Player
@@ -1458,6 +1542,66 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2255317294298136440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8255786446860534004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd438dd108a0f284aa931a2da434f1d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ImpulseDefinition:
+    ImpulseChannel: 1
+    ImpulseShape: 0
+    CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ImpulseDuration: 0.2
+    ImpulseType: 3
+    DissipationRate: 0
+    RawSignal: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    RepeatMode: 0
+    Randomize: 1
+    TimeEnvelope:
+      AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      AttackTime: 0
+      SustainTime: 0.2
+      DecayTime: 0.7
+      ScaleWithImpact: 1
+      HoldForever: 0
+    ImpactRadius: 100
+    DirectionMode: 0
+    DissipationMode: 2
+    DissipationDistance: 100
+    PropagationSpeed: 343
+  DefaultVelocity: {x: 0, y: -2, z: 0}
+  LayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  IgnoreTag: 
+  UseImpactDirection: 0
+  ScaleImpactWithMass: 0
+  ScaleImpactWithSpeed: 0
 --- !u!1001 &971308258444679853
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1721,6 +1865,11 @@ PrefabInstance:
 --- !u!4 &178020338233798283 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4545890527627593380, guid: e484f6bbe07c6364a930597fe5cb341b, type: 3}
+  m_PrefabInstance: {fileID: 4426558859405305903}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3405060744434391084 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1310406069676519427, guid: e484f6bbe07c6364a930597fe5cb341b, type: 3}
   m_PrefabInstance: {fileID: 4426558859405305903}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6751441573259828740

@@ -6,7 +6,6 @@ public class GuardAI : MonoBehaviour
     public Transform player;
     public Transform resetPosition;
     public float detectionRange = 15f;
-    public float stopRange = 2f;
 
     private NavMeshAgent agent;
     private bool hasResetPlayer = false;
@@ -28,13 +27,13 @@ public class GuardAI : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, player.position);
 
-        if (distance <= detectionRange && distance > stopRange)
+        if (distance <= detectionRange && distance > agent.stoppingDistance)
         {
             agent.isStopped = false;
             agent.SetDestination(player.position);
             hasResetPlayer = false; 
         }
-        else if (distance <= stopRange)
+        else if (distance <= agent.stoppingDistance)
         {
             agent.isStopped = true;
 
