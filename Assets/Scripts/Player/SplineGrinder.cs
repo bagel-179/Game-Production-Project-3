@@ -13,13 +13,13 @@ public class SplineGrinder : MonoBehaviour
     [SerializeField] private float alignmentSpeed = 5f;
     [SerializeField] private float attachRadius = 0.5f;
     [SerializeField] private LayerMask splineLayer;
-    [SerializeField] private float grindCooldown = 0.5f;
+    [SerializeField] private float grindCooldown = 1;
 
     [Header("Launch Settings")]
     [SerializeField] private float endLaunchForce = 10f;
-    [SerializeField] private float upwardLaunchRatio = 0.3f; // 30% upward force
+    [SerializeField] private float upwardLaunchRatio = 0.3f;
     [SerializeField] private float jumpLaunchForce = 8f;
-    [SerializeField] private float jumpUpwardRatio = 0.5f; // 50% upward force when jumping
+    [SerializeField] private float jumpUpwardRatio = 0.5f; 
 
     private SplineContainer currentSpline;
     private float currentDistance = 0f;
@@ -29,12 +29,14 @@ public class SplineGrinder : MonoBehaviour
     private PlayerMovement playerMovement;
     private Vector3 grindOffset;
     private float lastGrindEndTime;
+    private bool reachedEnd = false;
     private bool canGrind => Time.time > lastGrindEndTime + grindCooldown;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         playerMovement = GetComponent<PlayerMovement>();
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
         lastGrindEndTime = -grindCooldown;
 
         if (grindAnchorPoint == null)
@@ -50,7 +52,6 @@ public class SplineGrinder : MonoBehaviour
             CheckForSplineCollision();
         }
 
-        // NEW: Direct jump input check
         if (isGrinding && Input.GetKeyDown(KeyCode.Space))
         {
             JumpOffGrind();
@@ -67,45 +68,46 @@ public class SplineGrinder : MonoBehaviour
 
     private void JumpOffGrind()
     {
-        // 1. First enable physics
-        rb.isKinematic = false;
-        playerMovement.SetMovementLock(false);
-
-        // 2. Calculate jump direction (forward + upward)
         Vector3 jumpDirection = (transform.forward + Vector3.up * jumpUpwardRatio).normalized;
 
-        // 3. Apply force
+        EndGrind(false);
+
         rb.AddForce(jumpDirection * jumpLaunchForce, ForceMode.VelocityChange);
 
-        // 4. Update states
-        isGrinding = false;
-        currentSpline = null;
-        lastGrindEndTime = Time.time;
-
-        // 5. Set jump count (prevents double jump)
-        playerMovement.jumpCount = 1;
+        playerMovement.jumpCount = 0; 
+        playerMovement.canGlide = true;
+        playerMovement.SetMovementLock(false);
 
         Debug.DrawRay(transform.position, jumpDirection * 5f, Color.green, 2f);
     }
 
     private void CheckForSplineCollision()
     {
-        Collider[] hits = Physics.OverlapSphere(grindAnchorPoint.position, attachRadius, splineLayer);
+        if (Time.time < lastGrindEndTime) return; 
+
+        Collider[] hits = Physics.OverlapSphere(grindAnchorPoint.position, attachRadius * 0.8f, splineLayer);
 
         foreach (var hit in hits)
         {
             SplineContainer spline = hit.GetComponent<SplineContainer>();
-            if (spline != null)
+            if (spline != null && !IsNearLastKnot(spline))
             {
+                reachedEnd = false; 
                 StartGrinding(spline);
                 break;
             }
         }
     }
 
+    private bool IsNearLastKnot(SplineContainer spline)
+    {
+        float3 lastKnotPos = spline.EvaluatePosition(1f);
+        return Vector3.Distance(grindAnchorPoint.position, lastKnotPos) < attachRadius * 1.5f;
+    }
+
     private void StartGrinding(SplineContainer spline)
     {
-        playerMovement.IsGrinding = true; // <-- Add this
+        playerMovement.IsGrinding = true;
         playerMovement.SetMovementLock(true);
 
         currentSpline = spline;
@@ -113,12 +115,7 @@ public class SplineGrinder : MonoBehaviour
 
         grindOffset = grindAnchorPoint.position - transform.position;
 
-        SplineUtility.GetNearestPoint(
-            spline.Spline,
-            grindAnchorPoint.position,
-            out _,
-            out currentDistance
-        );
+        currentDistance = 0f;
 
         StartCoroutine(AlignToRail());
         rb.isKinematic = true;
@@ -126,6 +123,12 @@ public class SplineGrinder : MonoBehaviour
 
     private IEnumerator AlignToRail()
     {
+        if (currentDistance >= 1f)
+        {
+            EndGrindWithLaunch();
+            yield break;
+        }
+
         float t = 0f;
         Vector3 startPos = transform.position;
         Quaternion startRot = transform.rotation;
@@ -154,10 +157,13 @@ public class SplineGrinder : MonoBehaviour
 
     private void MoveAlongSpline()
     {
+        if (reachedEnd) return; 
+
         currentDistance += grindSpeed * Time.fixedDeltaTime / currentSpline.CalculateLength();
 
         if (currentDistance >= 1f)
         {
+            reachedEnd = true;
             EndGrindWithLaunch();
             return;
         }
@@ -184,37 +190,34 @@ public class SplineGrinder : MonoBehaviour
 
     private void EndGrindWithLaunch()
     {
-        // Get the spline's forward direction at the end point
-        float3 endTangent = currentSpline.EvaluateTangent(1f);
-        Vector3 forwardDirection = ((Vector3)endTangent).normalized;
-
-        // Combine with upward force
-        Vector3 launchDirection = (forwardDirection + Vector3.up * upwardLaunchRatio).normalized;
+        float3 endPos = currentSpline.EvaluatePosition(1f);
+        float3 beforeEndPos = currentSpline.EvaluatePosition(0.95f);
+        Vector3 launchDirection = ((Vector3)(endPos - beforeEndPos) + Vector3.up * upwardLaunchRatio).normalized;
 
         EndGrind(true);
+
         rb.AddForce(launchDirection * endLaunchForce, ForceMode.VelocityChange);
 
-        Debug.Log($"Launched from end with direction: {launchDirection}");
+        lastGrindEndTime = Time.time + grindCooldown;
     }
+
 
     private void EndGrind(bool launchedFromEnd)
     {
-        if (!isGrinding && !isAligning) return; // Already ended
-        playerMovement.IsGrinding = false;
+        if (!isGrinding && !isAligning) return;
 
-        // Reset all states
         isGrinding = false;
         isAligning = false;
         currentSpline = null;
 
-        // Enable physics
         rb.isKinematic = false;
+        playerMovement.IsGrinding = false;
         playerMovement.SetMovementLock(false);
 
-        // Set cooldown
-        lastGrindEndTime = Time.time;
-
-        Debug.Log(launchedFromEnd ? "Ended grind with launch" : "Ended grind from jump");
+        if (!launchedFromEnd)
+        {
+            lastGrindEndTime = Time.time;
+        }
     }
 
     private void OnDrawGizmosSelected()
@@ -223,6 +226,14 @@ public class SplineGrinder : MonoBehaviour
         {
             Gizmos.color = Color.cyan;
             Gizmos.DrawWireSphere(grindAnchorPoint.position, attachRadius);
+        }
+
+        if (currentSpline != null && isGrinding)
+        {
+            Gizmos.color = Color.red;
+            float3 pos = currentSpline.EvaluatePosition(currentDistance);
+            Gizmos.DrawSphere(pos, 0.2f);
+            Gizmos.DrawLine(transform.position, pos);
         }
     }
 }

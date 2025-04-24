@@ -25,6 +25,10 @@ public class FallReset : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
+        Rigidbody rb = playerRoot.GetComponent<Rigidbody>();
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
         playerRoot.position = spawnPoint.position;
         playerRoot.rotation = spawnPoint.rotation;
 

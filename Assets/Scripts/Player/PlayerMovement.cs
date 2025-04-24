@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
     private float swayTime = 0f;
     private bool isGliding;
     private float glideTimer = 0f; 
-    private bool canGlide = true;
+    [HideInInspector] public bool canGlide = true;
 
     [Header("Particles")]
     [SerializeField] private ParticleSystem jumpParticles;
