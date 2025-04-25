@@ -30,6 +30,7 @@ public class IntroTrigger : MonoBehaviour
     public float positionThreshold = 1f;
     public float rotationThreshold = 2f;
 
+    public bool isMainMenuIntro;
     private CinemachineCamera lastActiveCamera;
     private AudioSource audioSource;
 
@@ -39,7 +40,8 @@ public class IntroTrigger : MonoBehaviour
         introCameraTransform = introCamera.transform;
         audioSource = GetComponent<AudioSource>();
 
-        introCameraObj.SetActive(false);
+        if(!isMainMenuIntro)
+            introCameraObj.SetActive(false);
 
         lastActiveCamera = freeLookCamera.Priority > towerCamera.Priority ? freeLookCamera : towerCamera;
     }
@@ -78,16 +80,6 @@ public class IntroTrigger : MonoBehaviour
         EndIntro();
     }
 
-    private bool IsCameraInPosition(Transform targetTransform)
-    {
-        Transform mainCam = Camera.main.transform;
-
-        float positionDiff = Vector3.Distance(mainCam.position, targetTransform.position);
-        float rotationDiff = Quaternion.Angle(mainCam.rotation, targetTransform.rotation);
-
-        return positionDiff < positionThreshold && rotationDiff < rotationThreshold;
-    }
-
     private void EndIntro()
     {
         introUI.SetActive(false);
@@ -97,6 +89,16 @@ public class IntroTrigger : MonoBehaviour
 
         playerMovementScript.enabled = true;
     }
+
+    private bool IsCameraInPosition(Transform targetTransform)
+    {
+        Transform mainCam = Camera.main.transform;
+
+        float positionDiff = Vector3.Distance(mainCam.position, targetTransform.position);
+        float rotationDiff = Quaternion.Angle(mainCam.rotation, targetTransform.rotation);
+
+        return positionDiff < positionThreshold && rotationDiff < rotationThreshold;
+    }    
 
     private void OnDrawGizmosSelected()
     {

@@ -8,7 +8,6 @@ public class Menu : MonoBehaviour
     public GameObject player;     
     public GameObject freeLook;
     public GameObject towerView;
-    public GameObject menuBackground;
     
     [Header("UI References")]
     public GameObject playButton;
@@ -17,7 +16,6 @@ public class Menu : MonoBehaviour
 
     private PlayerMovement playerMovementScript;
     private ThirdPersonCamera thirdPersonCameraScript;
-    private Rigidbody menuRb;
     private Animator pauseMenuAnimator;
 
     private bool isPaused = false;
@@ -29,7 +27,6 @@ public class Menu : MonoBehaviour
         playerMovementScript = player.GetComponent<PlayerMovement>();
         thirdPersonCameraScript = player.GetComponent<ThirdPersonCamera>();
 
-        menuRb = menuBackground.GetComponentInChildren<Rigidbody>();
         pauseMenuAnimator = GetComponentInChildren<Animator>();
 
         pauseMenu.SetActive(false);
@@ -44,9 +41,6 @@ public class Menu : MonoBehaviour
 
             playButton.SetActive(false);
             quitButton.SetActive(false);
-
-            menuRb.useGravity = true;
-            Destroy(menuBackground, 5f);
 
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
@@ -113,9 +107,6 @@ public class Menu : MonoBehaviour
 
         playButton.SetActive(false);
         quitButton.SetActive(false);
-
-        menuRb.useGravity = true;
-        Destroy(menuBackground, 5f);
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
