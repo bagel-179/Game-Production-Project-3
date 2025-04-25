@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
+using System.Collections;
 using System;
 using TMPro;
 
@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     private float currentTime;
     private bool isRunning = true;
+    private bool hasFlashed = false;
 
     void Start()
     {
@@ -28,10 +29,11 @@ public class GameManager : MonoBehaviour
         currentTime = Mathf.Max(currentTime, 0);
         UpdateTimerDisplay();
 
-        if (currentTime <= 0)
+        if (currentTime <= 0 && !hasFlashed)
         {
+            hasFlashed = true;
             isRunning = false;
-            GameOver();
+            StartCoroutine(FlashTimerText());
         }
     }
 
@@ -47,8 +49,23 @@ public class GameManager : MonoBehaviour
         UpdateTimerDisplay();
     }
 
-    void GameOver()
+    IEnumerator FlashTimerText()
     {
-        Debug.Log("Game Over");
+        while (true)
+        {
+            timerText.enabled = !timerText.enabled;
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    public void CompleteLevel()
+    {
+        if (!isRunning) return;
+
+        isRunning = false;
+
+        int bonusPoints = Mathf.FloorToInt(currentTime);
+        ScoreManager.Instance.AddScore(bonusPoints);
+        Debug.Log("Level Completed! Bonus: " + bonusPoints);
     }
 }
