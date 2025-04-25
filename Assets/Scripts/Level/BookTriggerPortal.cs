@@ -1,7 +1,9 @@
 using UnityEngine;
+using System.Collections;
 
 public class BookTriggerPortal : MonoBehaviour
 {
+    public GameManager gm;
     public GameObject portalPrefab;
     public Transform portalSpawnPoint;
     public float fadeDuration = 2f;
@@ -15,10 +17,11 @@ public class BookTriggerPortal : MonoBehaviour
             GameObject portal = Instantiate(portalPrefab, portalSpawnPoint.position, Quaternion.identity);
             StartCoroutine(FadeInPortal(portal));
             portalSpawned = true;
+            gm.CompleteLevel();
         }
     }
 
-    private System.Collections.IEnumerator FadeInPortal(GameObject portal)
+    private IEnumerator FadeInPortal(GameObject portal)
     {
         Renderer renderer = portal.GetComponent<Renderer>();
         Material mat = renderer.material; 
