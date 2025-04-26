@@ -69,6 +69,11 @@ public class SplineGrinder : MonoBehaviour
         }
     }
 
+    public bool IsGrinding()
+    {
+        return isGrinding;
+    }
+
     private void JumpOffGrind()
     {
         Vector3 jumpDirection = (transform.forward + Vector3.up * jumpUpwardRatio).normalized;
@@ -241,6 +246,20 @@ public class SplineGrinder : MonoBehaviour
         if (!launchedFromEnd)
         {
             lastGrindEndTime = Time.time;
+        }
+    }
+
+    public void ForceEndGrind()
+    {
+        if (isGrinding || isAligning)
+        {
+            bool originalGravity = rb.useGravity;
+
+            grindCooldown = 3f;
+            EndGrind(false);
+            rb.isKinematic = false;
+            rb.useGravity = originalGravity;
+            playerMovement.SetMovementLock(false);
         }
     }
 
