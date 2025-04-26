@@ -141,11 +141,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (IsGrinding) return; // Let SplineGrinder handle it
+            if (IsGrinding) return; 
 
             if (jumpCount < maxJumps && !movementLocked)
             {
-                Debug.Log("JUMPING");
                 Jump();
                 jumpParticles.Play();
             }

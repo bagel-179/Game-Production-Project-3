@@ -14,6 +14,7 @@ public class SplineGrinder : MonoBehaviour
     [SerializeField] private float attachRadius = 0.5f;
     [SerializeField] private LayerMask splineLayer;
     [SerializeField] private float grindCooldown = 1;
+    [SerializeField] private AudioClip grindSound;
 
     [Header("Launch Settings")]
     [SerializeField] private float endLaunchForce = 10f;
@@ -30,12 +31,14 @@ public class SplineGrinder : MonoBehaviour
     private Vector3 grindOffset;
     private float lastGrindEndTime;
     private bool reachedEnd = false;
+    private AudioSource audioSource;
     private bool canGrind => Time.time > lastGrindEndTime + grindCooldown;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         playerMovement = GetComponent<PlayerMovement>();
+        audioSource = GetComponent<AudioSource>();
         rb.interpolation = RigidbodyInterpolation.Interpolate;
         lastGrindEndTime = -grindCooldown;
 
@@ -117,8 +120,29 @@ public class SplineGrinder : MonoBehaviour
 
         currentDistance = 0f;
 
+        StartCoroutine(PlayGrindingSound());
         StartCoroutine(AlignToRail());
         rb.isKinematic = true;
+    }
+
+    private IEnumerator PlayGrindingSound()
+    {
+        while (isAligning)
+        {
+            yield return null;
+        }
+
+        audioSource.clip = grindSound;
+        audioSource.loop = true;
+        audioSource.Play();
+
+        while (isGrinding)
+        {
+            yield return null;
+        }
+
+        audioSource.Stop();
+        audioSource.loop = false;
     }
 
     private IEnumerator AlignToRail()

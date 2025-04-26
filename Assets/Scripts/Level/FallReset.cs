@@ -27,13 +27,11 @@ public class FallReset : MonoBehaviour
         //Instantiate(fallEffect, playerRoot.position, Quaternion.identity);
         AudioSource.PlayClipAtPoint(fallSound, playerRoot.position);
 
-        // Optional: disable player movement script
         var movement = playerRoot.GetComponent<PlayerMovement>();
         if (movement != null) movement.enabled = false;
 
         yield return new WaitForSeconds(2f);
 
-        // Reset position & velocity
         Rigidbody rb = playerRoot.GetComponent<Rigidbody>();
         if (rb != null)
         {
