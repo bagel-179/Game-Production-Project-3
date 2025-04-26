@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 73803e32686435642bfe7bbe464d259c, type: 2}
     - target: {fileID: 1903698086898571435, guid: 488fd6b25523c344991d716f87bdce99, type: 3}
       propertyPath: m_Name
-      value: Enemy Variant
+      value: FantomPREFAB
       objectReference: {fileID: 0}
     - target: {fileID: 2431667279561286644, guid: 488fd6b25523c344991d716f87bdce99, type: 3}
       propertyPath: m_Mesh
@@ -123,7 +123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1104122839671272494, guid: 339ae6da658d2e149b1cf02f426cb74c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.683
       objectReference: {fileID: 0}
     - target: {fileID: 1104122839671272494, guid: 339ae6da658d2e149b1cf02f426cb74c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -153,6 +153,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1147711330805433020, guid: 339ae6da658d2e149b1cf02f426cb74c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1752884459794759825, guid: 339ae6da658d2e149b1cf02f426cb74c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4bef264f1f534c8459acdb838799e890, type: 2}
     - target: {fileID: 6363583872484586206, guid: 339ae6da658d2e149b1cf02f426cb74c, type: 3}
       propertyPath: m_Name
       value: Fantom
