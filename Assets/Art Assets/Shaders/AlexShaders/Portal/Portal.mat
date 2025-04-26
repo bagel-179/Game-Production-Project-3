@@ -74,6 +74,6 @@ Material:
     - _Speed: 0.21
     - _Strength: 11.81
     m_Colors:
-    - _Color: {r: 0.8573309, g: 12.596167, b: 3.0458272, a: 0}
+    - _Color: {r: 1.4145311, g: 3.7164109, b: 2.8096101, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
