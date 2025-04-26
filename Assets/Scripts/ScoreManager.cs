@@ -6,6 +6,9 @@ public class ScoreManager : MonoBehaviour
 
     public int TotalScore { get; private set; }
 
+    public GameObject goodEnding;
+    public GameObject badEnding;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -27,5 +30,15 @@ public class ScoreManager : MonoBehaviour
     public void ResetScore()
     {
         TotalScore = 0;
+    }
+
+    public void CheckEnding()
+    {
+        if (goodEnding != null && badEnding != null)
+        {
+            bool good = TotalScore >= 200;
+            goodEnding.SetActive(good);
+            badEnding.SetActive(!good);
+        }
     }
 }
