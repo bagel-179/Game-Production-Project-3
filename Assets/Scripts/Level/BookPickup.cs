@@ -8,10 +8,8 @@ public class BookPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //Disable object
-            gameObject.SetActive(false);
-
-            
+            Renderer renderer = visualObject.GetComponent<Renderer>();
+            renderer.enabled = false;
         }
     }
 }
