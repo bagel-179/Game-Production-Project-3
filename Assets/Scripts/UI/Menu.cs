@@ -13,6 +13,8 @@ public class Menu : MonoBehaviour
     public GameObject playButton;
     public GameObject quitButton;
     public GameObject pauseMenu;
+    public GameObject creditsButton;
+    public GameObject TitleImage;
 
     private PlayerMovement playerMovementScript;
     private ThirdPersonCamera thirdPersonCameraScript;
@@ -107,6 +109,8 @@ public class Menu : MonoBehaviour
 
         playButton.SetActive(false);
         quitButton.SetActive(false);
+        creditsButton.SetActive(false);
+        TitleImage.SetActive(false);
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;

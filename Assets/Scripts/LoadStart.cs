@@ -6,6 +6,6 @@ public class LoadStart : MonoBehaviour
 {
     void Start()
     {
-        SceneManager.LoadScene("ClockTowerBlockout");
+        SceneManager.LoadScene("ClockTowerEnding");
     }
 }
