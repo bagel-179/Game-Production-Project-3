@@ -19,6 +19,9 @@ public class ScoreManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        Debug.Log("Total Score: " + TotalScore);
+        CheckEnding();
     }
 
     public void AddScore(int amount)
@@ -34,11 +37,13 @@ public class ScoreManager : MonoBehaviour
 
     public void CheckEnding()
     {
-        if (goodEnding != null && badEnding != null)
+        if (TotalScore >= 200)
         {
-            bool good = TotalScore >= 200;
-            goodEnding.SetActive(good);
-            badEnding.SetActive(!good);
+            Destroy(badEnding);
+        }
+        else
+        {
+            Destroy(goodEnding);
         }
     }
 }
