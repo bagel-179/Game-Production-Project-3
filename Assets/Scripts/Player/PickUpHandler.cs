@@ -8,7 +8,15 @@ public class PickUpHandler : MonoBehaviour
     {
         if (other.CompareTag("Pickup"))
         {
-            timer.AddTime(30f);
+            if (timer != null)
+            {
+                timer.AddTime(30f);
+            }
+            else
+            {
+                Debug.LogWarning("Timer reference is missing on " + gameObject.name);
+            }
+
             Destroy(other.gameObject);
         }
     }
