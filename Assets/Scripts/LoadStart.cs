@@ -6,7 +6,7 @@ public class LoadStart : MonoBehaviour
 {
     public bool isBadEnding = false;
 
-    public void EndGame()
+    public void Awake()
     {
         if (isBadEnding)
         {
