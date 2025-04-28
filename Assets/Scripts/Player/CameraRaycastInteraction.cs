@@ -34,7 +34,7 @@ public class CameraRaycastInteraction : MonoBehaviour
                 visualIndicator.EnableIndicator(true);
             }
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Freeze"))
             {
                 TryFreezeObject(hit.collider);
                 audioSource.clip = freezeSound;
@@ -46,7 +46,7 @@ public class CameraRaycastInteraction : MonoBehaviour
             DisableAllIndicators();
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Freeze"))
         {
             Debug.Log("Attempting to freeze nearby objects...");
             FreezeNearbyObjects();

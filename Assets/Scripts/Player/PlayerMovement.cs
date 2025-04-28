@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
         ApplyDrag();
         CheckGroundStatus();
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Shift"))
         {
             timeShiftManager.TimeShift();
             audioSource.clip = shiftSound;
@@ -117,10 +117,10 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = 0f;
         float vertical = 0f;
 
-        if (Input.GetKey(KeyCode.W)) vertical += 1f;
-        if (Input.GetKey(KeyCode.S)) vertical -= 1f;
-        if (Input.GetKey(KeyCode.D)) horizontal += 1f;
-        if (Input.GetKey(KeyCode.A)) horizontal -= 1f;
+        if (Input.GetKey(KeyCode.W) || Input.GetAxis("Vertical") > 0.1f) vertical += 1f;
+        if (Input.GetKey(KeyCode.S) || Input.GetAxis("Vertical") < -0.1f) vertical -= 1f;
+        if (Input.GetKey(KeyCode.D) || Input.GetAxis("Horizontal") > 0.1f) horizontal += 1f;
+        if (Input.GetKey(KeyCode.A) || Input.GetAxis("Horizontal") < -0.1f) horizontal -= 1f;
 
         Vector3 forward = activeCamera.transform.forward;
         Vector3 right = activeCamera.transform.right;
@@ -150,14 +150,14 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl) && canSlam)
+        if ((Input.GetKeyDown(KeyCode.LeftControl) || Input.GetButtonDown("Slam")) && canSlam)
         {
             groundSlam.ActivateGroundSlam();
             canGlide = false;
             canSlam = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetButtonDown("Dash")) && canDash)
         {
             StartCoroutine(Dash());
         }

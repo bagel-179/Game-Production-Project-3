@@ -37,7 +37,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
     private void HandleCameraSwitch()
     {
-        if (Input.GetMouseButton(1)) 
+        if (Input.GetMouseButton(1) || Input.GetButtonDown("SecondView"))
         {
             towerCamera.Priority = highPriority;
             playerCamera.Priority = lowPriority;
