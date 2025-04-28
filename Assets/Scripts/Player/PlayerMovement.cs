@@ -117,10 +117,10 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = 0f;
         float vertical = 0f;
 
-        if (Input.GetAxis("Vertical") > 0.1f) vertical += 1f;
-        if (Input.GetAxis("Vertical") < -0.1f) vertical -= 1f;
-        if (Input.GetAxis("Horizontal") > 0.1f) horizontal += 1f;
-        if (Input.GetAxis("Horizontal") < -0.1f) horizontal -= 1f;
+        if (Input.GetKey(KeyCode.W)) vertical += 1f;
+        if (Input.GetKey(KeyCode.S)) vertical -= 1f;
+        if (Input.GetKey(KeyCode.D)) horizontal += 1f;
+        if (Input.GetKey(KeyCode.A)) horizontal -= 1f;
 
         Vector3 forward = activeCamera.transform.forward;
         Vector3 right = activeCamera.transform.right;

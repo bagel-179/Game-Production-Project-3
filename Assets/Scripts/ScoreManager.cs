@@ -39,19 +39,19 @@ public class ScoreManager : MonoBehaviour
     {
         if (TotalScore >= 50)
         {
-            if (goodEnding != null)
-            {
-                Destroy(goodEnding);
-                
-            }
-            
-        }
-        else
-        {
             if (badEnding != null)
             {
                 Destroy(badEnding);
             }
+
+        }
+        else
+        {
+            if (goodEnding != null)
+            {
+                Destroy(goodEnding);
+
+            }            
             
         }
     }
