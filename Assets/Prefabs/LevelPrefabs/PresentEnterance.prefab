@@ -1856,6 +1856,80 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6534136089067259197
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1669981340388021522}
+  - component: {fileID: 7643435455904990110}
+  - component: {fileID: 2067940224964524396}
+  m_Layer: 9
+  m_Name: DialogueCollider (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &1669981340388021522
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6534136089067259197}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0023367093, y: 0.9999929, z: -0.00014540562, w: 0.0029536367}
+  m_LocalPosition: {x: 71.63, y: -12.030001, z: 421.51}
+  m_LocalScale: {x: 112.57351, y: 13.20049, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4759716498590968436}
+  m_LocalEulerAnglesHint: {x: 0.017, y: 179.662, z: 0.268}
+--- !u!65 &7643435455904990110
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6534136089067259197}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2067940224964524396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6534136089067259197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f47dfa805a8111f49bffba41dd0a8c7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialoguePanel: {fileID: 0}
+  dialogueText: {fileID: 0}
+  portraitImage: {fileID: 0}
+  dialogueLine: This must be where Galen left his book! I hope it survived through
+    the rubble.
+  portraitSprite: {fileID: 0}
+  dialogueDisplayTime: 3
+  typeSpeed: 0.03
 --- !u!1 &7199371534400886648
 GameObject:
   m_ObjectHideFlags: 0
@@ -2568,6 +2642,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3210328561637889839}
+  - {fileID: 1669981340388021522}
   - {fileID: 3873825822757692142}
   - {fileID: 3468210486098495230}
   - {fileID: 6417362423156318536}
