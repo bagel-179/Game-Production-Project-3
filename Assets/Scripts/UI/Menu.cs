@@ -14,6 +14,7 @@ public class Menu : MonoBehaviour
     public GameObject quitButton;
     public GameObject pauseMenu;
     public GameObject creditsButton;
+    public GameObject creditsMenu;
     public GameObject TitleImage;
 
     private PlayerMovement playerMovementScript;
@@ -32,6 +33,10 @@ public class Menu : MonoBehaviour
         pauseMenuAnimator = GetComponentInChildren<Animator>();
 
         pauseMenu.SetActive(false);
+        if (creditsMenu != null)
+        {
+            creditsMenu.SetActive(false);
+        }
 
         if (gameStarted)
         {
@@ -43,6 +48,11 @@ public class Menu : MonoBehaviour
 
             playButton.SetActive(false);
             quitButton.SetActive(false);
+
+            if (creditsMenu != null)
+            {
+                creditsMenu.SetActive(false);
+            }
 
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
@@ -109,8 +119,15 @@ public class Menu : MonoBehaviour
 
         playButton.SetActive(false);
         quitButton.SetActive(false);
-        creditsButton.SetActive(false);
-        TitleImage.SetActive(false);
+        if (creditsButton != null)
+        {
+            creditsButton.SetActive(false);
+        }
+
+        if (TitleImage != null)
+        {
+            TitleImage.SetActive(false);
+        }
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -125,5 +142,28 @@ public class Menu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void CreditMenu()
+    {
+        if (creditsMenu != null)
+        {
+            creditsMenu.SetActive(true);
+        }
+        
+    }
+
+    public void CloseCreditMenu()
+    {
+        if (creditsMenu != null)
+        {
+            creditsMenu.SetActive(false);
+        }
+        
+    }
+
+    public void ReturnToStart()
+    {
+        SceneManager.LoadScene("ClockTowerBlockout");
     }
 }

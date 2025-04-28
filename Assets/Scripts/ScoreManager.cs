@@ -39,11 +39,19 @@ public class ScoreManager : MonoBehaviour
     {
         if (TotalScore >= 200)
         {
-            Destroy(badEnding);
+            if (badEnding != null)
+            {
+                Destroy(badEnding);
+            }
+            
         }
         else
         {
-            Destroy(goodEnding);
+            if (goodEnding != null)
+            {
+                Destroy(goodEnding);
+            }
+            
         }
     }
 }
