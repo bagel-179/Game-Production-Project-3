@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -10,18 +11,26 @@ public class ScoreManager : MonoBehaviour
     public GameObject badEnding;
 
     void Awake()
+    {       
+
+        Debug.Log("Total Score: " + TotalScore);
+        CheckEnding();
+
+        StartCoroutine(DelayedLoad());
+    }
+
+    private IEnumerator DelayedLoad()
     {
+        yield return new WaitForSeconds(1f);
+
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
-            return;
+            yield break; 
         }
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
-        Debug.Log("Total Score: " + TotalScore);
-        CheckEnding();
     }
 
     public void AddScore(int amount)
