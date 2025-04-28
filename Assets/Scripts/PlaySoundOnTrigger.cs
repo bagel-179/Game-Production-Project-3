@@ -2,19 +2,13 @@ using UnityEngine;
 
 public class PlaySoundOnTrigger : MonoBehaviour
 {
-    public AudioClip pickupSound;
-    public float volume = 1f;
-    private bool hasPlayedSound = false; 
+    public GameObject pickupSound;
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Pickup") && !hasPlayedSound) 
+        if (other.CompareTag("Player"))
         {
-
-            AudioSource.PlayClipAtPoint(pickupSound, transform.position, volume);
-            hasPlayedSound = true;
-
-            Destroy(other.gameObject); 
+            pickupSound.SetActive(true);
         }
     }
 }
