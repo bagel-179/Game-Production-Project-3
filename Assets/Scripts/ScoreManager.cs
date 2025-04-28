@@ -12,26 +12,25 @@ public class ScoreManager : MonoBehaviour
 
     void Awake()
     {       
-
         Debug.Log("Total Score: " + TotalScore);
         CheckEnding();
-
-        StartCoroutine(DelayedLoad());
-    }
-
-    private IEnumerator DelayedLoad()
-    {
-        yield return new WaitForSeconds(1f);
 
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
-            yield break; 
+            return;
         }
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        //StartCoroutine(DelayedLoad());
     }
+
+    //private IEnumerator DelayedLoad()
+    //{
+        
+    //}
 
     public void AddScore(int amount)
     {

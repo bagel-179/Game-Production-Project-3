@@ -61,11 +61,21 @@ public class GameManager : MonoBehaviour
     public void CompleteLevel()
     {
         if (!isRunning) return;
-
         isRunning = false;
 
         int bonusPoints = Mathf.FloorToInt(currentTime);
-        ScoreManager.Instance.AddScore(bonusPoints);
-        Debug.Log("Level Completed! Bonus: " + bonusPoints);
+
+        // Safely handle the ScoreManager reference
+        if (ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.AddScore(bonusPoints);
+            Debug.Log($"Level Complete! Added {bonusPoints} points. Total: {ScoreManager.Instance.TotalScore}");
+        }
+        else
+        {
+            Debug.LogError("ScoreManager instance not found!");
+            int currentScore = PlayerPrefs.GetInt("TotalScore", 0);
+            PlayerPrefs.SetInt("TotalScore", currentScore + bonusPoints);
+        }
     }
 }
