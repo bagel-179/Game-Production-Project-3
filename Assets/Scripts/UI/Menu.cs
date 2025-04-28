@@ -30,7 +30,7 @@ public class Menu : MonoBehaviour
         playerMovementScript = player.GetComponent<PlayerMovement>();
         thirdPersonCameraScript = player.GetComponent<ThirdPersonCamera>();
 
-        pauseMenuAnimator = GetComponentInChildren<Animator>();
+        //pauseMenuAnimator = GetComponentInChildren<Animator>();
 
         pauseMenu.SetActive(false);
         if (creditsMenu != null)
@@ -72,7 +72,7 @@ public class Menu : MonoBehaviour
         if (!gameStarted) return;
 
         isPaused = !isPaused;
-        isAnimating = true;
+        //isAnimating = true;
 
         Cursor.visible = isPaused;
         Cursor.lockState = isPaused ? CursorLockMode.None : CursorLockMode.Locked;
@@ -80,32 +80,33 @@ public class Menu : MonoBehaviour
         if (isPaused)
         {
             pauseMenu.SetActive(true);
-            pauseMenuAnimator.speed = 1f;
+           // pauseMenuAnimator.speed = 1f;
 
-            StartCoroutine(SetTimeScaleAfterAnimation(0f));
+            //StartCoroutine(SetTimeScaleAfterAnimation(0f));
         }
         else
         {
-            pauseMenuAnimator.speed = -1f;
-
-            StartCoroutine(SetTimeScaleAfterAnimation(1f, true));
-        }
-    }
-
-    private IEnumerator SetTimeScaleAfterAnimation(float timeScale, bool disableMenu = false)
-    {
-        yield return new WaitForSecondsRealtime(pauseMenuAnimator.GetCurrentAnimatorStateInfo(0).length);
-
-        Time.timeScale = timeScale;
-        isAnimating = false;
-
-        if (disableMenu)
-        {
-            pauseMenuAnimator.speed = -1f;
-
             pauseMenu.SetActive(false);
+            //  pauseMenuAnimator.speed = -1f;
+
+            //StartCoroutine(SetTimeScaleAfterAnimation(1f, true));
         }
     }
+
+    //private IEnumerator SetTimeScaleAfterAnimation(float timeScale, bool disableMenu = false)
+    //{
+    //  //  yield return new WaitForSecondsRealtime(pauseMenuAnimator.GetCurrentAnimatorStateInfo(0).length);
+
+    //    Time.timeScale = timeScale;
+    //    isAnimating = false;
+
+    //    if (disableMenu)
+    //    {
+    //        pauseMenuAnimator.speed = -1f;
+
+    //        pauseMenu.SetActive(false);
+    //    }
+    //}
 
     public void PlayGame()
     {

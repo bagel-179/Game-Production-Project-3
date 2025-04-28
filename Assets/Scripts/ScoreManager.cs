@@ -37,19 +37,20 @@ public class ScoreManager : MonoBehaviour
 
     public void CheckEnding()
     {
-        if (TotalScore >= 200)
+        if (TotalScore >= 50)
         {
-            if (badEnding != null)
+            if (goodEnding != null)
             {
-                Destroy(badEnding);
+                Destroy(goodEnding);
+                
             }
             
         }
         else
         {
-            if (goodEnding != null)
+            if (badEnding != null)
             {
-                Destroy(goodEnding);
+                Destroy(badEnding);
             }
             
         }
